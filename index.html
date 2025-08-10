@@ -272,35 +272,76 @@
     }
 
     @media (max-width: 1400px) {
-      #toc-sidebar {
-        left: -280px; /* Hide sidebar by default on smaller screens */
-      }
-      #menu-toggle {
-        display: block; /* Show the toggle button */
-      }
+    
+    /* 1. 隱藏側邊欄，並讓它完全透明看不見，以解決黑色弧形問題 */
+    #toc-sidebar {
+        left: -280px; /* 移出畫面 */
+        opacity: 0;   /* 完全透明 */
+        visibility: hidden; /* 在渲染層上隱藏 */
+        transition: left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    opacity 0.3s ease,
+                    visibility 0s linear 0.35s; /* 隱藏時延遲，避免動畫突然中斷 */
     }
-     @media (max-width: 768px) {
-      .container {
-        padding: 1.5rem 1rem; /* Adjust padding for smaller mobile screens */
-      }
-      h1 {
-        font-size: 2em;
-      }
-      h2 {
-        font-size: 1.7em;
-      }
+
+    /* 2. 顯示漢堡按鈕 */
+    #mobile-menu-toggle {
+        display: block;
     }
+
+    /* 3. 當 body.mobile-menu-open 時 (選單被打開) */
+    .mobile-menu-open #toc-sidebar {
+        left: 0;           /* 滑入畫面 */
+        opacity: 1;        /* 變為不透明 */
+        visibility: visible; /* 讓它可見 */
+        transition-delay: 0s; /* 動畫立即執行，沒有延遲 */
+    }
+
+    /* 4. 將漢堡按鈕變為 'X' */
+    .mobile-menu-open #mobile-menu-toggle span:nth-child(1) {
+        top: 48%;
+        transform: rotate(135deg);
+    }
+    .mobile-menu-open #mobile-menu-toggle span:nth-child(2) {
+        opacity: 0;
+        left: -50%;
+    }
+    .mobile-menu-open #mobile-menu-toggle span:nth-child(3) {
+        top: 48%;
+        transform: rotate(-135deg);
+    }
+}
+
+/* 當螢幕寬度「小於 768px」時 (更小的手機)，再進一步微調 */
+@media (max-width: 768px) {
+    .container {
+        /* 為小手機調整邊距，避免內容太靠邊 */
+        padding: 2rem 1.5rem;
+    }
+
+    /* 在小手機上縮小標題，讓排版更好看 */
+    h1 {
+        font-size: 2.1em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    h3 {
+        font-size: 1.4em;
+    }
+}
   </style>
 </head>
 <body>
 
 <!-- Mobile menu toggle button and overlay -->
-<button id="menu-toggle" aria-label="開啟或關閉目錄">
+<button id="mobile-menu-toggle" aria-label="開啟或關閉目錄">
   <span></span>
   <span></span>
   <span></span>
 </button>
-<div id="overlay"></div>
+<div id="toc-overlay"></div>
 
 
 <nav id="toc-sidebar">
@@ -971,94 +1012,75 @@
 
 
 </div>
+<!-- ▼▼▼ 請「完整刪除」您舊的 script 區塊，並用「下面這一段」新的程式碼取代 ▼▼▼ -->
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // --- 1. 處理捲動時，目錄項目高亮顯示的邏輯 ---
-  const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
-  const tocLinks = document.querySelectorAll('#toc-sidebar a');
+    // 獲取所有需要操作的核心元件
+    const body = document.body;
+    const tocSidebar = document.getElementById('toc-sidebar');
+    const toggleButton = document.getElementById('mobile-menu-toggle');
+    const overlay = document.getElementById('toc-overlay');
+    const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
 
-  const observer = new IntersectionObserver((entries) => {
-    let latestIntersectingId = null;
+    // 如果關鍵元件不存在，就停止執行，避免錯誤
+    if (!tocSidebar || !toggleButton || !overlay) {
+        console.error('導航所需元件 (sidebar, toggle button, or overlay) 缺失！');
+        return;
+    }
+    
+    // --- 功能 1: 側邊欄內部點擊邏輯 ---
+    tocSidebar.addEventListener('click', function(event) {
+        // 找到被點擊的連結
+        const targetLink = event.target.closest('a');
+        if (!targetLink) return;
 
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            if (!latestIntersectingId) {
-                latestIntersectingId = entry.target.getAttribute('id');
-            }
+        // 如果點擊的是有子選單的連結 (如「午餐」)，則只做展開/收合
+        if (targetLink.classList.contains('has-submenu')) {
+            event.preventDefault(); // 阻止頁面跳轉
+            targetLink.parentElement.classList.toggle('open');
+        }
+
+        // 如果是在手機模式下 (螢幕寬度小於1400)，點擊任何一個連結後都應該關閉選單
+        if (window.innerWidth <= 1400) {
+            body.classList.remove('mobile-menu-open');
         }
     });
-    
-    if (latestIntersectingId) {
-      tocLinks.forEach(link => {
-        link.classList.remove('active');
-        const linkHref = link.getAttribute('href').substring(1);
 
-        if (linkHref === latestIntersectingId) {
-          link.classList.add('active');
+    // --- 功能 2: 手機版「漢堡按鈕」和「遮罩」的開關邏輯 ---
+    // 點擊漢堡按鈕時，切換 body 的 class
+    toggleButton.addEventListener('click', () => {
+        body.classList.toggle('mobile-menu-open');
+    });
 
-          const parentSubmenu = link.closest('.submenu');
-          if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
-            parentSubmenu.parentElement.classList.add('open');
-          }
+    // 點擊背景遮罩時，移除 body 的 class (即關閉選單)
+    overlay.addEventListener('click', () => {
+        body.classList.remove('mobile-menu-open');
+    });
+
+    // --- 功能 3: 頁面捲動時，自動高亮對應的目錄項目 (此功能保持不變) ---
+    const observer = new IntersectionObserver((entries) => {
+      let latestIntersectingId = null;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          latestIntersectingId = entry.target.getAttribute('id');
         }
       });
-    }
-  }, {
-    rootMargin: '0px 0px -70% 0px' 
-  });
+      
+      if (latestIntersectingId) {
+        document.querySelectorAll('#toc-sidebar a').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === latestIntersectingId) {
+            link.classList.add('active');
+            const parentSubmenu = link.closest('.submenu');
+            if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
+              parentSubmenu.parentElement.classList.add('open');
+            }
+          }
+        });
+      }
+    }, { rootMargin: '0px 0px -70% 0px' });
 
-  sections.forEach(section => {
-    observer.observe(section);
-  });
-
-  // --- 2. 處理點擊時，目錄展開/收合的邏輯 ---
-  const toc = document.querySelector('#toc-sidebar');
-  toc.addEventListener('click', function(event) {
-    const targetLink = event.target.closest('a');
-
-    if (!targetLink) return; 
-
-    if (targetLink.classList.contains('has-submenu')) {
-      event.preventDefault(); 
-      targetLink.parentElement.classList.toggle('open');
-    }
-  });
-  
-  /* --- Mobile Menu Toggle Functionality --- */
-  const menuToggle = document.getElementById('menu-toggle');
-  const sidebar = document.getElementById('toc-sidebar');
-  const overlay = document.getElementById('overlay');
-
-  const openMenu = () => {
-    sidebar.classList.add('open');
-    overlay.classList.add('active');
-  };
-
-  const closeMenu = () => {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('active');
-  };
-
-  menuToggle.addEventListener('click', (event) => {
-    event.stopPropagation(); // 防止事件冒泡
-    if (sidebar.classList.contains('open')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  });
-
-  // 點擊遮罩層或側邊欄裡的連結時，關閉選單
-  overlay.addEventListener('click', closeMenu);
-  sidebar.addEventListener('click', (event) => {
-      // 確保點擊的是一個跳轉連結而不是可展開的父選單
-    if (event.target.tagName === 'A' && !event.target.classList.contains('has-submenu')) {
-        closeMenu();
-    }
-  });
-
+    sections.forEach(section => { observer.observe(section); });
 });
 </script>
-
-</body>
-</html>
