@@ -5,130 +5,242 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台南美食地圖</title>
   <style>
-    /* CSS 樣式定義 */
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 20px;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .custom-block {
-      background-color: #e6ffe6; /* 淺綠色背景 */
-      color: #333;             /* 文字顏色 */
-      border-left: 4px solid #4CAF50; /* 左邊框，使用更深的綠色 */
-      padding: 12px 15px;      /* 內邊距 */
-      margin-bottom: 1em;      /* 區塊下方的外邊距 */
-      border-radius: 4px;      /* 輕微圓角 */
-      font-family: Arial, sans-serif; /* 字體 */
-      line-height: 1.5;        /* 行高 */
-    }
-    .warning-box {
-      background-color: #fff3cd; /* 淺黃色背景 */
-      color: #856404;            /* 深黃色文字 */
-      border: 1px solid #ffeeba; /* 邊框 */
-      padding: 10px 15px;
-      margin-bottom: 1em;
-      border-radius: 4px;
-      font-weight: bold;
-    }
-    h2, h3, h4 {
-      color: #333;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 5px;
-      margin-top: 1.5em;
-    }
-    ul {
-      list-style-type: none; /* 移除預設的項目符號 */
-      padding-left: 0;
-    }
-    ul li {
-      margin-bottom: 0.5em;
-    }
-    ul li a {
-      color: #007bff; /* 預設連結顏色 */
-      text-decoration: none; /* 移除底線 */
-    }
-    ul li a:hover {
-      text-decoration: underline; /* 滑鼠移過顯示底線 */
-    }
-    blockquote {
-      margin: 0 0 1em 1em;
-      padding-left: 1em;
-      border-left: 3px solid #ccc;
-      color: #555;
-    }
-    .orange-text {
-        color: #E87400;
+    /* Google Fonts - Noto Sans TC */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+    :root {
+      --primary-color: #E87400; /* 活力的橘色 */
+      --secondary-color: #4CAF50; /* 清新的綠色 */
+      --background-color: #FAF8F2; /* 柔和的米色背景 */
+      --text-color: #333;
+      --light-gray: #f4f4f4;
+      --white: #fff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
-    /* ===== 以下是新增的程式碼 ===== */
-
-    /* 讓錨點連結有平滑捲動效果 */
     html {
       scroll-behavior: smooth;
     }
 
-    /* 側邊欄目錄的容器樣式 */
-    #toc-sidebar {
-      position: fixed; /* 固定在畫面上，不隨頁面捲動 */
-      left: 30px;      /* 距離畫面左邊 30px */
-      top: 100px;      /* 距離畫面上方 100px */
-      width: 200px;    /* 寬度 200px */
-      max-height: 80vh; /* 最大高度為畫面高度的 80% */
-      overflow-y: auto; /* 如果內容太長，顯示捲軸 */
-      background: #fff;
-      padding: 15px;
+    body {
+      font-family: 'Noto Sans TC', sans-serif; /* 改用更圓潤、易讀的字體 */
+      line-height: 1.8;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    
+    /* 標題美化 */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--text-color);
+      font-weight: 700;
+    }
+
+    h1 {
+        font-size: 2.8em;
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 0.5em;
+        letter-spacing: 2px;
+    }
+    
+    h2 {
+      font-size: 2.2em;
+      color: var(--primary-color);
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 0.5em;
+      margin-top: 3em;
+      margin-bottom: 1.5em;
+      display: flex;
+      align-items: center;
+    }
+    
+    h2 .emoji { /* 讓 emoji 和標題更好對齊 */
+        font-size: 1.2em;
+        margin-right: 0.5em;
+    }
+
+    h3 {
+      font-size: 1.6em;
+      color: #333;
+      border-bottom: none;
+      border-left: 5px solid var(--secondary-color);
+      padding-left: 1em;
+      margin-top: 2.5em;
+      margin-bottom: 1.2em;
+    }
+    
+    h4 {
+        border-bottom: none;
+    }
+    
+    /* 區塊樣式優化 */
+    .custom-block, .warning-box {
+      padding: 1.2em 1.5em;
+      margin-bottom: 1.5em;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      z-index: 1000; /* 確保它在最上層 */
+      font-size: 1.1em;
+      line-height: 1.7;
     }
 
-    /* 調整目錄標題 */
-    #toc-sidebar h4 {
-        margin-top: 0;
-        border-bottom: 2px solid #eee;
-        padding-bottom: 10px;
+    .custom-block {
+      background-color: #F0FFF0;
+      color: #2E8B57;
+      border-left: 5px solid var(--secondary-color);
     }
 
-    /* 調整清單樣式 */
-    #toc-sidebar ul {
+    .warning-box {
+      background-color: #FFF8E1;
+      color: #FFA000;
+      border: 1px solid #FFECB3;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    
+    .warning-box .icon {
+        font-size: 1.5em;
+        margin-right: 0.7em;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    ul {
       list-style-type: none;
       padding-left: 0;
     }
 
-    #toc-sidebar ul li a {
-      display: block; /* 讓整個區域都能點擊 */
-      padding: 6px 10px;
-      color: #333; /* 預設連結顏色 */
+    /* 列表項目卡片化 */
+    ul > li {
+        background-color: var(--white);
+        border: 1px solid var(--light-gray);
+        border-radius: 8px;
+        padding: 1.2em 1.5em;
+        margin-bottom: 1em;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    
+    ul > li:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* 連結樣式優化 */
+    ul li a {
+      color: var(--text-color);
       text-decoration: none;
-      border-radius: 4px;
-      transition: all 0.2s ease-in-out;
+      font-size: 1.2em;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    ul li a:hover {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    blockquote {
+        margin: 0.8em 0 0 0;
+        padding: 0.8em 1em;
+        border-left: 4px solid var(--light-gray);
+        background: #f9f9f9;
+        color: #555;
+        border-radius: 4px;
     }
 
-    /* 滑鼠移過或目前所在區塊的連結樣式 */
+    .orange-text {
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+
+    /* ===== 側邊欄目錄優化 ===== */
+    #toc-sidebar {
+      position: fixed;
+      left: 30px;
+      top: 50%; /* 改為置中 */
+      transform: translateY(-50%); /* 精準垂直置中 */
+      width: 220px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.95); /* 半透明背景 */
+      backdrop-filter: blur(10px); /* 毛玻璃效果 */
+      padding: 1.5em;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      transition: left 0.3s ease-in-out;
+    }
+
+    #toc-sidebar h4 {
+        margin-top: 0;
+        margin-bottom: 1em;
+        padding-bottom: 0.8em;
+        font-size: 1.3em;
+        text-align: center;
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    #toc-sidebar ul {
+      padding-left: 0;
+    }
+
+    #toc-sidebar ul li a {
+      display: block;
+      padding: 0.7em 1em;
+      color: #555;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.25s ease-in-out;
+    }
+    
     #toc-sidebar ul li a:hover,
     #toc-sidebar ul li a.active {
-      background-color: #e6ffe6; /* 使用您自訂的淺綠色 */
-      color: #E87400; /* 使用您自訂的橘色文字 */
-      font-weight: bold;
+      background-color: var(--primary-color);
+      color: var(--white);
+      transform: translateX(10px);
+      box-shadow: 0 4px 8px rgba(232, 116, 0, 0.2);
     }
 
-    /* 在小螢幕（例如手機）上隱藏側邊欄，避免佔用畫面空間 */
-    @media (max-width: 1200px) {
+    /* RWD: 在較小螢幕隱藏側邊欄 */
+    @media (max-width: 1400px) {
       #toc-sidebar {
-        display: none;
+        left: -250px; /* 完全移出畫面 */
       }
     }
+
+    /* 美化捲軸 */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #ccc; 
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #aaa; 
+    }
+    
   </style>
 </head>
 <body>
