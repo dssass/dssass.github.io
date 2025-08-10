@@ -159,6 +159,7 @@
 </nav>git add .
 <h1>台南美食</h1>
 
+
 <div class="custom-block">
 店家資訊若有異動，歡迎隨時提出更新，感謝！<br>
 （本文件持續更新中...）
@@ -907,8 +908,7 @@
 <li><a href="https://maps.app.goo.gl/tCuiparwsATmZD4g8" style="color: black">宮後食酒號</a></li>
 
 </ul>
-
-<h3>&#9674;宿醉hung over</h3>
+<h3 id="hangover">&#9674;宿醉hung over</h3>
 <ul>
  <li>所有的<a href="#beef">牛肉湯</a></li>
     
@@ -1124,11 +1124,10 @@
     <li><a href="https://wheelofnames.com/zh-HK/95z-yk9" target="_blank">喝什麼？ (輪盤)</a></li>
 </ul>
 
-<!-- ===== 以下是新增的 JavaScript 程式碼，請務必放在 </body> 前面 ===== -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // 選取所有有 id 的 h2 標籤 (也就是我們的目標區塊)
-  const sections = document.querySelectorAll('h2[id]');
+  // 選取所有有 id 的 h2 和 h3 標籤 (也就是我們的目標區塊)
+  const sections = document.querySelectorAll('h2[id], h3[id]');
   // 選取側邊欄的所有連結
   const tocLinks = document.querySelectorAll('#toc-sidebar a');
 
@@ -1155,7 +1154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     rootMargin: '-30% 0px -60% 0px' // 調整偵測範圍，讓標示在畫面中間時更準確
   });
 
-  // 讓觀察器開始觀察每一個 h2 區塊
+  // 讓觀察器開始觀察每一個區塊
   sections.forEach(section => {
     observer.observe(section);
   });
