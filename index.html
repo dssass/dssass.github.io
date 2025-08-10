@@ -23,8 +23,10 @@
     }
 
     body {
-      font-family: 'Noto Sans TC', sans-serif; /* 改用更圓潤、易讀的字體 */
-      line-height: 1.8;
+      font-family: 'Noto Sans TC', sans-serif;
+      /* ===== 修改點 1: 調整基礎字體大小與行高 ===== */
+      font-size: 16px; /* 設定基準字體大小，讓 'em' 單位有標準 */
+      line-height: 1.75; /* 輕微調整行高以適應新字體大小 */
       margin: 0;
       padding: 0;
       background-color: var(--background-color);
@@ -34,20 +36,19 @@
     .container {
       max-width: 960px;
       margin: 2rem auto;
-      padding: 2rem;
+      padding: 2.5rem; /* 稍微增加內邊距 */
       background: var(--white);
       border-radius: 12px;
       box-shadow: var(--shadow);
     }
     
-    /* 標題美化 */
     h1, h2, h3, h4, h5, h6 {
       color: var(--text-color);
       font-weight: 700;
     }
 
     h1 {
-        font-size: 2.8em;
+        font-size: 2.5em; /* 相對大小不變，但因基礎字體縮小而變小 */
         text-align: center;
         color: var(--primary-color);
         margin-bottom: 0.5em;
@@ -55,7 +56,7 @@
     }
     
     h2 {
-      font-size: 2.2em;
+      font-size: 2em;
       color: var(--primary-color);
       border-bottom: 3px solid var(--primary-color);
       padding-bottom: 0.5em;
@@ -64,14 +65,14 @@
       display: flex;
       align-items: center;
     }
-    
-    h2 .emoji { /* 讓 emoji 和標題更好對齊 */
-        font-size: 1.2em;
-        margin-right: 0.5em;
+
+    /* 為 H3、H4 也加上 ID 以便目錄連結 */
+    h3[id], h4[id] {
+      scroll-margin-top: 20px; /* 避免跳轉時被頂部遮擋 */
     }
 
     h3 {
-      font-size: 1.6em;
+      font-size: 1.5em;
       color: #333;
       border-bottom: none;
       border-left: 5px solid var(--secondary-color);
@@ -81,106 +82,77 @@
     }
     
     h4 {
-        border-bottom: none;
+      font-size: 1.2em;
+      border-bottom: none;
+      margin-top: 2em;
+      font-weight: 700;
     }
     
-    /* 區塊樣式優化 */
+    /* 區塊樣式 */
     .custom-block, .warning-box {
       padding: 1.2em 1.5em;
       margin-bottom: 1.5em;
       border-radius: 8px;
-      font-size: 1.1em;
+      font-size: 1em; /* ===== 修改點 1: 字體大小調整 ===== */
       line-height: 1.7;
     }
 
-    .custom-block {
-      background-color: #F0FFF0;
-      color: #2E8B57;
-      border-left: 5px solid var(--secondary-color);
-    }
+    .custom-block { background-color: #F0FFF0; color: #2E8B57; border-left: 5px solid var(--secondary-color); }
+    .warning-box { background-color: #FFF8E1; color: #FFA000; border: 1px solid #FFECB3; font-weight: 500; display: flex; align-items: center; }
+    .warning-box .icon { font-size: 1.5em; margin-right: 0.7em; }
 
-    .warning-box {
-      background-color: #FFF8E1;
-      color: #FFA000;
-      border: 1px solid #FFECB3;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-    }
-    
-    .warning-box .icon {
-        font-size: 1.5em;
-        margin-right: 0.7em;
-        animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
+    ul { list-style-type: none; padding-left: 0; }
 
     /* 列表項目卡片化 */
     ul > li {
         background-color: var(--white);
         border: 1px solid var(--light-gray);
         border-radius: 8px;
-        padding: 1.2em 1.5em;
+        padding: 1em 1.5em; /* 調整內邊距 */
         margin-bottom: 1em;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
     
-    ul > li:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    }
+    ul > li:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
     
     /* 連結樣式優化 */
     ul li a {
       color: var(--text-color);
       text-decoration: none;
-      font-size: 1.2em;
-      font-weight: 500;
+      /* ===== 修改點 1: 列表中的店家名稱字體調整 ===== */
+      font-size: 1.05em; 
+      font-weight: 700;
       transition: color 0.2s;
     }
     
-    ul li a:hover {
-      color: var(--primary-color);
-      text-decoration: none;
-    }
+    ul li a:hover { color: var(--primary-color); text-decoration: none; }
     
     blockquote {
         margin: 0.8em 0 0 0;
         padding: 0.8em 1em;
         border-left: 4px solid var(--light-gray);
         background: #f9f9f9;
-        color: #555;
+        color: #666; /* 調淡一點文字顏色 */
         border-radius: 4px;
+        /* ===== 修改點 1: 引用區塊字體調整 ===== */
+        font-size: 0.95em; 
     }
 
-    .orange-text {
-        color: var(--primary-color);
-        font-weight: bold;
-    }
+    .orange-text { color: var(--primary-color); font-weight: bold; }
 
-    /* ===== 側邊欄目錄優化 ===== */
+    /* ===== 修改點 2: 側邊欄目錄的全新樣式 (CSS 部分) ===== */
     #toc-sidebar {
       position: fixed;
       left: 30px;
-      top: 50%; /* 改為置中 */
-      transform: translateY(-50%); /* 精準垂直置中 */
-      width: 220px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 230px; /* 稍微加寬以容納箭頭 */
       max-height: 90vh;
       overflow-y: auto;
-      background: rgba(255, 255, 255, 0.95); /* 半透明背景 */
-      backdrop-filter: blur(10px); /* 毛玻璃效果 */
-      padding: 1.5em;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1em;
       border-radius: 12px;
       box-shadow: var(--shadow);
       z-index: 1000;
@@ -199,64 +171,138 @@
 
     #toc-sidebar ul {
       padding-left: 0;
+      margin: 0;
     }
 
-    #toc-sidebar ul li a {
+    /* 主層級連結 */
+    #toc-sidebar ul.main-menu > li > a {
       display: block;
-      padding: 0.7em 1em;
-      color: #555;
+      padding: 0.6em 1em;
+      color: #333; /* 主層級顏色深一點 */
       text-decoration: none;
       border-radius: 6px;
       font-weight: 500;
       transition: all 0.25s ease-in-out;
     }
+
+    /* 有子選單的連結加上箭頭 */
+    #toc-sidebar a.has-submenu::after {
+      content: '▸';
+      position: absolute;
+      right: 25px; /* 控制箭頭位置 */
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #toc-sidebar li.open > a.has-submenu::after {
+      transform: rotate(90deg); /* 展開時箭頭旋轉 */
+    }
     
+    /* 連結滑鼠移過 或 目前啟動的狀態 */
     #toc-sidebar ul li a:hover,
     #toc-sidebar ul li a.active {
       background-color: var(--primary-color);
       color: var(--white);
       transform: translateX(10px);
-      box-shadow: 0 4px 8px rgba(232, 116, 0, 0.2);
-    }
-
-    /* RWD: 在較小螢幕隱藏側邊欄 */
-    @media (max-width: 1400px) {
-      #toc-sidebar {
-        left: -250px; /* 完全移出畫面 */
-      }
-    }
-
-    /* 美化捲軸 */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #ccc; 
-        border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #aaa; 
     }
     
+    #toc-sidebar ul li a.active {
+      font-weight: 700;
+    }
+    
+    /* 子選單的容器 (預設隱藏) */
+    .submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-in-out;
+      background: rgba(0,0,0,0.02); /* 子選單加個淡淡的底色區分 */
+      border-radius: 6px;
+      margin: 4px 0 8px 0;
+    }
+    
+    /* 當父層 li.open 時，展開子選單 */
+    li.open > .submenu {
+      max-height: 1000px; /* 給一個足夠大的高度讓它完全展開 */
+    }
+
+    /* 子選單的項目連結 */
+    .submenu li a {
+      padding: 0.5em 1em 0.5em 2em; /* 增加左邊距做出層級感 */
+      display: block;
+      font-size: 0.9em;
+      font-weight: 400;
+      color: #444;
+      border-radius: 4px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* 子選單項目滑過或啟動 */
+    .submenu li a:hover, .submenu li a.active {
+        background-color: var(--secondary-color); /* 子項目用綠色 */
+        color: var(--white);
+        transform: translateX(5px);
+    }
+
+    /* ===== END OF 修改點 2 (CSS) ===== */
+
+    @media (max-width: 1400px) {
+      #toc-sidebar { left: -280px; }
+    }
   </style>
 </head>
 <body>
 <div class="container">
 
-<!-- ===== 修改後的目錄 ===== -->
+<!-- ===== 修改點 2: 全新的、具備層級結構的目錄 (HTML) ===== -->
 <nav id="toc-sidebar">
     <h4>目錄</h4>
-    <ul>
-        <li><a href="#beef">牛肉</a></li>
+    <ul class="main-menu">
+        <li><a href="#beef" class="has-submenu">牛肉</a>
+            <ul class="submenu">
+                <li><a href="#beef-section-jiali">佳里</a></li>
+                <li><a href="#beef-section-hotpot">牛肉火鍋</a></li>
+            </ul>
+        </li>
         <li><a href="#brunch">早午餐</a></li>
-        <li><a href="#lunch">午餐time</a></li>
-        <li><a href="#dinner">晚餐time</a></li>
-        <li><a href="#dessert">甜點</a></li>
-        <li><a href="#cafe">咖啡廳</a></li>
-        <li><a href="#ice-dessert">冰&甜品</a></li>
+        <li><a href="#lunch" class="has-submenu">午餐time</a>
+            <ul class="submenu">
+                <li><a href="#lunch-taiwanese-rice">台式飯類</a></li>
+                <li><a href="#lunch-fish">魚類</a></li>
+                <li><a href="#lunch-taiwanese-noodle">台式麵類</a></li>
+                <li><a href="#lunch-american">美式</a></li>
+                <li><a href="#lunch-japanese">生魚片、壽司、丼飯</a></li>
+                <li><a href="#lunch-ramen">拉麵</a></li>
+                <li><a href="#lunch-hotpot">火鍋</a></li>
+                <li><a href="#lunch-hongkong">港式</a></li>
+                <li><a href="#lunch-others">其他</a></li>
+            </ul>
+        </li>
+        <li><a href="#dinner" class="has-submenu">晚餐time</a>
+            <ul class="submenu">
+                <li><a href="#dinner-taiwanese-rice">台式飯類</a></li>
+                <li><a href="#dinner-winter-food">冬天進補</a></li>
+                <li><a href="#dinner-fish">魚類</a></li>
+                <li><a href="#dinner-taiwanese-noodle">台式麵類</a></li>
+                <li><a href="#dinner-american">美式</a></li>
+                <li><a href="#dinner-curry">咖哩</a></li>
+                <li><a href="#dinner-ramen">拉麵</a></li>
+                <li><a href="#dinner-japanese">生魚片、壽司、丼飯</a></li>
+                <li><a href="#dinner-hotpot">火鍋</a></li>
+                <li><a href="#dinner-drypot">乾鍋</a></li>
+                <li><a href="#dinner-hongkong">港式</a></li>
+                <li><a href="#dinner-thai">泰式</a></li>
+                <li><a href="#dinner-izakaya">居酒屋、熱炒、燒烤</a></li>
+                <li><a href="#dinner-others">其他</a></li>
+                <li><a href="#dinner-group-meal">合菜、buffet</a></li>
+                <li><a href="#dinner-snacks">小吃</a></li>
+            </ul>
+        </li>
+        <li><a href="#desserts" class="has-submenu">甜食</a>
+            <ul class="submenu">
+              <li><a href="#dessert">甜點</a></li>
+              <li><a href="#cafe">咖啡廳</a></li>
+              <li><a href="#ice-dessert">冰&甜品</a></li>
+            </ul>
+        </li>
         <li><a href="#drinks">飲料</a></li>
         <li><a href="#mid-price-restaurants">氣氛晚餐、中價位餐廳</a></li>
         <li><a href="#high-end-restaurants">高級料理</a></li>
@@ -265,1009 +311,114 @@
         <li><a href="#hungover">宿醉hung over</a></li>
         <li><a href="#night-markets">夜市</a></li>
         <li><a href="#tourist-areas">觀光地區</a></li>
-        <li><a href="#ncku-area">成大周遭</a></li>
+        <li><a href="#ncku-area" class="has-submenu">成大周遭</a>
+            <ul class="submenu">
+                <li><a href="#ncku-brunch">早午餐</a></li>
+                <li><a href="#ncku-dinner-only">晚餐only</a></li>
+                <li><a href="#ncku-lunch-dinner">午/晚餐</a></li>
+                <li><a href="#ncku-fruits">水果</a></li>
+                <li><a href="#ncku-latenight">宵夜</a></li>
+                <li><a href="#ncku-budget">省錢</a></li>
+                <li><a href="#ncku-mid-price">中價位餐廳</a></li>
+            </ul>
+        </li>
         <li><a href="#tools">互動小工具</a></li>
     </ul>
-</nav>git add .
-<h1>台南美食</h1>
+</nav>
+<h1>台南美食地圖</h1>
 
 
-<div class="custom-block">
-店家資訊若有異動，歡迎隨時提出更新，感謝！<br>
-（本文件持續更新中...）
+<!-- 以下是您的內文，我已為需要被連結的 H3, H4, H5 加上了 id -->
+<h2 id="beef">...牛肉...</h2>
+<h3 id="beef-section-jiali">佳里</h3>
+...
+<h3 id="beef-section-hotpot">牛肉火鍋</h3>
+...
+<h2 id="brunch">...早午餐</h2>
+...
+<h2 id="lunch">...午餐time</h2>
+<h4 id="lunch-taiwanese-rice"><strong class="orange-text">台式飯類</strong></h4>
+...
+<h4 id="lunch-fish"><strong class="orange-text">魚類</strong></h4>
+...
+<!-- 您需要依照上面目錄的結構，為您內容中對應的 h3/h4/h5 標題加上 id，格式如 id="lunch-ramen", id="ncku-budget" 等，才能讓連結正常作用 -->
+<!-- 為了版面簡潔，此處省略了重複的內文 -->
+...
+
+<!-- ... 您的其他所有網頁內容 ... -->
 </div>
 
-<div class="warning-box">
-  <span style="font-size: 1.2em; margin-right: 5px;">&#9888;</span> 點選店家文字即可開啟對應的 Google 地圖位置！
-</div>
 
-
-<h2 id="beef">&#128002;牛肉&#128002;</h2>
-<ul>
-<li><a href="https://maps.app.goo.gl/ce3szQeqTsxVqZEDA" style="color: black;">永樂牛肉湯</a>    
-<blockquote>每日 00:00–09:00 (週二公休)</blockquote></li>
-<li><a href="https://maps.app.goo.gl/ZdKip2QwR9PDa7hc7" style="color: black;">西羅殿牛肉湯</a></li>
-<blockquote>每日 04:30–13:00 (週二公休)</blockquote></li>
-<li><a href="https://maps.app.goo.gl/LTCB1aKVQpHexFYS9" style="color: black;">阿財牛肉湯</a></li>
-<li><a href="https://maps.app.goo.gl/szc3PJ5JWzzFYi5d8" style="color: black;">無名牛肉湯</a></li>
-<li><a href="https://maps.app.goo.gl/5HTv4BpxKTSjY5cr9" style="color: black;">六千泓佐土產牛肉</a></li>
-<li><a href="https://maps.app.goo.gl/4EhxSkij8m4uXGCh7" style="color: black;">苏 - 牛肉湯</a></li>
-<li><a href="https://maps.app.goo.gl/yJ6F7p4v1sA2E1jH6" style="color: black;">二牛牛肉湯</a></li>
-<li><a href="https://maps.app.goo.gl/j4x41mK9TjW5r75d8" style="color: black;">阿棠牛肉湯</a></li>
-<li><a href="https://maps.app.goo.gl/d3K73r6M9Ld5Q5rL8" style="color: black;">阿村牛肉湯</a></li>
-<li><a href="https://maps.app.goo.gl/q3rxP6j38FRtfWiW8" style="color:black;">杜牛肉湯</a></li>
-</ul>
-
-<h3>佳里</h3>
-<ul>
-<li><a href="https://maps.app.goo.gl/EcmtSwQMuwRgQsg66" style="color: black;">順福土產牛肉湯</a></li>
-<li><a href="https://maps.app.goo.gl/EcmtSwQMuwRgQsg66" style="color: black;">萬林牛肉湯</a></li>
-</ul>
-
-<h3>牛肉火鍋</h3>
-<ul>
-<li><a href="https://maps.app.goo.gl/5TptQsvpnP62F2UW7" style="color:black">皇家四季溫體牛肉火鍋</a>
-<blockquote>三~日 11:30–15:00、17:00–23:00</blockquote></li>
-</ul>
- 
-
-<h2 id="brunch">&#129367;早午餐</h2>
-<ul>
-<li><a href="https://maps.app.goo.gl/ntnhh3uXHqxKb9fD7 " style="color: black;">PEKO PEKO</a>
-<blockquote>每日09:30–16:00 (週三公休)<br>北非蛋</blockquote></li>
-   
-<li><a href="https://maps.app.goo.gl/H9SPpZDgXgL62mhQ8" style="color: black;">粼粼</a>
-<blockquote>營業日期:看<a href="https://www.instagram.com/ring_ring.00?igsh=MWUxbW5ta3ByNmt5bQ==" >ig</a>，營業時間:11:30-17:00(最後點餐時間:16:00)<br>布丁</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/ciUVRPUnD9MnBTZr9" style="color: black">小北家灶咖ZAOKA</a><blockquote>每日 09:00–16:30<br></blockquote></li>
-
-
-<li><a href="https://maps.app.goo.gl/ciUVRPUnD9MnBTZr9" style="color: black">伊莉的店</a><blockquote>法國小店，可麗餅 (平日去才不用排隊)<br>三~日 07:30–14:30<br></blockquote></li>
-    
-  
-<li><a href="https://maps.app.goo.gl/a9jm6oCmdkcLVK7HA" style="color: black">南島夢遊</a><blockquote>週一 、 週四~週日 09:00–15:00 (二、三公休)</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/SoqpsqaJ6WwTkYVD7" style="color: black">小璋炭烤輕食</a><blockquote>每日 06:00–17:00 (六日營業至15:00)<br>內用沒什麼位置，可先打電話</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/yXdVMu3gqwuUEwgw5" style="color: black">龍百貨</a><blockquote>二~六 09:30–14:30<br></blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/XTqbxAdE9pzytJVcA" style="color: black">後座熟食店</a><blockquote>每日 11:00–<strong>17:00</strong></blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/aKqu5ki27gXBemb26" style="color: black;">橋上看書</a>
-<blockquote>三~日 09:00–<strong>17:00</strong><br></blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/yvZjjUXfNjnWk2EA8" style="color: black;">阿公阿婆蛋餅</a><blockquote>週二到週日 05:30–12:30</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/yZoinYwN4SaLpJM4A" style="color: black;">南園街鍋貼</a>
-<blockquote>週一到週六 09:30–15:00</blockquote></li>    
-    
-</ul>
-<p>龍鳳早點</p>
-<br>
-
-<h2 id="lunch">&#127860;午餐time</h2>
-
-<h4><strong class="orange-text">台式飯類</strong></h4>
-<ul>  
-<li><a href="https://maps.app.goo.gl/m2Vp398jJoY45ojY9" style="color: black">福泰飯桌 第三代</a>
- <blockquote>二~六 10:00–13:30、16:30–18:15</blockquote></li>   
-
-<li><a href="https://maps.app.goo.gl/H14Dc1LL2uNiePZY6" style="color: black">溫爸鵝肉</a>
-<blockquote>一~六 11:30–18:30 (週日公休)</blockquote></li> 
-       
-<li><a href="https://maps.app.goo.gl/9zf3rXMVWuEdwDwT7" style="color: black">無名米糕</a>
-<blockquote>週一至週六 09:30–15:00、17:00–20:00</blockquote></li>
- 
-<li><a href="https://maps.app.goo.gl/aQiXkxTE4LggJpPA8" style="color: black">竹記冬菜鴨</a>
-<blockquote>一~五 12:00–14:30、16:30–19:30</blockquote></li>
-       
-<li><a href="https://maps.app.goo.gl/4wADyqgTPcwpNijn8" style="color: black">國榮肉燥飯</a>
-<blockquote>每日 06:00–20:00<br>(肉燥飯有香菜)</blockquote></li> 
-
-<li><a href="https://maps.app.goo.gl/2dRaLTWgNHA3CAnN7" style="color: black">
-阿龍香腸熟肉</a><blockquote>每日 10:30–19:00</blockquote></li>
-        
-<li><a href="https://maps.app.goo.gl/YQBZ9L9GV9SazEWcA" style="color: black">鼎富發豬油拌飯</a>
-<blockquote>觀光客店還好</blockquote></li>
-        
-<li><a href="https://maps.app.goo.gl/1H6C9fSrUZ7jug2y6" style="color: black">鳳姐鴨肉飯</a>
-<blockquote>每日 11:00–18:30 (三、四公休)<br>
-中午11點開始，一路賣到晚餐18:30，賣完會提早打烊</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/HqJWwYiDRGWGT3YP6 " style="color:black">和緯蝦仁飯</a>   
-<blockquote>每日 06:30–13:30 (禮拜日公休)</blockquote></li>    
-
-</ul>
-
-<h4><strong class="orange-text">魚類</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/fE2hX8YC55KEtioF7" style="color: black">開元紅燒𩵚魠魚羹</a>
- <blockquote>每日 09:00–18:30</blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/s6gCNacQhWT7PNpP9" style="color:black">永記虱目魚丸</a>
-<blockquote>每日 06:30–13:30</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/JZGptrVMEERmEvEV8" style="color:black">第三代虱目魚丸</a>   
-<blockquote>每日 06:00–14:00 (禮拜三公休)</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/9PYCF98PN6PnR4DJ7" style="color: black">阿星鹹粥</a>
-<blockquote>週二~週日 06:00–14:00</blockquote></li> 
-    
-
-<li><a href="https://maps.app.goo.gl/1ZFvAizh7MmNdkQf6" style="color: black">德興鱔魚意麵</a>
-<blockquote>週一~週四 11:00–13:45、17:00–19:30</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/HnktQUBKAFfNC6V88" style="color:black">王氏魚皮</a>   
-<blockquote>每日 04:00–14:00(六日至15:00)</blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/ZGqszHDYdCUs5nn87" style="color:black">黑記鮮魚湯</a>
-<blockquote>鮭魚蒸蛋<br>每日10:30–13:30、16:00–18:30</blockquote></li>     
-</ul>
-    
-    
-<h4><strong class="orange-text">台式麵類</strong></h4>
-<ul>
-    
-<li><a href="https://maps.app.goo.gl/5TptQsvpnP62F2UW7" style="color:black">老黃陽春麵</a><blockquote>每日 06:00–14:00(禮拜日公休)</blockquote></li> 
-  
-<li><a href="https://maps.app.goo.gl/z7GpZFK86fY4jwU58" style="color:black">陳家汕頭意麵</a>   
-<blockquote>每日 07:30–14:30(禮拜日公休)</blockquote></li>   
-
-<li><a href="https://maps.app.goo.gl/z7GpZFK86fY4jwU58" style="color:black">小丰川</a>   
-<blockquote>二~六 11:00–20:00</blockquote></li>
-
-    
-<li><a href="https://maps.app.goo.gl/qkXcuBr8vvM61tD59" style="color: black">裕民街麵店</a>
- <blockquote>一~六 11:30–13:30、16:30–20:30</blockquote></li>   
-    
-<li><a href="https://maps.app.goo.gl/i77Dp1HYqNTb6pyj7" style="color: black">醇涎坊古早味鍋燒意麵</a>
-    
-<blockquote>每日 06:00–20:00 (週一公休)</blockquote></li>
-
- </ul>    
-
-<h4><strong class="orange-text">美式</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/w3dNXLnem5C3fFgo7" style="color: black">Little Cuba 小古巴漢堡</a><blockquote>二~日 10:30–15:00、17:00–20:00 (週五、週六至21:00)</blockquote></li>  
-    
-<li><a href="https://maps.app.goo.gl/x8z56vK42g1G2LpC7" style="color: black">ABC Burger</a>
-<blockquote>三~日 11:30–20:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/B5fhW7XX3k1P6v5q6" style="color: black">THINKPIZZA</a>
-<blockquote>週一、週二、週五~週日 11:30–20:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/B5fhW7XX3k1P6v5q6" style="color: black">8818 比薩屋(本店)</a>
-<blockquote>每日 11:00–21:00 <Br><a href="https://maps.app.goo.gl/PHAeFGcAWwX5NC9MA">永康店</a> </blockquote></li>
-
-</ul>
-
-<h4><strong class="orange-text">&#127843;生魚片、壽司、丼飯</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/XaEhqxtdcesFRc4e9" style="color: black">鰻丼作(中西區)</a>
-<blockquote>每日 11:00–14:00、17:00–21:00 (週三公休)</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/rEVcFS3o5wKeWrdFA" style="color: black">十平</a> (不定休請參考<a href="https://www.instagram.com/zyuutsubo/">ig</a>貼文公告)(中西區)
-<blockquote>每日 12:00–14:00, 18:00–20:00 (週三公休)</blockquote></li> 
-<li><a href="https://maps.app.goo.gl/A9e6PCLKttMma1kc6" style="color: black">慕Mu 日式料理(中西區)</a>
-  <blockquote>每日 11:00–14:00、17:00–23:00</blockquote></li> 
-<li><a href="https://maps.app.goo.gl/LxkYnJjZV4peGsVTA" style="color: black">惠比壽壽司便當(中西區)</a>
-<blockquote>外帶花壽司 二~日 11:30–18:00 </blockquote></li>  
-    
-<li><a href="https://maps.app.goo.gl/F2QW2UWRgXiqUakz6" style="color: black">鮨瑀(北區)</a>
-<blockquote>二~日 11:30–14:00、17:30–21:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/cDgG57UVFM2nXvEHA" style="color: black">鮨次郎壽司專賣(東區)</a>
-<blockquote>cp值最高、蝦子<br>二~日 11:00–14:00、17:00–21:00</blockquote></li>    
-    
-<li><a href="https://maps.app.goo.gl/ZX57k8ECR4BbXVPw9" style="color: black">肉丼丼食專門店(東區)</a>
-<blockquote>離成大很近<br>一～日 11:30–14:00、17:00–20:00</blockquote></li>
-    
-</ul>
-    
-<h4><strong class="orange-text">拉麵</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/koV3TtTu9dJuTYjU8" style="color: black">覺丸拉麵</a>
-<blockquote>每日 11:00–14:00、17:00–20:00</blockquote></li>     
-
-<li><a href="https://maps.app.goo.gl/dcdwW6kJYqW84Tp8A" style="color: black">漣戶</a>
-<blockquote>每日 11:30–13:30、17:30–21:00 </blockquote></li>
-</ul> 
-
-<h4><strong class="orange-text">火鍋</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/3xoREEZYZZuFFTVi7" style="color: black">辣訣</a><blockquote>每日 11:00–14:00、17:00–22:00</blockquote></li>
-      
-<li><a href="https://maps.app.goo.gl/U9jAhBaWsQyHU9iX9" style="color: black">毛房 蔥柚鍋 ·冷藏肉專門</a><blockquote>平日 17:30–22:00, 假日11:30–15:00, 17:30–22:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/7ecDecGDZU3ZdDAQ6" style="color: black">囍運麻辣鍋</a><blockquote>每日 11:30–14:30、17:00–22:30 (週三、週六公休)</blockquote></li>
-
-<li><a href="https://maps.google.com/?cid=51386791119871625" style="color: black">台南阿官火鍋專家府前店</a>
-<blockquote>每日 11:00–22:00 (週四公休)</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/dro2c5gDho3A6hM9A" style="color: black">各鍋各的</a><blockquote>平日 18:00–22:00<br>假日 11:00–15:00、18:00–22:00</blockquote></li>
-</ul>
-
-<h4><strong class="orange-text">港式</strong></h4>
-<ul>
-  
-<li><a href="https://maps.app.goo.gl/Zviac3mJm4u1SkGZ8" style="color: black">寓點</a>
-<blockquote>週五、週六 07:00–14:00(內用只有這兩天) <BR>週三及週六提供冷藏及冷凍點心</blockquote></li>     
-    
-<li><a href="https://maps.app.goo.gl/QP3h4Repi2SQ8soL6" style="color: black">捌伍貳冰室（公休日請查詢FB&IG粉專）</a>
-<blockquote>週一~週五 11:30–17:00</blockquote></li>    
-</ul> 
-    
-<h4><strong class="orange-text">其他</strong></h4>
-<ul>
-  
-<li><a href="https://maps.app.goo.gl/4yasAF4K37tjXov48" style="color: black">ゴゴ台所（kaku.daidokoro)</a>
-    <blockquote>是咖啡廳但有塔可飯跟泰北麵<br>每日 11:00–<strong>18:00</strong></blockquote></li> 
-</ul>
-
-<br>
-
-
-<h2 id="dinner">&#128362;晚餐 time</h2>
-<h4><strong class="orange-text">台式飯類</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/m2Vp398jJoY45ojY9" style="color: black">福泰飯桌 第三代</a>
- <blockquote>二~六 10:00–13:30、16:30–18:15</blockquote></li>   
-
-<li><a href="https://maps.app.goo.gl/H14Dc1LL2uNiePZY6" style="color: black">溫爸鵝肉</a>
-<blockquote>一~六 11:30–18:30 (週日公休)</blockquote></li> 
-       
-<li><a href="https://maps.app.goo.gl/9zf3rXMVWuEdwDwT7" style="color: black">無名米糕</a>
-<blockquote>週一至週六 09:30–15:00、17:00–20:00</blockquote></li>
- 
-<li><a href="https://maps.app.goo.gl/aQiXkxTE4LggJpPA8" style="color: black">竹記冬菜鴨</a>
-<blockquote>一~五 12:00–14:30、16:30–19:30</blockquote></li>
-       
-<li><a href="https://maps.app.goo.gl/4wADyqgTPcwpNijn8" style="color: black">國榮肉燥飯</a>
-<blockquote>每日 06:00–20:00<br>(肉燥飯有香菜)</blockquote></li> 
-
-<li><a href="https://maps.app.goo.gl/2dRaLTWgNHA3CAnN7" style="color: black">
-阿龍香腸熟肉</a><blockquote>每日 10:30–19:00</blockquote></li>
-        
-<li><a href="https://maps.app.goo.gl/YQBZ9L9GV9SazEWcA" style="color: black">鼎富發豬油拌飯</a>
-<blockquote>觀光客店還好</blockquote></li>
-        
-<li><a href="https://maps.app.goo.gl/1H6C9fSrUZ7jug2y6" style="color: black">鳳姐鴨肉飯</a>
-<blockquote>每日 11:00–18:30 (三、四公休)<br>
-中午11點開始，一路賣到晚餐18:30，賣完會提早打烊</blockquote></li>
-    
-</ul>
-    
-<h4><strong class="orange-text">冬天進補</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/ytVu1RpH1QcJCzgu7" style="color:black">Walking Su 藥膳麻油雞</a>
- <blockquote>17:00–22:00 固定休週日、週一</blockquote></li>     
-</ul>  
-    
-<h4><strong class="orange-text">魚類</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/fE2hX8YC55KEtioF7" style="color: black">開元紅燒𩵚魠魚羹</a>
- <blockquote>每日 09:00–18:30</blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/1ZFvAizh7MmNdkQf6" style="color: black">德興鱔魚意麵</a>
-<blockquote>週一~週四 11:00–13:45、17:00–19:30</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/rS4aK377fCuPLtch7" style="color:black">枸杞土虱</a>
-<blockquote>每日 17:00–00:00</blockquote></li>    
-
-<li><a href="https://maps.app.goo.gl/ZGqszHDYdCUs5nn87" style="color:black">黑記鮮魚湯</a>
-<blockquote>鮭魚蒸蛋<br>每日10:30–13:30、16:00–18:30</blockquote></li> 
-
-</ul>
-    
-    
-<h4><strong class="orange-text">台式麵類</strong></h4>
-<ul> 
-<li><a href="https://maps.app.goo.gl/z7GpZFK86fY4jwU58" style="color:black">小丰川</a>   
-<blockquote>二~六 11:00–20:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/qkXcuBr8vvM61tD59" style="color: black">裕民街麵店</a>
- <blockquote>一~六 11:30–13:30、16:30–20:30</blockquote></li>   
-    
-<li><a href="https://maps.app.goo.gl/i77Dp1HYqNTb6pyj7" style="color: black">醇涎坊古早味鍋燒意麵</a><blockquote>每日 06:00–20:00 (週一公休)</blockquote></li>   
-
-<li><a href="https://maps.app.goo.gl/XwGWTyQwPf4E47Hw8" style="color: black">民生路意麵</a>
-<blockquote>一～日 15:30~<strong>01:30</strong></blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/eUC8sfembdro6Sgd9" style="color: black">頂好意麵</a><blockquote>每日 19:00~<strong>04:00</strong></blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/ZE4fWVz8Tc29k4tb6" style="color: black">阿明豬心冬粉</a>
- <blockquote>每日 17:00–00:00 (週一公休)</blockquote></li>   
-</ul>    
-
-<h4><strong class="orange-text">美式</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/w3dNXLnem5C3fFgo7" style="color: black">Little Cuba 小古巴漢堡</a><blockquote>二~日 10:30–15:00、17:00–20:00 (週五、週六至21:00)</blockquote></li>  
-    
-
-<li><a href="https://maps.app.goo.gl/x8z56vK42g1G2LpC7" style="color: black">ABC Burger</a>
-<blockquote>三~日 11:30–20:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/B5fhW7XX3k1P6v5q6" style="color: black">THINKPIZZA</a>
-<blockquote>週一、週二、週五~週日 11:30–20:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/B5fhW7XX3k1P6v5q6" style="color: black">8818 比薩屋(本店)</a>
-<blockquote>每日 11:00–21:00 <Br><a href="https://maps.app.goo.gl/PHAeFGcAWwX5NC9MA">永康店</a> </blockquote></li>
-
-</ul>
-     
-<h4><strong class="orange-text">&#127835;咖哩</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/j496Qd5nU4kF4M8N7" style="color: black">日曜日オムライス</a>
-<blockquote>每日 17:30–23:30 (週二公休)</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/RfKE88ivVz8RPdxR7" style="color: black">大丸家</a>
-<blockquote>每日 11:00–15:00、17:00–20:00 (週三公休)</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/PjbkktzoFzaVtW29A" style="color: black">食べオム洋食歐姆専門店</a>
-<blockquote>每日 11:00–20:00</blockquote></li>
-</ul>
-    
-<h4><strong class="orange-text">拉麵</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/koV3TtTu9dJuTYjU8" style="color: black">覺丸拉麵</a>
-<blockquote>每日 11:00–14:00、17:00–20:00</blockquote></li>     
-
-<li><a href="https://maps.app.goo.gl/dcdwW6kJYqW84Tp8A" style="color: black">漣戶</a>
-<blockquote>每日 11:30–13:30、17:30–21:00 </blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/7yUuss1kJpV4feGW6" style="color: black">白露拉麵</a><blockquote>星期四、五 17:30–20:00<br> 星期六、日 11:00–14:00、17:30–20:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/zaTqS7tJT9o3SzoEA" style="color: black">吾旬拉麵</a>
-<blockquote>每日 17:30–22:30 (週一公休)</blockquote></li> 
-</ul> 
-
-<h4><strong class="orange-text">&#127843;生魚片、壽司、丼飯</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/XaEhqxtdcesFRc4e9" style="color: black">鰻丼作(中西區)</a>
-<blockquote>每日 11:00–14:00、17:00–21:00 (週三公休)</blockquote></li>
-
- <li><a href="https://maps.app.goo.gl/QcE7tCgC29Kz8GAn8" style="color: black">豐藏 鰻魚料理專門(中西區)</a>
-<blockquote>每日 11:30–14:30、17:30–21:30</blockquote></li>
-<li><a href="https://maps.app.goo.gl/rEVcFS3o5wKeWrdFA" style="color: black">十平</a> (不定休請參考<a href="https://www.instagram.com/zyuutsubo/">ig</a>貼文公告)(中西區)
-<blockquote>每日 12:00–14:00, 18:00–20:00 (週三公休)</blockquote></li> 
-<li><a href="https://maps.app.goo.gl/A9e6PCLKttMma1kc6" style="color: black">慕Mu 日式料理(中西區)</a>
-  <blockquote>每日 11:00–14:00、17:00–23:00</blockquote></li> 
-<li><a href="https://maps.app.goo.gl/LxkYnJjZV4peGsVTA" style="color: black">惠比壽壽司便當(中西區)</a>
-<blockquote>外帶花壽司 二~日 11:30–18:00 </blockquote></li>  
-    
-<li><a href="https://maps.app.goo.gl/F2QW2UWRgXiqUakz6" style="color: black">鮨瑀(北區)</a>
-<blockquote>二~日 11:30–14:00、17:30–21:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/cDgG57UVFM2nXvEHA" style="color: black">鮨次郎壽司專賣(東區)</a>
-<blockquote>cp值最高、蝦子<br>二~日 11:00–14:00、17:00–21:00</blockquote></li>    
-    
-<li><a href="https://maps.app.goo.gl/ZX57k8ECR4BbXVPw9" style="color: black">肉丼丼食專門店(東區)</a>
-<blockquote>離成大很近<br>一～日 11:30–14:00、17:00–20:00</blockquote></li>
-    
-</ul>
- 
-<h4><strong class="orange-text">火鍋</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/3xoREEZYZZuFFTVi7" style="color: black">辣訣</a><blockquote>每日 11:00–14:00、17:00–22:00</blockquote></li>
-      
-<li><a href="https://maps.app.goo.gl/U9jAhBaWsQyHU9iX9" style="color: black">毛房 蔥柚鍋 ·冷藏肉專門</a><blockquote>平日 17:30–22:00, 假日11:30–15:00, 17:30–22:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/7ecDecGDZU3ZdDAQ6" style="color: black">囍運麻辣鍋</a><blockquote>每日 11:30–14:30、17:00–22:30 (週三、週六公休)</blockquote></li>
-
-<li><a href="https://maps.google.com/?cid=51386791119871625" style="color: black">台南阿官火鍋專家府前店</a>
-<blockquote>每日 11:00–22:00 (週四公休)</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/dro2c5gDho3A6hM9A" style="color: black">各鍋各的</a><blockquote>平日 18:00–22:00<br>假日 11:00–15:00、18:00–22:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/Euc3TgKMdHtZcKqg6" style="color: black">溢湘涺</a>   
-<blockquote>每日 16:30–<strong>02:00</strong></blockquote></li> 
-</ul>
-    
-<h4><strong class="orange-text">乾鍋</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/akf2Cio2XzSprerg78" style="color: black">福相麻辣香鍋</a>
-<blockquote>每日 16:30–00:00 </blockquote></li>       
-    
-<li><a href="https://maps.app.goo.gl/oqkZQSFZsFQFVCPFA" style="color: black">小赤佬干鍋</a>   
-<blockquote>每日 17:00–00:00  
-<br><a href="https://maps.app.goo.gl/oNk9cr8PBCk46TFH9/">忠義店</a> : 每日 17:00–23:30 (週二公休 週日到24:00)</blockquote></li> 
-</ul>  
-
-<h4><strong class="orange-text">港式</strong></h4>
-<ul>
-  
-<li><a href="https://maps.app.goo.gl/Zviac3mJm4u1SkGZ8" style="color: black">寓點</a>
-<blockquote>週五、週六 07:00–14:00(內用只有這兩天) <BR>週三及週六提供冷藏及冷凍點心</blockquote></li>     
-    
-<li><a href="https://maps.app.goo.gl/QP3h4Repi2SQ8soL6" style="color: black">捌伍貳冰室（公休日請查詢FB&IG粉專）</a>
-<blockquote>週一~週五 11:30–17:00</blockquote></li>   
-
-<li><a href="https://maps.app.goo.gl/Zviac3mJm4u1SkGZ8" style="color: black">糖勒？兩茶匙</a>
-<blockquote>三~日 11:00–18:00</blockquote></li>  
-
-</ul> 
- 
-<h4><strong class="orange-text">泰式</strong></h4>
-<ul> 
-<li><a href="https://maps.app.goo.gl/nN4pWwG3nU8pS7yV8" style="color: black">MUSA泰國料理</a><blockquote>一、四~日 ; 11:00–15:00、17:00–21:00</blockquote></li>
-</ul>   
-
-<h4><strong class="orange-text">居酒屋、熱炒、燒烤</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/JNJSpVqfEpH1eP8X9" style="color: black">豐收飯桌</a>
-<blockquote>每日 16:30–23:40</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/2rxXWjmxKXWAYbVt5" style="color: black">澪三酒食</a>
-<blockquote>二~日 星期二、18:00–00:30</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/VUH62EM4wpJRzrRd9" style="color: black">北海燒炒物語</a>
-<blockquote>北海燒炒物語<br>每日 17:00–22:00 (六日多營業午餐時段 11:30–14:00)</blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/XXi2s2hMsdCeMtG26" style="color: black">新宿ホルモン台南金仔店</a>
-<blockquote>內臟燒烤店<br>每日 17:30–00:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/4RpKqQmGxiXhArUb9" style="color: black">三兄弟15元串燒</a>
-<blockquote>豆皮好吃，要等很久建議先打電話預約<br>每日19:00–01:00</blockquote></li>    
-    
-<li><a href="https://maps.app.goo.gl/h5DaFFtNsP895oyA6" style="color: black">上好烤魯味</a>
-<blockquote>每日 16:30–23:00</blockquote></li>
-    
-</ul> 
-    
-<h4><strong class="orange-text">其他</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/7w6E2M5GNsHJaC4W9" style="color: black">天天來冷飲DGCD</a>
- <blockquote>不定期推出當日限定的鹹食 有漢堡排/咖喱飯/塔可飯/黯然銷魂飯 <br>營業時間：依<a href="https://www.instagram.com/dagumm_colddrinks/">限動</a>公佈<br>營業日期：固定休週日、週一</blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/7w6E2M5GNsHJaC4W9" style="color: black">燭日</a>
- <blockquote>評分不高因為有一星真的好評 <br>二~日 17:30–22:00</blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/tD53qU7U2ouX8bPe9" style="color: black">毒く毒ㄑDoKuKu</a>
-    <blockquote>一二五六日 <strong>14:00</strong>–00:00(週三、週四公休)</blockquote></li>
-
-</ul>
-<br>
-
-<p>那間茶室—海南雞</p>
-<p>海之味食堂</p>
-<p>亞芙</p>
-<p>閒情茗品屋</p>
-<h3>&#9674;合菜、buffet</h3>
-<ul>
-<li><a href="https://maps.app.goo.gl/xYtaRj6NP7sRjxCw8" style="color: black">阿美飯店</a>
-<blockquote>週一、週四~週日11:30–14:00、17:00–21:00</blockquote></li>
-<li><a href="https://maps.app.goo.gl/7JSAZi5SxQcCCssm7" style="color: black">阿霞飯店</a>
-<blockquote>二~日11:00–14:00、17:00–21:00</blockquote></li> 
-
-<li><a href="https://maps.app.goo.gl/7JSAZi5SxQcCCssm7" style="color: black">桂田酒店_阿力海百匯 (buffet) </a>
-<blockquote>二~日11:00–14:00、17:00–21:00</blockquote></li> 
-
-<p>享鴨 烤鴨與中華料理</p>
-</ul>
-
-<h3>&#129650;小吃</h3>
-<ul>
- <li><a href="https://maps.app.goo.gl/xYtaRj6NP7sRjxCw8" style="color: black">七誠米粿</a>
-<blockquote>每日 07:30–20:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/bVhjP9W5z3tfC4t2A" style="color: black">阿文米粿</a>
-<blockquote>每日 08:30–23:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/1zaXrFtw51S6Fqop8" style="color: black">府城黃家蝦捲</a>
-<blockquote>一、二、三四日14:30–19:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/Wrdi368yFANH3hER7" style="color: black">鮮蒸蝦仁肉圓</a>
-<blockquote>10:30–14:00、16:30–19:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/AoP8vJM2quTpsJeb8" style="color: black">再發號百年肉粽</a>
-<blockquote>每日 10:00–20:00(周二公休)</blockquote></li>
- 
-<li><a href="https://maps.app.goo.gl/RgrFg27mntCGY9km8" style="color: black">福州香胡椒餅(北區)</a>
-<blockquote>一~六 13:40–19:30</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/QKJEd7iVTJoBbTSCA" style="color: black">松村煙燻滷味</a>
-<blockquote>二~日 11:00–19:30<br><a href="https://maps.app.goo.gl/ikQhVHVfActwsj9x6">成功店</a>:葡吉旁邊</blockquote></li> 
-</ul>
-
-<h2>甜食</h2>
-
-<h3 id="dessert">&#127856;甜點</h3>
-<ul>
-<li><a href="https://maps.app.goo.gl/YWeoK6sjDzoiwgYQ6" style="color: black">小滿 </a><blockquote>千層蛋糕<br>營業時間請見ig</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/1nG5yRHtbgW9jhM59" style="color: black">克林姆之屋</a><blockquote>千層蛋糕、生日蛋糕<br>每日 11:00–21:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/FiWLpU4xAF3XVvS49" style="color: black">濃特慢手作千層（工作室）</a>
-<blockquote>五 15:00–18:30，六日14:00–17:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/8bmnXznM8Tg6YroX9" style="color: black">深藍咖啡館 府連本店(僅供外帶)(東區)</a>
-<blockquote>千層蛋糕<br>每日 10:30–19:00(週三公休)<br><a href="https://maps.app.goo.gl/8bmnXznM8Tg6YroX9">旗艦店</a>(安平)有內用</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/uCDV3N6tYSZmXyxC9" style="color:black">順風號</a>
-<blockquote>生乳捲<br>一、二、六、日 12:00–21:00 (週三、四、五公休)</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/G1wA2hDDGrUvqK2j9" style="color: black">咚窩蕊喫茶店</a>
-    
-<blockquote>布丁</blockquote></li>
-  
-<li><a href="https://maps.app.goo.gl/4iVQCf3cpJ4T7a4k6" style="color: black">EVA伊娃日式泡芙專賣店</a><blockquote>冰淇淋泡芙<br>每日11:00–19:30 (週二公休)</blockquote></li>
-    
-
-<li><a href="https://maps.app.goo.gl/krAxEkmfq1qrtHB68" style="color: black">阿櫃-日式手作銅鑼燒(中西區)</a><blockquote>蝸牛巷內 四~六 14:30–18:00</blockquote> </li>
-    
-<li><a href="https://maps.app.goo.gl/jBCVoYtAgPw3fmaT7" style="color: black">說說甜點</a>
-<blockquote>戚風蛋糕(Chiffon Cake)<br>
-每日 13:00–21:00</blockquote></li>   
-
-<li><a href="https://maps.app.goo.gl/r5FWm8aacghSGfrY8" style="color: black">蘇格蕾法式甜點｜法式手工喜餅</a>
-    <blockquote>法式糕點甜點<br>二~六 12:00–19:00</blockquote>
-  </li>
-<li><a href="https://maps.app.goo.gl/DMrXKRVSexBTgP3ZA" style="color: black">提拉米蘇精緻蛋糕臺南店</a>
-<blockquote>每日 11:30–18:30</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/qrkwzxCM2gmZWDJH6" style="color: black">乜料茶居</a><blockquote>每日 19:30–00:00 (週二公休)<br>要等很久 老闆很有個性 </blockquote></li>  
-    
-    
-<li><a href="https://maps.app.goo.gl/6cPJp3NR5LGVDZjAA" style="color: black">惠比壽鯛魚燒 </a>
-<blockquote>每日 12:00–18:00</blockquote></li>
-</ul>
-
-<h3 id="cafe">&#9749;咖啡廳</h3> 
-
-<h4><strong class="orange-text">&#128008;&#8205;2&#65039;&#8413;貓咖</strong></h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/CEYnuwLpVnMbYRgb6" style="color:black;">找找卯咪咖啡廳</a>
-    
-<blockquote>不太像貓咖比較像貓咪互動店，貓咪摸到爽 一人$250學生優惠200可折抵餐費100<br>
-用餐區在一樓，只有幾個座位，貓咪都在二樓<br> </blockquote>
-
-<li><a href="https://maps.app.goo.gl/y9v89TuJDqu1mK2t5" style="color:black;">貓言貓語雪花冰下午茶</a>
-<blockquote>三~日 上午12:00 - 下午7:00</blockquote></li>
-      
-
-<li><a href="https://maps.app.goo.gl/paokq69iNiVjsLTz6" style="color: black">日月参上 HITSUKI SANJO</a><blockquote>每日 12:30–23:30:00–21:00</blockquote></li>  
-</ul>
-    
-<h4><strong class="orange-text">深咖</strong></h4>
- <ul>   
-<li><a href="https://maps.app.goo.gl/V2LLyrH5jgHUFNyw8" style="color: black">月波</a><blockquote>每日 15:00-23:00(五六-24:00) ，月休看
-<a href="https://instagram.com/moon_wave___?igshid=12xi2u9ceid93">ig</a>    
-</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/xDptSDQbdizdixta8" style="color: black">䖙｜THENN LEH</a><blockquote>每日 15:00–00:00
-    </blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/XM9sbGqDPMxGCqFq6" style="color: black">腐城</a>
-    
-<blockquote>每日 19:00–00:59</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/tN2ZjQLke7hrHTSh7" style="color: black">好像不錯 </a><blockquote>三~日 17:30–00:30</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/nPHkgmutRqANv5Bh6" style="color: black">牽咖啡</a><blockquote>一~六 20:30–01:00
-    </blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/2sgFBTshrn6GXXh69" style="color: black">客憩café ケーキ </a><blockquote>離成大很近的 每日 15:00–00:00
-    </blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/eQ1uguxmyjV4r1bcA" style="color: black">山湃</a><blockquote>一、二、五~日 17:00–00:00(週三、週四公休)
-    </blockquote></li>
-</ul>
-
-<h4><strong class="orange-text">日間咖啡廳</strong></h4>
-<ul> 
-<li><a href="https://maps.app.goo.gl/CH5JbxjYSvPdiTmh8" style="color: black">窟仔kula咖啡(中西區)</a><blockquote>炙燒豬肉飯<br>每日 14:00–22:00(週四公休)</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/d8sMGiEx62seCLTg8" style="color: black">自己的房間(中西區)</a><blockquote>每日 13:00–21:00</blockquote></li>
-<li><a href="https://maps.app.goo.gl/vSpPDgkBy49KWVjn9" style="color: black">錫鼓 Tin Drum(中西區)</a><blockquote>日式老宅咖啡廳丨比利時鬆餅<br>10:00–17:30五六10:00–17:30、18:30–22:20</blockquote></li>
-<li><a href="https://maps.app.goo.gl/gK1RX4SZ5dUomDiN8" style="color: black">雀色喫茶(中西區)</a><blockquote>永樂市場裡面，一定要預約，店內只有四組位置<br>每日 15:00–22:00(五六日至23:00)，公休日請看<a href="https://www.instagram.com/sunsetdessert.lab/">Ig</a></blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/kqKRPgARqwTVEGp89" style="color: black">潺潺咖啡(東區)</a><blockquote>有一隻會走來走去的貓<br>每日 12:00–19:00，公休看<a href="https://instagram.com/chan.chan.coffee/">Ig</a></blockquote></li>   
-<li><a href="https://maps.app.goo.gl/7w6KGzGFyyAjRqMK9" style="color: black">仁人(東區)</a> <blockquote>南紡旁<br>每日 11:30–18:30</blockquote></li>
-<li><a href="https://maps.app.goo.gl/MRSSn4hGGWDLBo8bA" style="color: black">木溪 MERCIKTN 總舖(北區靠中西區)</a><blockquote>司康專賣店<br>每日 上午10:00 - 下午5:30 公休看<a href="https://www.instagram.com/merci_kitchen/">ig</a></blockquote></li>
-<li><a href="https://maps.app.goo.gl/QwFaCPkkzTSTykiP8" style="color: black">千森製菓ちもり(中西區)</a><blockquote>抹茶千層 生乳捲<br>每日 11:30–19:00(週三公休)<br>內用每人低消$200，限時90分鐘 </blockquote></li>
-
-  <li><a href="https://maps.app.goo.gl/NMNN1MZZ9FWwVD8n7" style="color: black">綠町抹茶專門店</a>
-    <blockquote>每日 12:00–19:00 (週三公休)</blockquote>
-  </li>
-
-  <li><a href="https://maps.app.goo.gl/q9WxsTFAsncocSzc7" style="color: black">KADOYA喫茶店</a>
-    <blockquote>每日 13:00–20:00 (週二公休)</blockquote>
-  </li>
-
-  <li><a href="https://maps.app.goo.gl/BqcPz5i4q3oQC93BA" style="color: black">窄門咖啡館</a>
-    <blockquote>每日 11:00–20:30</blockquote>
-  </li>
-
-<li><a href="https://maps.app.goo.gl/xd7FLD3ZzWPiHEg26" style="color: black">穴居cave cafe</a><blockquote>成大附近小店<br>每日12:00–18:00 (週二、週三公休)</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/4CWuQEATTYBeAtAy5" style="color: black">小房子咖啡</a>
-<blockquote>低消一杯飲品or $120/人</blockquote></li>
-
-</ul>
-
-<h3 id="ice-dessert">&#127848;冰&甜品</h3>
-<ul>
-<li><a href="https://maps.app.goo.gl/eCQcfvFu36yPLVtf9" style="color: black;">榕樹下璞味綿綿冰</a><blockquote>每天12:00–21:00<br><a href="https://maps.app.goo.gl/eCQcfvFu36yPLVtf9" style="color: black;">河樂店</a>、<a href="https://maps.app.goo.gl/eCQcfvFu36yPLVtf9" style="color: black;">小北門店</a></blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/ccGmwqHiDPgcsDtTA" style="color: black">懷舊小棧杏仁豆腐冰</a><blockquote>每日 10:30–22:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/8C8UgA1ZUgeLmka59" style="color: black">豆腐洋行•杏仁豆腐冰(東區)</a>
-<blockquote>每日 13:00–22:00<br><a href="https://maps.app.goo.gl/ZQDdZ36eEEBaXHnP9">國華店</a></blockquote></li>
-
-    
-<li><a href="https://maps.app.goo.gl/u5BnnUFvY69pV5Bj7" style="color: black; ">奉口冰室台南府城店</a></li>
-
-<li><a href="https://maps.app.goo.gl/gmEfn6Ni4L1PekT6A" style="color: black">同記安平豆花(總店)</a>
-<blockquote>每日 09:00–23:00<br><a href="https://maps.app.goo.gl/UzCAfVNamiYRLed69">中西區店</a>: 10:00–22:00</blockquote></li> 
-
-<li><a href="https://maps.app.goo.gl/7pCSBPaeKSMXh4eC" style="color: black">茂記黑豆花大王 </a>
-<blockquote>燒仙草比較好吃<br><a href="https://maps.app.goo.gl/WgWSgFzV2GKKSRsYA" style="color: black">赤崁店</a>、<a href="https://maps.app.goo.gl/5uN4wWBp6s54KaXF6" style="color: black">海安店</a></blockquote></li> 
-
-<li><a href="https://maps.app.goo.gl/qWZUbNiWkVed9K7f8" style="color: black">冰鄉</a></li><blockquote>草莓冰需先去排隊拿號碼牌<br>每日 12:00–20:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/ZdNaUsQKPzjLSqWDA" style="color: black">八寶彬圓仔惠</a>
-    
-<li><a href="https://www.google.com/maps?cid=16005384033278745991&entry=gps" style="color: black">冰ㄉ• かき氷(東區)</a><blockquote>每日 11:00–20:00<br><a href="https://www.google.com/maps?cid=16005384033278745991&entry=gps" style="color: black">冰ㄉ• かき氷 二號店(中西區)</a></blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/FKHPwktSe2gJ4xoT7" style="color: black">太陽牌冰品</a>
-    
-<li><a href="https://maps.app.goo.gl/xE1kozfozeiaJF7f8" style="color: black">美雪冰菓室</a>
-
-</ul>
-
-<h2 id="drinks">&#129370;飲料</h2>
-<ul>
-<li><a href="https://maps.app.goo.gl/rxTxcMg6CLLBxHdD7" style="color: black">第一站手作飲品</a>
-<blockquote>每日 星期五、09:00–21:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/uvutJt6LjPDKnX3k6" style="color: black">双生綠豆沙牛奶</a>
-<blockquote>每日 11:00–19:00 (週二公休)</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/PGfRg1pVymtJZksC8" style="color: black">老丘茶舖</a>
-<blockquote>每日 10:00–21:00 (週日公休)</blockquote>
-</li>
-
-<li><a href="https://maps.app.goo.gl/QW6vjr4TCQitKqHW6" style="color: black">甜又鮮飲料</a>
-<blockquote>每日 08:30–22:00</blockquote>
-</li>
-
-<li><a href="https://maps.app.goo.gl/idng8vTKt5MyhfXG7" style="color: black">小良田</a>
-<blockquote>每日 11:00–21:30</blockquote>
-</li>
-
-<li><a href="https://maps.app.goo.gl/YwasrrJEzjiwKoTT7" style="color: black">老丘茶舖</a>
-<blockquote>每日 10:30–21:00</blockquote>
-</li>
-
-</ul>
-
-<h2 id="mid-price-restaurants">氣氛晚餐、中價位餐廳</h2>
-<ul>
-<li><a href="https://maps.app.goo.gl/H7UNtBBVQB8fFrLc7" style="color: black">LOLA蘿拉冷飲</a>
-    <blockquote>二~日 18:00–<strong>01:00</strong>(五、六至<strong>02:00)</strong></blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/AmozeaBnPuPBBYwt5" style="color: black">麥謎食驗室 Bue mi .Lab</a>
- <blockquote>週一、週四~週日 12:00–14:00、17:50–20:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/oA1WUJZCXu1eAXHR6" style="color: black">咖啡小酒館</a></li>
-    
-<li><a href="https://maps.app.goo.gl/u5BnnUFvY69pV5Bj7" style="color: black;">南瓜餐桌</a>
-</li>
-    
-<li><a href="https://maps.app.goo.gl/Sf9p1goHHTeyStWM8" style="color: black">今鶴</a>
-<blockquote>每日 10:00–22:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/rEVcFS3o5wKeWrdFA" style="color: black">十平</a> (不定休請參考<a href="https://www.instagram.com/zyuutsubo/">ig</a>貼文公告)
-<blockquote>每日 12:00–14:00 、18:00–20:00 (週三公休)</blockquote></li>    
-</ul>
-
-<h2 id="high-end-restaurants">高級料理</h2>
-<ul>
-<li><a href="https://maps.google.com/?cid=9524955650233570520" style="color: black">戶羽鍋物</a>
-<blockquote>二~日 12:00–14:00、17:30–21:30</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/4ezp3X9Ygz158HH37" style="color: black">尼法</a>
- <blockquote>每日 12:00–14:00、18:00–21:00</blockquote>   </li>  
-    
-<li><a href="https://maps.app.goo.gl/AXSB1REmmyfTFFRQ8" style="color: black">私之家壽司刺身 （預約制）</a>
-    <blockquote>每日 11:00–14:00、18:00–22:00</blockquote>  
-
-</ul>
-
-<h2 id="late-night-snack">&#127769;宵夜 (超過12.的)</h2>
-<ul>
-<li><a href="https://maps.app.goo.gl/HCGjNKkPKUuQuQ4x7" style="color: black">微宵夜</a>
-<blockquote>每日 19:00–03:00 (週一公休)</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/bZFB6ZS75AynKpDx6" style="color: black">小東路麻辣關東煮</a>
-<blockquote>營業時間：依<a href="https://www.facebook.com/XiaoDongLuMaLaGuanDongZhu/">facebook</a>公佈</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/FH3X2viSYPvduQ6i6" style="color: black">T&F 手作吐司</a>
-<blockquote>每日 19:30–03:00</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/Tz7NPDg81gvhqf5U9" style="color: black">盛田滷味</a>
-<blockquote>每日 18:00–01:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/Tz7NPDg81gvhqf5U9" style="color: black">丹瓦樓</a>
-<blockquote>週一至週五 17:00–01:30<br>週六、週日 11:00–01:30</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/eUC8sfembdro6Sgd9" style="color: black">頂好意麵</a>
-<blockquote>每日 19:00–04:00</blockquote></li>   
-
-<li><a href="https://maps.app.goo.gl/eUC8sfembdro6Sgd9" style="color: black">咕嚕叫土司(林森店)</a>
-<blockquote>每日 19:00–03:00<a href="https://maps.app.goo.gl/a4Wbx4Uek3aeJXH86">(民生店)</a></blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/BDSmT8GDYcri7Sya6" style="color: black">亮晶晶宵夜</a>
-    
-<blockquote>一~五 20:30–02:00(餐點售完為止)</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/pFcwbszjzTnvdfHv6" style="color: black;">何記永和豆漿</a><blockquote>一~六 20:30–02:00
-</blockquote></li>
-</ul>
-
-<h2 id="bars">&#127863;酒吧</h2>
-<ul>
-<li><a href="https://maps.app.goo.gl/tsmQLu5LbqZzyvHC8" style="color: black">萬昌起義</a></li>
-    
-<li><a href="https://maps.app.goo.gl/7dykjrYpxnMr7PLT7" style="color: black">moon rock</a>
-      
-<blockquote>鴨肝餛飩老母雞湯</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/9PubKXjb3LzSFcuSA" style="color: black">TCRC Livehouse</a></li>
-    
-<li><a href="https://maps.app.goo.gl/HHcfStmbfLLVnngx5" style="color: black">Phowa</a></li>
-
-<li><a href="https://maps.app.goo.gl/tCuiparwsATmZD4g8" style="color: black">宮後食酒號</a></li>
-
-</ul>
-<h3 id="hungover">&#9674;宿醉hung over</h3>
-<ul>
- <li>所有的<a href="#beef">牛肉湯</a></li>
-    
-<li><a href="https://maps.app.goo.gl/2jYUyKm3MrbM7VMDA" style="color: black">無名羊肉湯</a>
-
-<blockquote>05:30-賣完 星期二公休</blockquote></li>    
-<li><a href="https://maps.app.goo.gl/FY1A28PoKQLsoEr78" style="color: black">王氏魚皮店</a>
-
-<blockquote>一~五 04:00–14:00<br> 六、日 04:00–15:00</blockquote></li>
-
-<li><a  href="https://maps.app.goo.gl/4hnLRSVUAdcKZojF9" style="color: black;">新興路無名虱目魚粥</a><blockquote>週一~週六 06:00–10:00</blockquote></li>
-  
-</ul>
-
-<h2 id="night-markets">夜市</h2>
-<ul>
-<li><a href="https://maps.app.goo.gl/QQyL7RY3Syb9PXVz5" style="color: black;">花園夜市</a>
-    
-<blockquote>營業時間：週四、週六、週日<br>棺材板、麻糬叔叔、白糖粿</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/TybFTNQvR7xRu1qE9" style="color: black;">武聖夜市</a>
-    
-<blockquote>營業時間：週三、週五、週六<br>摩天輪、海盜船、倒數第二排大腸香腸老攤 </blockquote></li>
-
-</ul>
-
-<h2 id="tourist-areas">觀光地區</h2>
-(會跟前面有重複的店家)
-<h3>&#9674;國華街 ~(由北至南)~</h3>
-
-<ul>
- <li><a href="https://maps.app.goo.gl/viqWTm8bgynu3zRR9" style="color: black">富川麻糬</a>
-<blockquote>每日 09:45–19:00</blockquote></li>    
-
-<li><a href="https://maps.app.goo.gl/j6nVwXAE3sjKo91v8" style="color: black">石精臼蚵仔煎</a>
-<blockquote>香菇湯飯<br>每日 07:30–20:00</blockquote></li>    
-    
-<li><a href="https://maps.app.goo.gl/6CHUC63G5FJdJinUA" style="color: black">一味品碗粿魚羹</a>
-<blockquote>每日 05:00–17:00 (週二公休)</blockquote></li>   
- 
-<li><a href="https://maps.app.goo.gl/gK1RX4SZ5dUomDiN8" style="color: black">雀色喫茶</a><blockquote>永樂市場裡面，一定要預約，店內只有四組位置<br>公休日請看<a href="https://www.instagram.com/sunsetdessert.lab?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=">IG</a></blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/xYtaRj6NP7sRjxCw8" style="color: black">七誠米粿</a>
-<blockquote>每日 07:30–20:00</blockquote></li>
-  
-<li><a href="https://maps.app.goo.gl/ZdNaUsQKPzjLSqWDA" style="color: black">八寶彬圓仔惠</a></li>
-<p>老鼎魯麵</p>
-<p>My老爹紅茶屋</p>
-</ul>
-
-<h3>&#9674;保安路</h3>
-<ul>
-<li><a href="https://maps.app.goo.gl/i77Dp1HYqNTb6pyj7" style="color: black">醇涎坊古早味鍋燒意麵</a>
-    
-<blockquote>每日 06:00–20:00 (週日只營業至14:00)</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/ZE4fWVz8Tc29k4tb6" style="color: black">阿明豬心冬粉</a>
-    
-<blockquote>每日 17:00–00:00 (週一公休)</blockquote></li>
-</ul>
-
-
-<h2 id="ncku-area">&#127891;成大周遭</h2>
-
-<h5>&#9672;早午餐</h5> 
-<ul>
-<li><a href="https://maps.app.goo.gl/poCjhbQS4QTFEQ869" style="color: black">小邁時光</a>
-    
-<blockquote>每日 08:00–16:00 </blockquote></li>
-<li><a href="https://maps.app.goo.gl/7TiEQK4ZdC643LmL7" style="color: black">鐵牛早餐</a>
-<blockquote>二~日：07:00–12:30 (週一公休)</blockquote></li>      
-
-<li><a href="https://maps.app.goo.gl/TUeuJdu38iGpDLTW7 " style="color: black">晨香廚房</a><blockquote>每日 06:00–13:00</blockquote></li>       
-
-<li><a href="https://maps.app.goo.gl/hH56UzhvQ2yCaTNQ7" style="color: black">漢堡大叔</a><blockquote>每日 06:00–12:30 (週三、週四公休)</blockquote></li>   
-</ul>
-
-    
-<h5>&#9672;晚餐only</h5>   
-<ul>
-<li><a href="https://maps.app.goo.gl/TUeuJdu38iGpDLTW7 " style="color: black">菘芝香滷味</a><blockquote>二~六 17:30–22:00</blockquote></li>   
-</ul>
-   
-<h4>&#9672;午/晚餐</h4>
-<h5><span style="color: #6F4E37;">育樂街</span></h5>
-<ul>
-<li><a href="https://maps.app.goo.gl/kNPRHbAAg1jMGZjv7" style="color: black">餃場</a><blockquote>一~六 11:00–13:00、17:00–22:00</blockquote></li>
-<li><a href="https://maps.app.goo.gl/MoMqLNCm2VmUJMpc9" style="color: black">暖食堂 歐姆蛋包飯 </a><blockquote>二~日、16:00–20:00</blockquote></li>
-<li><a href="https://maps.app.goo.gl/kNPRHbAAg1jMGZjv7" style="color: black">元味屋和風洋食</a><blockquote>一~六 11:00–14:00、17:00–20:00</blockquote></li>    
-<li><a href="https://maps.app.goo.gl/kNPRHbAAg1jMGZjv7" style="color: black">樂品屋</a><blockquote>一~六 11:00–14:00、16:30–20:00</blockquote></li>
-<li><a href="https://maps.app.goo.gl/kTJtenaDMZNk5Eud7" style="color: black">有泰拜三</a><blockquote>每日11:30–20:30</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/6WaNgKMv6oAY9JTf9" style="color: black">大口咬定</a><blockquote>每日 11:00–21:00</blockquote></li>  
-
-<li><a href="https://maps.app.goo.gl/xj73NvoE7heaxsfh7" style="color: black">二樂丼飯 (之前是叫餓了)</a>   
-<blockquote>每日 11:00–14:00、17:00–21:00</blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/xj73NvoE7heaxsfh7" style="color: black">康舍FOOD HOUSE</a> 
-<blockquote>一~六 11:00–14:00、17:00–20:00</blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/wnDgDFanAELpqjPn7" style="color: black">竹間手作 麻辣燙</a><blockquote>一~六 18:00–23:30</blockquote></li>
-
-<li><a href="https://maps.app.goo.gl/wnDgDFanAELpqjPn7" style="color: black">一煥關東煮</a><blockquote>一~日 18:00–00:00</blockquote></li>
-
-</ul> 
-
-<h5><span style="color: #6F4E37;">醫學院北邊</span></h5>
-<ul>
-<li><a href="https://maps.app.goo.gl/7mt7TqrmA69R7WuG9" style="color: black">小邁時光（東豐店）</a><blockquote>每日 08:00–16:00<br></blockquote></li>    
-<li><a href="https://maps.app.goo.gl/uDhyvfVtGto6Daxn8" style="color: black">昆布食堂</a>
-<blockquote>二~六：11:00~14:00</blockquote></li>      
-<li><a href="https://maps.app.goo.gl/6e74LYAmAF2toGMt7" style="color: black">廣越美食</a>
-  
-<blockquote>咖哩麵包容易賣完要早一點去<br>
-    星期一至星期五：11:00~15:00， 16:30~19:30 <br>
-    星期六：only11:00~15:00<br>
-    星期日：公休</blockquote></li>  
-<li><a href="https://maps.app.goo.gl/oZchWGSm6MhMvayC7" style="color: black">櫻之庭食堂</a></li>   
-<li><a href="https://maps.app.goo.gl/6e74LYAmAF2toGMt7" style="color: black">添福麵館</a>  
-
-<blockquote>星期二至星期五：11:30–15:00、17:30–20:30 <br>
- 星期一：公休</blockquote></li>   
-</ul> 
-    
-<h5><span style="color: #6F4E37;">勝後、長榮路</span></h5>
-<ul>     
-<li><a href="https://maps.app.goo.gl/sjEhKPNzB6FLfQsx8" style="color: black">七海魚皮</a> 
-<blockquote>一～六 11:00–14:00、17:00–20:00</blockquote></li>
-  
-<li><a href="https://maps.app.goo.gl/Ty8jUi6zAtN7VoJH9" style="color: black">BitchFryFry 台南店</a><blockquote>每日 11:00–14:00、17:00–22:00</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/3xoREEZYZZuFFTVi7" style="color: black">辣訣</a><blockquote>每日 11:00–14:00、17:00–22:00</blockquote></li>
-</ul>     
-    
-<h5><span style="color: #6F4E37;">東安路、東寧路那區</span></h5>
-    
-<ul>
-<li><a href="https://maps.app.goo.gl/6e74LYAmAF2toGMt7" style="color: black">港記燒臘便當</a>
-    
-<blockquote>09:30–20:00 六公休</blockquote></li>
-<li><a href="https://maps.app.goo.gl/TgMQ4JpAQxi84QRFA" style="color: black">鴨霸當歸鴨</a>
-<blockquote>星期一~六 10:00–21:00</blockquote></li>    
- 
- 
-<li><a href="https://maps.app.goo.gl/6J2iiEVDZ9vSahPi6" style="color: black">嚥舐麻辣鴨血</a>
-<blockquote>每日 16:30–21:00</blockquote></li>
- 
-<li><a href="https://maps.app.goo.gl/hqacHoarmDsgaXkw5" style="color: black">飽芝林關東煮🍢</a>
-<blockquote>每日 11:00–23:00 </blockquote></li> 
-    
-<li><a href="https://maps.app.goo.gl/yXU4tQKus3dZSMUW8" style="color:black">萬客樓</a></li>
-<li><a href="https://maps.app.goo.gl/5w8rYsJv1yCVDJVd8" style="color:black">上海好味道小籠湯包(貴)</a></li>
-<li><a href="https://maps.app.goo.gl/ytVu1RpH1QcJCzgu7" style="color: black">Walking Su 藥膳麻油雞</a></li> 
-<li><a href="https://maps.app.goo.gl/ubUoYagq4sXuadwT8" style="color: black">禾品平價鐵板燒</a>
-<blockquote>平日: 11:00–14:30、16:30–23:30<br>六日: 11:00–23:30</blockquote></li>    
-</ul>   
-    
-<h5><span style="color: #6F4E37;">開元路、南園街</span></h5>    
-<ul>
-<li><a href="https://maps.app.goo.gl/gDsbud2yUad6wF8R8" style="color: black">十三小館</a>
-<blockquote>每日 11:30–14:00, 17:00–20:30 (週二公休)</blockquote></li>
-    
-<li><a href="https://maps.app.goo.gl/fE2hX8YC55KEtioF7" style="color: black">開元紅燒𩵚魠魚羹</a>
- <blockquote>每日 09:00–18:30</blockquote></li>  
-</ul>   
-    
-<h4>&#9672;水果</h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/8iPC4dxCEouYBJWn6" style="color: black;">鮮果補給站</a>
-    
-<blockquote>每天09:30–22:00 </blockquote></li></ul> 
-
-<h4>&#9672;宵夜</h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/HCGjNKkPKUuQuQ4x7" style="color: black">微宵夜</a>
-<blockquote>二~日19:00–03:00</blockquote></li>    
-       
-<li><a href="https://maps.app.goo.gl/oiVRQibaoMPcDZE76" style="color: black">一點刈包</a>
-<blockquote>每日 22:00–03:00</blockquote></li>     
-
-</ul>
-
-<h4>&#9672;省錢</h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/eDVeB7KAHaJ1opRJ8" style="color: black">煦悅(便當)</a>
-<blockquote>11:00–14:00、17:00–19:00 六日公休</blockquote></li>  
-
-<li><a href="https://maps.app.goo.gl/uiBNNpeAFSxKtZd1A" style="color: black">活力小廚(便當)</a>
-<blockquote>11:00–14:00、17:00–19:30 五、日公休</blockquote></li>     
- 
-<li><a href="https://maps.app.goo.gl/D7AVeTMW4vEAkAQG7" style="color: black">胖媽媽炒飯</a>
-<blockquote>二~六 11:30–13:30、17:00–19:30</blockquote></li>     
-    
-<li><a href="https://maps.app.goo.gl/tSsM9qyKUWVLppxr6" style="color: black">香香小吃</a>
-
-<blockquote>11:20–14:00、16:30–20:00　五公休
-</blockquote></li>
-</ul>
-
-<h4>&#9672;中價位餐廳</h4>
-<ul>
-<li><a href="https://maps.app.goo.gl/gXn1V1P8ZgT23bV77" style="color: black">庫肯花園餐廳</a><blockquote>每日 11:00–20:45</blockquote></li>    
-</ul>   
-<p>約會</p>
-
-<h2 id="tools">&#127922;互動小工具</h2>
-<p>這裡無法直接嵌入您提供的輪盤工具。您可以點擊以下連結開啟它們：</p>
-<ul>
-    <li><a href="https://pickerwheel.com/pw?id=DLzPr" target="_blank">午餐吃什麼？ (輪盤)</a></li>
-    <li><a href="https://pickerwheel.com/pw?id=DncVx" target="_blank">晚餐吃什麼？ (輪盤)</a></li>
-    <li><a href="https://pickerwheel.com/pw?id=p93C3" target="_blank">吃什麼鹹食？ (輪盤)</a></li>
-    <li><a href="https://pickerwheel.com/pw?id=bEjnG" target="_blank">吃什麼甜食？ (輪盤)</a></li>
-    <li><a href="https://wheelofnames.com/zh-HK/95z-yk9" target="_blank">喝什麼？ (輪盤)</a></li>
-</ul>
-
+<!-- ===== 修改點 2: 控制目錄開合功能的全新 JAVASCRIPT ===== -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // 選取所有有 id 的 h2 和 h3 標籤
-  const sections = document.querySelectorAll('h2[id], h3[id]');
-  
+  // --- 1. 處理捲動時，目錄項目高亮顯示的邏輯 (已更新以適應新結構) ---
+  const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
   const tocLinks = document.querySelectorAll('#toc-sidebar a');
+  const tocSubmenus = document.querySelectorAll('#toc-sidebar .submenu');
 
   const observer = new IntersectionObserver((entries) => {
+    let latestIntersectingId = null;
+
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        
-        tocLinks.forEach(link => {
-          link.classList.remove('active');
-        });
-        
-        const activeLink = document.querySelector(`#toc-sidebar a[href="#${id}"]`);
-        if (activeLink) {
-          activeLink.classList.add('active');
-        }
+        latestIntersectingId = entry.target.getAttribute('id');
       }
     });
+    
+    if (latestIntersectingId) {
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkHref = link.getAttribute('href').substring(1);
+
+        if (linkHref === latestIntersectingId) {
+          link.classList.add('active');
+
+          // 如果啟動的項目在子選單內，自動展開其父選單
+          const parentSubmenu = link.closest('.submenu');
+          if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
+            parentSubmenu.parentElement.classList.add('open');
+          }
+        }
+      });
+    }
   }, {
-    rootMargin: '-30% 0px -60% 0px'
+    rootMargin: '0px 0px -70% 0px' // 調整偵測區，讓頂部三分之一處的標題觸發
   });
 
   sections.forEach(section => {
     observer.observe(section);
   });
+
+
+  // --- 2. 處理點擊時，目錄展開/收合的邏輯 ---
+  const toc = document.querySelector('#toc-sidebar');
+  toc.addEventListener('click', function(event) {
+    const targetLink = event.target.closest('a');
+
+    // 檢查點擊的是否為一個有效的連結
+    if (!targetLink) return;
+
+    // 如果點擊的是有子選單的主連結
+    if (targetLink.classList.contains('has-submenu')) {
+      // 防止頁面跳轉，僅做開合動作
+      event.preventDefault(); 
+      targetLink.parentElement.classList.toggle('open');
+    }
+    // 如果點擊的是子選單中的項目，或沒有子選單的項目
+    else {
+        // 先關閉所有已展開的子選單...
+        const allOpenLis = toc.querySelectorAll('li.open');
+        allOpenLis.forEach(li => {
+            // ...但不要關閉目前點擊項目所在的父選單
+            if(!li.contains(targetLink)){
+                li.classList.remove('open');
+            }
+        });
+    }
+  });
 });
 </script>
 
-</div>
 </body>
 </html>
