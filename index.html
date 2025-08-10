@@ -70,10 +70,93 @@
     .orange-text {
         color: #E87400;
     }
+
+    /* ===== 以下是新增的程式碼 ===== */
+
+    /* 讓錨點連結有平滑捲動效果 */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* 側邊欄目錄的容器樣式 */
+    #toc-sidebar {
+      position: fixed; /* 固定在畫面上，不隨頁面捲動 */
+      left: 30px;      /* 距離畫面左邊 30px */
+      top: 100px;      /* 距離畫面上方 100px */
+      width: 200px;    /* 寬度 200px */
+      max-height: 80vh; /* 最大高度為畫面高度的 80% */
+      overflow-y: auto; /* 如果內容太長，顯示捲軸 */
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 1000; /* 確保它在最上層 */
+    }
+
+    /* 調整目錄標題 */
+    #toc-sidebar h4 {
+        margin-top: 0;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    /* 調整清單樣式 */
+    #toc-sidebar ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    #toc-sidebar ul li a {
+      display: block; /* 讓整個區域都能點擊 */
+      padding: 6px 10px;
+      color: #333; /* 預設連結顏色 */
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* 滑鼠移過或目前所在區塊的連結樣式 */
+    #toc-sidebar ul li a:hover,
+    #toc-sidebar ul li a.active {
+      background-color: #e6ffe6; /* 使用您自訂的淺綠色 */
+      color: #E87400; /* 使用您自訂的橘色文字 */
+      font-weight: bold;
+    }
+
+    /* 在小螢幕（例如手機）上隱藏側邊欄，避免佔用畫面空間 */
+    @media (max-width: 1200px) {
+      #toc-sidebar {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
 <div class="container">
+
+<!-- ===== 修改後的目錄 ===== -->
+<nav id="toc-sidebar">
+    <h4>目錄</h4>
+    <ul>
+        <li><a href="#beef">牛肉</a></li>
+        <li><a href="#brunch">早午餐</a></li>
+        <li><a href="#lunch">午餐time</a></li>
+        <li><a href="#dinner">晚餐time</a></li>
+        <li><a href="#dessert">甜點</a></li>
+        <li><a href="#cafe">咖啡廳</a></li>
+        <li><a href="#ice-dessert">冰&甜品</a></li>
+        <li><a href="#drinks">飲料</a></li>
+        <li><a href="#mid-price-restaurants">氣氛晚餐、中價位餐廳</a></li>
+        <li><a href="#high-end-restaurants">高級料理</a></li>
+        <li><a href="#late-night-snack">宵夜 (超過12.的)</a></li>
+        <li><a href="#bars">酒吧</a></li>
+        <li><a href="#hangover">宿醉hung over</a></li>
+        <li><a href="#night-markets">夜市</a></li>
+        <li><a href="#tourist-areas">觀光地區</a></li>
+        <li><a href="#ncku-area">成大周遭</a></li>
+    </ul>
+</nav>
+
 
 <h1>台南美食</h1>
 
@@ -86,27 +169,7 @@
   <span style="font-size: 1.2em; margin-right: 5px;">&#9888;</span> 點選店家文字即可開啟對應的 Google 地圖位置！
 </div>
 
-<h2>目錄</h2>
-<!-- 自動目錄功能需要JavaScript或伺服器端程式，無法單純透過HTML實現。您可以手動建立連結到各個H2標題。 -->
-<ul>
-    <li><a href="#beef">牛肉</a></li>
-    <li><a href="#brunch">早午餐</a></li>
-    <li><a href="#lunch">午餐time</a></li>
-    <li><a href="#dinner">晚餐time</a></li>
-    <li><a href="#dessert">甜點</a></li>
-    <li><a href="#cafe">咖啡廳</a></li>
-    <li><a href="#ice-dessert">冰&甜品</a></li>
-    <li><a href="#drinks">飲料</a></li>
-    <li><a href="#mid-price-restaurants">氣氛晚餐、中價位餐廳</a></li>
-    <li><a href="#high-end-restaurants">高級料理</a></li>
-    <li><a href="#late-night-snack">宵夜 (超過12.的)</a></li>
-    <li><a href="#bars">酒吧</a></li>
-    <li><a href="#hangover">宿醉hung over</a></li>
-    <li><a href="#night-markets">夜市</a></li>
-    <li><a href="#tourist-areas">觀光地區</a></li>
-    <li><a href="#ncku-area">成大周遭</a></li>
-</ul>
-
+<!-- 原本的目錄位置，現在已經被側邊欄取代，所以這裡不需要了 -->
 
 <h2 id="beef">&#128002;牛肉&#128002;</h2>
 <ul>
@@ -331,6 +394,7 @@
 </ul>
 
 <br>
+
 
 <h2 id="dinner">&#128362;晚餐 time</h2>
 <h4><strong class="orange-text">台式飯類</strong></h4>
@@ -908,6 +972,7 @@
 <blockquote>每日 17:00–00:00 (週一公休)</blockquote></li>
 </ul>
 
+
 <h2 id="ncku-area">&#127891;成大周遭</h2>
 
 <h5>&#9672;早午餐</h5> 
@@ -1060,6 +1125,44 @@
     <li><a href="https://pickerwheel.com/pw?id=bEjnG" target="_blank">吃什麼甜食？ (輪盤)</a></li>
     <li><a href="https://wheelofnames.com/zh-HK/95z-yk9" target="_blank">喝什麼？ (輪盤)</a></li>
 </ul>
+
+<!-- ===== 以下是新增的 JavaScript 程式碼，請務必放在 </body> 前面 ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 選取所有有 id 的 h2 標籤 (也就是我們的目標區塊)
+  const sections = document.querySelectorAll('h2[id]');
+  // 選取側邊欄的所有連結
+  const tocLinks = document.querySelectorAll('#toc-sidebar a');
+
+  // 建立一個觀察器，用來偵測元素是否進入畫面
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // 如果該區塊進入畫面中
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        
+        // 移除所有連結的 active 樣式
+        tocLinks.forEach(link => {
+          link.classList.remove('active');
+        });
+        
+        // 找到對應的連結並加上 active 樣式
+        const activeLink = document.querySelector(`#toc-sidebar a[href="#${id}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+      }
+    });
+  }, {
+    rootMargin: '-30% 0px -60% 0px' // 調整偵測範圍，讓標示在畫面中間時更準確
+  });
+
+  // 讓觀察器開始觀察每一個 h2 區塊
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+});
+</script>
 
 </div>
 </body>
