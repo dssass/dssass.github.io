@@ -232,6 +232,54 @@
         transform: translateX(5px);
     }
     
+    #mobile-menu-toggle {
+    display: none; /* 在大螢幕上預設隱藏 */
+    position: fixed;
+    bottom: 25px;
+    right: 25px; /* 我們把它放在右下角，更符合操作習慣 */
+    width: 55px;
+    height: 55px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    z-index: 1002; /* 層級要最高，才不會被蓋住 */
+    cursor: pointer;
+}
+/* 按鈕裡面的三條線 */
+#mobile-menu-toggle span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 50%;
+    background: white;
+    border-radius: 3px;
+    left: 25%;
+    transition: all 0.3s ease-in-out;
+}
+#mobile-menu-toggle span:nth-child(1) { top: 30%; }
+#mobile-menu-toggle span:nth-child(2) { top: 48%; }
+#mobile-menu-toggle span:nth-child(3) { top: 66%; }
+
+/* 背景遮罩 */
+#toc-overlay {
+    display: none; /* 在大螢幕上預設隱藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+/* 當選單開啟時，讓遮罩淡入 */
+.mobile-menu-open #toc-overlay {
+    display: block;
+    opacity: 1;
+}
+
   
   
 
@@ -396,7 +444,7 @@
 <ul>
     <li><a href="https://maps.app.goo.gl/ce3szQeqTsxVqZEDA">永樂牛肉湯</a>    
     <blockquote>每日 00:00–09:00 (週二公休)</blockquote></li>
-    <li><a href="https://maps.app.goo.gl/ZdKip2QwR9PDa7hc7">西羅殿牛肉湯</a></li>
+    <li><a href="https://maps.app.goo.gl/ZdKip2QwR9PDa7hc7">西羅殿牛肉湯</a>
     <blockquote>每日 04:30–13:00 (週二公休)</blockquote></li>
     <li><a href="https://maps.app.goo.gl/LTCB1aKVQpHexFYS9">阿財牛肉湯</a></li>
     <li><a href="https://maps.app.goo.gl/szc3PJ5JWzzFYi5d8">無名牛肉湯</a></li>
@@ -545,6 +593,7 @@
     <li><a href="https://maps.app.goo.gl/4yasAF4K37tjXov48">ゴゴ台所（kaku.daidokoro)</a>
     <blockquote>是咖啡廳但有塔可飯跟泰北麵<br>每日 11:00–<strong>18:00</strong></blockquote></li> 
 </ul>
+
 <h2 id="dinner">&#128362;晚餐 time</h2>
 <h4 id="dinner-taiwanese-rice"><strong class="orange-text">台式飯類</strong></h4>
 <ul>
@@ -976,8 +1025,6 @@
 
 
 </div>
-<!-- ▼▼▼ 請「完整刪除」您舊的 script 區塊，並用「下面這一段」新的程式碼取代 ▼▼▼ -->
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     // 獲取所有需要操作的核心元件
