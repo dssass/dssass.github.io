@@ -2,9 +2,530 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台南美食清單</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1804918027527093"
+     crossorigin="anonymous"></script>
+  <style>
+    /* Google Fonts - Noto Sans TC */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+    :root {
+      --primary-color: #E87400; /* 活力的橘色 */
+      --secondary-color: #4CAF50; /* 清新的綠色 */
+      --background-color: #FAF8F2; /* 柔和的米色背景 */
+      --text-color: #333;
+      --light-gray: #f4f4f4;
+      --white: #fff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px;
+      line-height: 1.75;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 1.5rem; /* 在手機上稍微減少邊距 */
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: filter 0.3s ease-in-out; /* for overlay effect */
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--text-color);
+      font-weight: 700;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 0.5em;
+        letter-spacing: 2px;
+    }
+    
+    h2 {
+      font-size: 2em;
+      color: var(--primary-color);
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 0.5em;
+      margin-top: 3em;
+      margin-bottom: 1.5em;
+      display: flex;
+      align-items: center;
+      scroll-margin-top: 20px;
+    }
+
+    h3, h4, h5 {
+      scroll-margin-top: 20px; /* 避免跳轉時被頂部遮擋 */
+    }
+
+    h3 {
+      font-size: 1.5em;
+      color: #333;
+      border-bottom: none;
+      border-left: 5px solid var(--secondary-color);
+      padding-left: 1em;
+      margin-top: 2.5em;
+      margin-bottom: 1.2em;
+    }
+    
+    h4 {
+      font-size: 1.2em;
+      border-bottom: none;
+      margin-top: 2em;
+      font-weight: 700;
+    }
+    
+    .custom-block, .warning-box {
+      padding: 1.2em 1.5em;
+      margin-bottom: 1.5em;
+      border-radius: 8px;
+      font-size: 1em;
+      line-height: 1.7;
+    }
+
+    .custom-block { background-color: #F0FFF0; color: #2E8B57; border-left: 5px solid var(--secondary-color); }
+    .warning-box { background-color: #FFF8E1; color: #FFA000; border: 1px solid #FFECB3; font-weight: 500; display: flex; align-items: center; }
+    .warning-box .icon { font-size: 1.5em; margin-right: 0.7em; }
+
+    ul { list-style-type: none; padding-left: 0; }
+
+    ul > li {
+        background-color: var(--white);
+        border: 1px solid var(--light-gray);
+        border-radius: 8px;
+        padding: 1em 1.5em;
+        margin-bottom: 1em;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    
+    ul > li:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+    
+    ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 1.05em; 
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    
+    ul li a:hover { color: var(--primary-color); text-decoration: none; }
+    
+    blockquote {
+        margin: 0.8em 0 0 0;
+        padding: 0.8em 1em;
+        border-left: 4px solid var(--light-gray);
+        background: #f9f9f9;
+        color: #666;
+        border-radius: 4px;
+        font-size: 0.95em; 
+    }
+
+    .orange-text { color: var(--primary-color); font-weight: bold; }
+    .brown-text { color: #6F4E37; }
+
+    #toc-sidebar {
+      position: fixed;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 230px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1em;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      transition: left 0.3s ease-in-out;
+    }
+    
+    #toc-sidebar.open {
+      left: 0;
+    }
+
+    #toc-sidebar h4 {
+        margin-top: 0;
+        margin-bottom: 1em;
+        padding-bottom: 0.8em;
+        font-size: 1.3em;
+        text-align: center;
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+    }
+       #toc-sidebar h4 a {
+      color: inherit; /* 繼承父層 h4 的顏色 (橘色) */
+      text-decoration: none; /* 移除連結的底線 */
+      display: block; /* 讓整個標題區塊都可以點擊 */
+      transition: opacity 0.2s ease;
+    }
+
+    #toc-sidebar h4 a:hover {
+      opacity: 0.8; /* 當滑鼠移上去時，增加一點透明度作為提示 */
+    }
+
+    #toc-sidebar ul { padding-left: 0; margin: 0; }
+
+    #toc-sidebar ul.main-menu > li > a {
+      display: block;
+      padding: 0.6em 1em;
+      color: #333;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.25s ease-in-out;
+      position: relative;
+    }
+
+    #toc-sidebar a.has-submenu::after {
+      content: '▸';
+      position: absolute;
+      right: 25px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #toc-sidebar li.open > a.has-submenu::after {
+      transform: rotate(90deg);
+    }
+    
+    #toc-sidebar ul li a:hover,
+    #toc-sidebar ul li a.active {
+      background-color: var(--primary-color);
+      color: var(--white);
+      transform: translateX(10px);
+    }
+    
+    #toc-sidebar ul li a.active {
+      font-weight: 700;
+    }
+    
+    .submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-in-out;
+      background: rgba(0,0,0,0.02);
+      border-radius: 6px;
+      margin: 4px 0 8px 0;
+    }
+    
+    li.open > .submenu {
+      max-height: 1000px;
+    }
+
+    .submenu li a {
+      padding: 0.5em 1em 0.5em 2em;
+      display: block;
+      font-size: 0.9em;
+      font-weight: 400;
+      color: #444;
+      border-radius: 4px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .submenu li a:hover, .submenu li a.active {
+        background-color: var(--secondary-color);
+        color: var(--white);
+        transform: translateX(5px);
+    }
+    
+    #mobile-menu-toggle {
+        display: none; /* 在大螢幕上預設隱藏 */
+        position: fixed;
+        bottom: 25px;
+        left: 25px; /* ★★★ 這就是修改的地方 ★★★ */
+        width: 55px;
+        height: 55px;
+        background-color: var(--primary-color);
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+        z-index: 1002;
+        cursor: pointer;
+    }
+
+    #mobile-menu-toggle span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 50%;
+        background: white;
+        border-radius: 3px;
+        left: 25%;
+        transition: all 0.3s ease-in-out;
+    }
+    #mobile-menu-toggle span:nth-child(1) { top: 30%; }
+    #mobile-menu-toggle span:nth-child(2) { top: 48%; }
+    #mobile-menu-toggle span:nth-child(3) { top: 66%; }
+
+    #toc-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+
+    .mobile-menu-open #toc-overlay {
+        display: block;
+        opacity: 1;
+    }
+
+    @media (max-width: 1400px) {
+        #toc-sidebar {
+            left: -280px;
+            opacity: 0;
+            visibility: hidden;
+            transition: left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        opacity 0.3s ease,
+                        visibility 0s linear 0.35s;
+        }
+
+        #mobile-menu-toggle {
+            display: block;
+        }
+
+        .mobile-menu-open #toc-sidebar {
+            left: 0;
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0s;
+        }
+
+        .mobile-menu-open #mobile-menu-toggle span:nth-child(1) {
+            top: 48%;
+            transform: rotate(135deg);
+        }
+        .mobile-menu-open #mobile-menu-toggle span:nth-child(2) {
+            opacity: 0;
+            left: -50%;
+        }
+        .mobile-menu-open #mobile-menu-toggle span:nth-child(3) {
+            top: 48%;
+            transform: rotate(-135deg);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 2rem 1.5rem;
+        }
+        h1 { font-size: 2.1em; }
+        h2 { font-size: 1.8em; }
+        h3 { font-size: 1.4em; }
+    }
+  </style>
 </head>
 <body>
+
+<!-- Mobile menu toggle button and overlay -->
+<button id="mobile-menu-toggle" aria-label="開啟或關閉目錄">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+<div id="toc-overlay"></div>
+
+
+<nav id="toc-sidebar">
+    <h4><a href="#">📜 目錄</a></h4>
+    <ul class="main-menu">
+        <li><a href="#beef" class="has-submenu">牛肉</a>
+            <ul class="submenu">
+                <li><a href="#beef-jiali">佳里</a></li>
+                <li><a href="#beef-hotpot">牛肉火鍋</a></li>
+            </ul>
+        </li>
+        <li><a href="#brunch"> 早午餐</a></li>
+        <li><a href="#lunch" class="has-submenu"> 午餐</a>
+            <ul class="submenu">
+                <li><a href="#lunch-taiwanese-rice">台式飯類</a></li>
+                <li><a href="#lunch-fish">魚類</a></li>
+                <li><a href="#lunch-taiwanese-noodle">台式麵類</a></li>
+                <li><a href="#lunch-american">美式</a></li>
+                <li><a href="#lunch-japanese">日式料理</a></li>
+                <li><a href="#lunch-ramen">拉麵</a></li>
+                <li><a href="#lunch-hotpot">火鍋</a></li>
+                <li><a href="#lunch-hongkong">港式</a></li>
+                <li><a href="#lunch-others">其他</a></li>
+            </ul>
+        </li>
+        <li><a href="#dinner" class="has-submenu"> 晚餐</a>
+            <ul class="submenu">
+                <li><a href="#dinner-taiwanese-rice">台式飯類</a></li>
+                <li><a href="#dinner-winter-food">冬天進補</a></li>
+                <li><a href="#dinner-fish">魚類</a></li>
+                <li><a href="#dinner-taiwanese-noodle">台式麵類</a></li>
+                <li><a href="#dinner-american">美式</a></li>
+                <li><a href="#dinner-curry">咖哩</a></li>
+                <li><a href="#dinner-ramen">拉麵</a></li>
+                <li><a href="#dinner-japanese">日式料理</a></li>
+                <li><a href="#dinner-hotpot">火鍋</a></li>
+                <li><a href="#dinner-drypot">乾鍋</a></li>
+                <li><a href="#dinner-hongkong">港式</a></li>
+                <li><a href="#dinner-thai">泰式</a></li>
+                <li><a href="#dinner-izakaya">居酒屋/熱炒</a></li>
+                <li><a href="#dinner-others">其他</a></li>
+                <li><a href="#dinner-group-meal">合菜/Buffet</a></li>
+                <li><a href="#dinner-snacks">小吃</a></li>
+            </ul>
+        </li>
+        <li><a href="#desserts" class="has-submenu"> 甜食</a>
+            <ul class="submenu">
+              <li><a href="#dessert">甜點</a></li>
+              <li><a href="#cafe">咖啡廳</a></li>
+              <li><a href="#ice-dessert">冰品</a></li>
+            </ul>
+        </li>
+        <li><a href="#drinks"> 飲料</a></li>
+        <li><a href="#mid-price-restaurants">氣氛餐廳</a></li>
+        <li><a href="#high-end-restaurants">高級料理</a></li>
+        <li><a href="#late-night-snack">深夜食堂</a></li>
+        <li><a href="#bars">酒吧</a></li>
+        <li><a href="#hungover"> 解宿醉</a></li>
+        <li><a href="#night-markets">夜市</a></li>
+        <li><a href="#tourist-areas"> 觀光區</a></li>
+        <li><a href="#ncku-area" class="has-submenu"> 成大周遭</a>
+            <ul class="submenu">
+                <li><a href="#ncku-brunch">早午餐</a></li>
+                <li><a href="#ncku-dinner-only">僅晚餐</a></li>
+                <li><a href="#ncku-lunch-dinner">午/晚餐</a></li>
+                <li><a href="#ncku-latenight">宵夜</a></li>
+                <li><a href="#ncku-budget">省錢</a></li>
+                <li><a href="#ncku-mid-price">中價位</a></li>
+            </ul>
+        </li>
+        <li><a href="#tools">🎲 小工具</a></li>
+    </ul>
+</nav>
+
+<div class="container">
   {{ content }}
+
+</div>
+S
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // --- 選取所有需要的元素 ---
+  const body = document.body;
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const sidebar = document.getElementById('toc-sidebar');
+  const overlay = document.getElementById('toc-overlay');
+  
+  // --- 處理滾動時，目錄項目高亮顯示的邏輯 ---
+  const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
+  const tocLinks = document.querySelectorAll('#toc-sidebar a');
+  const observer = new IntersectionObserver((entries) => {
+    // 從所有可見的區塊中，找到最靠近頂部的那一個
+    let latestIntersectingEntry = null;
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if(!latestIntersectingEntry || entry.boundingClientRect.top < latestIntersectingEntry.boundingClientRect.top){
+             latestIntersectingEntry = entry;
+          }
+        }
+    });
+
+    if (latestIntersectingEntry) {
+        const activeId = latestIntersectingEntry.target.getAttribute('id');
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+            const linkHref = link.getAttribute('href').substring(1);
+            if (linkHref === activeId) {
+                link.classList.add('active');
+                // 自動展開父層選單
+                const parentSubmenu = link.closest('.submenu');
+                if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
+                    parentSubmenu.parentElement.classList.add('open');
+                }
+            }
+        });
+    }
+  }, { 
+    rootMargin: '0px 0px -80% 0px' // 調整這個值可以改變高亮的觸發時機
+  });
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  // --- 手機版選單開關功能 ---
+  const openMenu = () => body.classList.add('mobile-menu-open');
+  const closeMenu = () => body.classList.remove('mobile-menu-open');
+
+  // 點擊漢堡按鈕來開關選單
+  menuToggle.addEventListener('click', (event) => {
+    event.stopPropagation(); // 避免點擊事件冒泡
+    if (body.classList.contains('mobile-menu-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+  
+  // 點擊半透明遮罩層來關閉選單
+  overlay.addEventListener('click', closeMenu);
+
+  // --- 側邊欄點擊的核心邏輯 ---
+  sidebar.addEventListener('click', function(event) {
+    const targetLink = event.target.closest('a');
+
+    // 如果點的不是連結，就什麼都不做
+    if (!targetLink) return;
+
+    // 處理最頂端的 "目錄" 標題連結，點擊它就回到頁面頂端
+    if (targetLink.getAttribute('href') === '#') {
+        event.preventDefault(); // 阻止跳轉到 #
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // 平滑滾動到最頂端
+        closeMenu(); // 在手機上關閉選單
+        return; // 結束執行
+    }
+    
+    // 如果點擊的是有子選單的父連結 (e.g., '牛肉', '午餐')
+    if (targetLink.classList.contains('has-submenu')) {
+      // 阻止頁面跳轉到 #lunch, #dinner 等
+      event.preventDefault(); 
+      // 僅切換子選單的展開/收合狀態
+      targetLink.parentElement.classList.toggle('open');
+    } 
+    // 如果點擊的是最終的目標連結 (e.g., '台式飯類', '牛肉火鍋')
+    else {
+      // 同樣先阻止預設的瞬間跳轉行為，這樣網址就不會改變！
+      event.preventDefault();
+      const targetId = targetLink.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+
+      // 手動執行平滑滾動
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      
+      // 在手機模式下，點擊後自動關閉選單
+      closeMenu();
+    }
+  });
+});
+</script>
+
+
 </body>
 </html>
