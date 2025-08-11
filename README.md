@@ -20,6 +20,6 @@
 2.  編輯完成後，在 VS Code 的終端機中依序輸入以下指令即可更新網站：
     ```bash
     git add .
-    git commit -m "更新美食清單"
+    git commit -m "Update food list"
     git push
     ```
