@@ -6,7 +6,7 @@
 
 您可以直接透過以下網址瀏覽這個網站：
 
-**[(https://www.dssass.com/)]()**
+https://www.dssass.com
 
 ## 主要功能 (Features)
 
