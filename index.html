@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🗺️ 台南美食清單</title>
+  <title>台南美食清單</title>
   <style>
     /* Google Fonts - Noto Sans TC */
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
@@ -24,7 +24,7 @@
 
     body {
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.75;
       margin: 0;
       padding: 0;
@@ -1019,19 +1019,36 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     
-    // --- 功能 1: 側邊欄內部點擊邏輯 ---
+    // --- 功能 1: 側邊欄內部點擊邏輯 (★★★ 修改的部分 ★★★) ---
     tocSidebar.addEventListener('click', function(event) {
         const targetLink = event.target.closest('a');
         if (!targetLink) return;
 
+        // 檢查是否是帶有子選單的項目
         if (targetLink.classList.contains('has-submenu')) {
-            event.preventDefault(); // 阻止頁面跳轉
-            targetLink.parentElement.classList.toggle('open');
+            const parentLi = targetLink.parentElement;
+
+            // 如果子選單已經是開啟狀態 (使用者第二次點擊)
+            // 我們就什麼都不做，讓連結正常跳轉
+            if (parentLi.classList.contains('open')) {
+                // 不執行 preventDefault，讓 a 連結正常運作
+            } 
+            // 如果子選單是關閉狀態 (使用者第一次點擊)
+            else {
+                // 阻止 a 連結的預設跳轉行為
+                event.preventDefault();
+                // 為父層 li 加上 open class 來展開子選單
+                parentLi.classList.add('open');
+            }
         }
 
-        // 如果是在手機模式下，點擊任何一個連結後都應該關閉選單
+        // 如果是在手機模式下，點擊任何一個"會跳轉"的連結後都應該關閉選單
+        // 因為第一次點擊被 preventDefault 了，所以只有第二次點擊和點擊一般連結時才會觸發這裡
         if (window.innerWidth <= 1400) {
-            body.classList.remove('mobile-menu-open');
+            // 使用 setTimeout 確保頁面跳轉動畫有時間啟動
+            setTimeout(() => {
+                body.classList.remove('mobile-menu-open');
+            }, 50); // 延遲 50 毫秒後關閉
         }
     });
 
