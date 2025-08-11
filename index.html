@@ -1016,87 +1016,106 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // 獲取所有需要操作的核心元件
-    const body = document.body;
-    const tocSidebar = document.getElementById('toc-sidebar');
-    const toggleButton = document.getElementById('mobile-menu-toggle');
-    const overlay = document.getElementById('toc-overlay');
-    const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
+  // --- 選取所有需要的元素 ---
+  const body = document.body;
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const sidebar = document.getElementById('toc-sidebar');
+  const overlay = document.getElementById('toc-overlay');
+  
+  // --- 處理滾動時，目錄項目高亮顯示的邏輯 ---
+  const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
+  const tocLinks = document.querySelectorAll('#toc-sidebar a');
+  const observer = new IntersectionObserver((entries) => {
+    // 從所有可見的區塊中，找到最靠近頂部的那一個
+    let latestIntersectingEntry = null;
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if(!latestIntersectingEntry || entry.boundingClientRect.top < latestIntersectingEntry.boundingClientRect.top){
+             latestIntersectingEntry = entry;
+          }
+        }
+    });
 
-    // 如果關鍵元件不存在，就停止執行，避免錯誤
-    if (!tocSidebar || !toggleButton || !overlay) {
-        console.error('導航所需元件 (sidebar, toggle button, or overlay) 缺失！');
-        return;
+    if (latestIntersectingEntry) {
+        const activeId = latestIntersectingEntry.target.getAttribute('id');
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+            const linkHref = link.getAttribute('href').substring(1);
+            if (linkHref === activeId) {
+                link.classList.add('active');
+                // 自動展開父層選單
+                const parentSubmenu = link.closest('.submenu');
+                if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
+                    parentSubmenu.parentElement.classList.add('open');
+                }
+            }
+        });
+    }
+  }, { 
+    rootMargin: '0px 0px -80% 0px' // 調整這個值可以改變高亮的觸發時機
+  });
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  // --- 手機版選單開關功能 ---
+  const openMenu = () => body.classList.add('mobile-menu-open');
+  const closeMenu = () => body.classList.remove('mobile-menu-open');
+
+  // 點擊漢堡按鈕來開關選單
+  menuToggle.addEventListener('click', (event) => {
+    event.stopPropagation(); // 避免點擊事件冒泡
+    if (body.classList.contains('mobile-menu-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+  
+  // 點擊半透明遮罩層來關閉選單
+  overlay.addEventListener('click', closeMenu);
+
+  // --- 側邊欄點擊的核心邏輯 ---
+  sidebar.addEventListener('click', function(event) {
+    const targetLink = event.target.closest('a');
+
+    // 如果點的不是連結，就什麼都不做
+    if (!targetLink) return;
+
+    // 處理最頂端的 "目錄" 標題連結，點擊它就回到頁面頂端
+    if (targetLink.getAttribute('href') === '#') {
+        event.preventDefault(); // 阻止跳轉到 #
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // 平滑滾動到最頂端
+        closeMenu(); // 在手機上關閉選單
+        return; // 結束執行
     }
     
-    // --- 功能 1: 側邊欄內部點擊邏輯 (★★★ 修改的部分 ★★★) ---
-    tocSidebar.addEventListener('click', function(event) {
-        const targetLink = event.target.closest('a');
-        if (!targetLink) return;
+    // 如果點擊的是有子選單的父連結 (e.g., '牛肉', '午餐')
+    if (targetLink.classList.contains('has-submenu')) {
+      // 阻止頁面跳轉到 #lunch, #dinner 等
+      event.preventDefault(); 
+      // 僅切換子選單的展開/收合狀態
+      targetLink.parentElement.classList.toggle('open');
+    } 
+    // 如果點擊的是最終的目標連結 (e.g., '台式飯類', '牛肉火鍋')
+    else {
+      // 同樣先阻止預設的瞬間跳轉行為，這樣網址就不會改變！
+      event.preventDefault();
+      const targetId = targetLink.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
 
-        // 檢查是否是帶有子選單的項目
-        if (targetLink.classList.contains('has-submenu')) {
-            const parentLi = targetLink.parentElement;
-
-            // 如果子選單已經是開啟狀態 (使用者第二次點擊)
-            // 我們就什麼都不做，讓連結正常跳轉
-            if (parentLi.classList.contains('open')) {
-                // 不執行 preventDefault，讓 a 連結正常運作
-            } 
-            // 如果子選單是關閉狀態 (使用者第一次點擊)
-            else {
-                // 阻止 a 連結的預設跳轉行為
-                event.preventDefault();
-                // 為父層 li 加上 open class 來展開子選單
-                parentLi.classList.add('open');
-            }
-        }
-
-        // 如果是在手機模式下，點擊任何一個"會跳轉"的連結後都應該關閉選單
-        // 因為第一次點擊被 preventDefault 了，所以只有第二次點擊和點擊一般連結時才會觸發這裡
-        if (window.innerWidth <= 1400) {
-            // 使用 setTimeout 確保頁面跳轉動畫有時間啟動
-            setTimeout(() => {
-                body.classList.remove('mobile-menu-open');
-            }, 50); // 延遲 50 毫秒後關閉
-        }
-    });
-
-    // --- 功能 2: 手機版「漢堡按鈕」和「遮罩」的開關邏輯 ---
-    toggleButton.addEventListener('click', () => {
-        body.classList.toggle('mobile-menu-open');
-    });
-
-    overlay.addEventListener('click', () => {
-        body.classList.remove('mobile-menu-open');
-    });
-
-    // --- 功能 3: 頁面捲動時，自動高亮對應的目錄項目 ---
-    const observer = new IntersectionObserver((entries) => {
-      let latestIntersectingId = null;
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          latestIntersectingId = entry.target.getAttribute('id');
-        }
-      });
-      
-      if (latestIntersectingId) {
-        document.querySelectorAll('#toc-sidebar a').forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href').substring(1) === latestIntersectingId) {
-            link.classList.add('active');
-            const parentSubmenu = link.closest('.submenu');
-            if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
-              parentSubmenu.parentElement.classList.add('open');
-            }
-          }
-        });
+      // 手動執行平滑滾動
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, { rootMargin: '0px 0px -70% 0px' });
-
-    sections.forEach(section => { observer.observe(section); });
+      
+      // 在手機模式下，點擊後自動關閉選單
+      closeMenu();
+    }
+  });
 });
 </script>
+
 
 </body>
 </html>
