@@ -167,6 +167,16 @@
         color: var(--primary-color);
         border-bottom: 2px solid var(--primary-color);
     }
+       #toc-sidebar h4 a {
+      color: inherit; /* 繼承父層 h4 的顏色 (橘色) */
+      text-decoration: none; /* 移除連結的底線 */
+      display: block; /* 讓整個標題區塊都可以點擊 */
+      transition: opacity 0.2s ease;
+    }
+
+    #toc-sidebar h4 a:hover {
+      opacity: 0.8; /* 當滑鼠移上去時，增加一點透明度作為提示 */
+    }
 
     #toc-sidebar ul { padding-left: 0; margin: 0; }
 
@@ -336,7 +346,7 @@
 
 
 <nav id="toc-sidebar">
-    <h4>📜 目錄</h4>
+    <h4><a href="#">📜 目錄</a></h4>
     <ul class="main-menu">
         <li><a href="#beef" class="has-submenu">牛肉</a>
             <ul class="submenu">
