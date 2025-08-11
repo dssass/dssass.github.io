@@ -6,7 +6,7 @@
 
 您可以直接透過以下網址瀏覽這個網站：
 
-**[(https://www.dssass.com/)]()**
+https://www.dssass.com
 
 ## 主要功能 (Features)
 
@@ -23,3 +23,10 @@
     git commit -m "Update food list"
     git push
     ```
+ 
+從現在開始，您想編輯網站時：
+打開任何一台電腦的瀏覽器，登入 GitHub。
+進入專案，點擊 Code -> Codespaces，然後點擊您已經建立好的那個 Codespace (它會記住您的進度)。
+雲端 VS Code 開啟後，在終端機輸入 bundle exec jekyll serve。
+開始享受在 VS Code 裡編輯，並在另一個分頁即時預覽的開發體驗。
+編輯完成後，使用 VS Code 左側的「原始檔控制」功能來提交 (Commit) 和推送 (Push) 您的變更，就像在本地端一樣。
