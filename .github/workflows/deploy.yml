@@ -40,13 +40,13 @@ jobs:
 
       # 步驟 5: 使用 SFTP 將網站部署到您的主機
       - name: Deploy to SFTP
-          uses: appleboy/sftp-action@v0.1.10 
-            with:
-              host: ${{ secrets.FTP_HOST }}
-              port: ${{ secrets.FTP_PORT }}
-              username: ${{ secrets.FTP_USERNAME }}
-              password: ${{ secrets.FTP_PASSWORD }}
-              # 要上傳的來源資料夾
-              source: "_site/"
-              # 要上傳到的目標資料夾
-              target: ${{ secrets.REMOTE_PATH }}
+        uses: appleboy/sftp-action@v0.1.10 
+        with:
+          host: ${{ secrets.FTP_HOST }}
+          port: ${{ secrets.FTP_PORT }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # 要上傳的來源資料夾
+          source: "_site/"
+          # 要上傳到的目標資料夾
+          target: ${{ secrets.REMOTE_PATH }}
