@@ -1,52 +1,52 @@
-# ¤u§@¬yµ{ªº¦WºÙ
+# å·¥ä½œæµç¨‹çš„åç¨±
 name: Build and Deploy Jekyll Site to SFTP
 
-# Ä²µo±ø¥ó¡G·í±À°e¨ì main ¤À¤ä®É¦Û°Ê°õ¦æ
+# è§¸ç™¼æ¢ä»¶ï¼šç•¶æ¨é€åˆ° main åˆ†æ”¯æ™‚è‡ªå‹•åŸ·è¡Œ
 on:
   push:
     branches:
       - main
-  # ¤¹³\¤â°ÊÄ²µo
+  # å…è¨±æ‰‹å‹•è§¸ç™¼
   workflow_dispatch:
 
-# ¤u§@¥ô°È
+# å·¥ä½œä»»å‹™
 jobs:
   build-and-deploy:
-    # ¨Ï¥Î¥Ñ GitHub ´£¨Ñªº³Ì·sª© Ubuntu µêÀÀ¹q¸£¨Ó°õ¦æ
+    # ä½¿ç”¨ç”± GitHub æä¾›çš„æœ€æ–°ç‰ˆ Ubuntu è™›æ“¬é›»è…¦ä¾†åŸ·è¡Œ
     runs-on: ubuntu-latest
 
-    # °õ¦æªº¨BÆJ
+    # åŸ·è¡Œçš„æ­¥é©Ÿ
     steps:
-      # ¨BÆJ 1: ±qÀx¦s®w¤¤¨ú±o±zªºµ{¦¡½X
+      # æ­¥é©Ÿ 1: å¾å„²å­˜åº«ä¸­å–å¾—æ‚¨çš„ç¨‹å¼ç¢¼
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # ¨BÆJ 2: ³]©w Ruby Àô¹Ò
+      # æ­¥é©Ÿ 2: è¨­å®š Ruby ç’°å¢ƒ
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          # ¨Ï¥Î»P±z¥»¦a¬Û¦Pªº Ruby ª©¥»
+          # ä½¿ç”¨èˆ‡æ‚¨æœ¬åœ°ç›¸åŒçš„ Ruby ç‰ˆæœ¬
           ruby-version: '3.1' 
-          # §Ö¨ú bundle ¦w¸Ëªº®M¥ó¡A¥[³t¥¼¨Óªº°õ¦æ
+          # å¿«å– bundle å®‰è£çš„å¥—ä»¶ï¼ŒåŠ é€Ÿæœªä¾†çš„åŸ·è¡Œ
           bundler-cache: true
 
-      # ¨BÆJ 3: ¦w¸Ë¬Û¨Ì®M¥ó (¦pªG§Ö¨ú¨S¦³ªº¸Ü)
+      # æ­¥é©Ÿ 3: å®‰è£ç›¸ä¾å¥—ä»¶ (å¦‚æœå¿«å–æ²’æœ‰çš„è©±)
       - name: Install dependencies
         run: bundle install
 
-      # ¨BÆJ 4: ½sÄ¶ Jekyll ºô¯¸
+      # æ­¥é©Ÿ 4: ç·¨è­¯ Jekyll ç¶²ç«™
       - name: Build the site
         run: bundle exec jekyll build
 
-      # ¨BÆJ 5: ¨Ï¥Î SFTP ±Nºô¯¸³¡¸p¨ì±zªº¥D¾÷
+      # æ­¥é©Ÿ 5: ä½¿ç”¨ SFTP å°‡ç¶²ç«™éƒ¨ç½²åˆ°æ‚¨çš„ä¸»æ©Ÿ
       - name: Deploy to SFTP
         uses: appleboy/sftp-action@v0.1.10 
-        with:
-          host: ${{ secrets.FTP_HOST }}
-          port: ${{ secrets.FTP_PORT }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          # ­n¤W¶Çªº¨Ó·½¸ê®Æ§¨
-          source: "_site/"
-          # ­n¤W¶Ç¨ìªº¥Ø¼Ğ¸ê®Æ§¨
-          target: ${{ secrets.REMOTE_PATH }}
+          with:
+            host: ${{ secrets.FTP_HOST }}
+            port: ${{ secrets.FTP_PORT }}
+            username: ${{ secrets.FTP_USERNAME }}
+            password: ${{ secrets.FTP_PASSWORD }}
+            # è¦ä¸Šå‚³çš„ä¾†æºè³‡æ–™å¤¾
+            source: "_site/"
+            # è¦ä¸Šå‚³åˆ°çš„ç›®æ¨™è³‡æ–™å¤¾
+            target: ${{ secrets.REMOTE_PATH }}
