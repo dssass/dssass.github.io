@@ -25,12 +25,12 @@ jobs:
       - name: Build site
         run: bundle exec jekyll build
 
-      - name: Deploy to SFTP
-        uses: appleboy/sftp-action@v0.1.10
+      - name: Deploy to SFTP using a different action
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          host: ${{ secrets.FTP_HOST }}
-          port: ${{ secrets.FTP_PORT }}
           username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_HOST }}
+          port: ${{ secrets.FTP_PORT }}
           password: ${{ secrets.FTP_PASSWORD }}
-          source: "_site/"
-          target: ${{ secrets.REMOTE_PATH }}
+          local_path: './_site/*'
+          remote_path: ${{ secrets.REMOTE_PATH }}
