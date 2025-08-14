@@ -1,0 +1,19 @@
+---
+layout: default
+title: 店家評論
+permalink: /categories/reviews/
+---
+
+<div class="container">
+    <div class="category-header">
+        <h1>⭐ 店家評論</h1>
+        <p>詳細的用餐體驗分享</p>
+    </div>
+    
+    <div class="posts-list">
+        {% assign review_posts = site.categories['reviews'] %}
+        {% for post in review_posts %}
+        <!-- 同上面的文章列表結構 -->
+        {% endfor %}
+    </div>
+</div>
