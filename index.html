@@ -1,25 +1,26 @@
 ---
+# index.html
 layout: default
-title: 我的美食首頁
-description: 歡迎來到我的美食網站，這裡會分享一些文章與評論。
+title: 我的美食地圖 - 首頁
+description: 探索台南最道地的美味，品嚐在地人的私房推薦
 ---
 
-<h1>歡迎來到我的美食地圖！</h1>
+<!-- "最新文章" 區塊是屬於 index.html 的主要內容 -->
+<div class="container">
+  <h2 class="section-title">最新文章</h2>
 
-<br>
+  <div class="articles-grid">
+    <!-- 文章卡片 -->
+    <a href="/articles/tainan-food-guide.html" class="article-card">
+      <div class="featured-badge">推薦</div>
+      <h3 class="article-title">台南美食導覽 - 在地人推薦</h3>
+      <p class="article-description">這是一篇關於在地人視角的台南美食指南，從牛肉湯、小吃到甜點，應有盡有。我們將帶你走遍台南的大街小巷，發現那些隱藏在巷弄裡的美味秘境，讓你的味蕾體驗最道地的台南風味...</p>
+    </a>
 
-<h2>最新文章</h2>
-<ul>
-  <li>
-    <h3><a href="/articles/tainan-food-guide.html">台南美食導覽 - 在地人推薦</a></h3>
-    <p>這是一篇關於在地人視角的台南美食指南，從牛肉湯、小吃到甜點，應有盡有...</p>
-  </li>
-  
-  <!-- 如果要新增文章，可以複製下面的格式來使用 -->
-  <!-- 
-  <li>
-    <h3><a href="/articles/another-post.html">另一篇文章標題</a></h3>
-    <p>這是另一篇文章的簡短介紹...</p>
-  </li>
-  -->
-</ul>
+    <!-- 敬請期待卡片 -->
+    <div class="article-card coming-soon">
+      <h3>更多精彩文章</h3>
+      <p>正在準備中... 即將分享更多台南美食、小吃探店、甜點推薦等內容</p>
+    </div>
+  </div>
+</div>
