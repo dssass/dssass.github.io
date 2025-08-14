@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
- {% include head.html %}
+  <!-- Meta 標籤 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  
+  <!-- SEO 小幫手 -->
+  {% seo %}
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1804918027527093" crossorigin="anonymous"></script>
+
+  <!-- 
+    這是最重要的部分！
+    這個版型只載入它自己專屬的 CSS 檔案。
+  -->
+  <link rel="stylesheet" href="{{ '/assets/css/tainan_food.css' | relative_url }}">
+
 </head>
 <body>
-{% include "sidebar_tainan_food.html" %} 
-
-<div class="container">
-  {{ content }}
-
-</div>
-{% include scripts.html %}
-
-
+  <!-- 這裡維持您原本的結構，載入側邊欄和內容 -->
+  {% include "sidebar_tainan_food.html" %} 
+  <div class="container">
+    {{ content }}
+  </div>
+  {% include scripts.html %}
 </body>
 </html>
