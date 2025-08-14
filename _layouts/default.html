@@ -1,27 +1,35 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    
-    <!-- SEO -->
-    {% seo %}
-    
-    <!-- 自定義 CSS -->
-    <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
+  <!-- Meta 標籤 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  
+  <!-- SEO 小幫手 -->
+  {% seo %}
+
+  <!-- 
+    這是最重要的部分！
+    這個通用版型，永遠都載入首頁的 CSS 檔案。
+  -->
+  <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
+
 </head>
 <body>
-    {% include header.html %}
-    
-    <main>
-        {{ content }}
-    </main>
-    
-    {% include footer.html %}
-    
-    <!-- JavaScript -->
-    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  <!-- 
+    這裡可以使用我們之前討論過的「聰明 Header」。
+    它在首頁會顯示大標題，在其他內頁只會顯示導覽列。
+  -->
+  {% include header.html %}
+
+  <main>
+    {{ content }}
+  </main>
+  
+  {% include footer.html %}
+  {% include scripts.html %}
 </body>
+</html>
 </html>
