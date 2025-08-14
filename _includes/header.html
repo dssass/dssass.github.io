@@ -1,0 +1,23 @@
+<header class="site-header">
+    <div class="container">
+        <div class="header-content">
+            <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+            <p class="subtitle">{{ site.description }}</p>
+            <div class="food-icons">
+                <div class="food-icon">🍜</div>
+                <div class="food-icon">🍶</div>
+                <div class="food-icon">🍰</div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="{{ '/' | relative_url }}">首頁</a></li>
+                <li><a href="{{ '/categories/tainan-food/' | relative_url }}">台南美食</a></li>
+                <li><a href="{{ '/categories/reviews/' | relative_url }}">店家評論</a></li>
+                <li><a href="{{ '/categories/recipes/' | relative_url }}">食譜分享</a></li>
+                <li><a href="{{ '/about/' | relative_url }}">關於我</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
