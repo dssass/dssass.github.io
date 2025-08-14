@@ -1,0 +1,46 @@
+/* 將之前完整的 CSS 代碼放在這裡 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+/* ... 所有之前的 CSS 樣式 ... */
+
+/* Jekyll 特定樣式 */
+.main-nav {
+    margin-top: 20px;
+}
+
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+}
+
+.post-meta {
+    margin: 20px 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.categories a, .category-tag {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-right: 8px;
+}
+
+/* ... 其他樣式 ... */
