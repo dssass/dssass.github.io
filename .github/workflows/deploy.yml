@@ -25,19 +25,21 @@ jobs:
       - name: Build site
         run: bundle exec jekyll build
 
-      # =============================================================
-      #  ★★★ 我們將不聽話的舊 Action 換成這個更可靠的版本 ★★★
-      # =============================================================
       - name: Deploy to SFTP using a more reliable action
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
+          # =============================================================
+          #  ★★★ 我們在這裡明確告訴它要使用 SFTP 協定 ★★★
+          # =============================================================
+          protocol: sftp 
+          
           # 您主機的 IP 位址
           server: ${{ secrets.FTP_HOST }}
           # 您的 SFTP 使用者名稱
           username: ${{ secrets.FTP_USERNAME }}
           # 您的 SFTP 密碼
           password: ${{ secrets.FTP_PASSWORD }}
-          # 您的 SFTP 連接埠，通常是 22 或您主機提供的特殊連接埠
+          # 您的 SFTP 連接埠 (這個值應該是 21098)
           port: ${{ secrets.FTP_PORT }}
           # 要上傳的本地資料夾
           local-dir: ./_site/
