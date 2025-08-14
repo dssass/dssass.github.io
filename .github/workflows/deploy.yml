@@ -29,9 +29,8 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           # =============================================================
-          #  ★★★ 我們在這裡明確告訴它要使用 SFTP 協定 ★★★
+          #  ★★★ 我們把造成錯誤的 protocol 這一行完全刪除 ★★★
           # =============================================================
-          protocol: sftp 
           
           # 您主機的 IP 位址
           server: ${{ secrets.FTP_HOST }}
@@ -39,7 +38,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           # 您的 SFTP 密碼
           password: ${{ secrets.FTP_PASSWORD }}
-          # 您的 SFTP 連接埠 (這個值應該是 21098)
+          # 您的 SFTP 連接埠
           port: ${{ secrets.FTP_PORT }}
           # 要上傳的本地資料夾
           local-dir: ./_site/
