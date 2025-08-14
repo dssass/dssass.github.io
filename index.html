@@ -1,17 +1,18 @@
 ---
-# index.html
 layout: default
 title: 我的美食地圖 - 首頁
 description: 探索台南最道地的美味，品嚐在地人的私房推薦
 ---
 
-<!-- "最新文章" 區塊是屬於 index.html 的主要內容 -->
 <div class="container">
   <h2 class="section-title">最新文章</h2>
 
   <div class="articles-grid">
-    <!-- 文章卡片 -->
-    <a href="/articles/tainan-food-guide.html" class="article-card">
+    <!-- 
+      文章卡片 - 我們將連結直接指向檔案的真實路徑 
+      這是最重要的修改！
+    -->
+    <a href="{{ '/categories/tainan-food-guide.html' | relative_url }}" class="article-card">
       <div class="featured-badge">推薦</div>
       <h3 class="article-title">台南美食導覽 - 在地人推薦</h3>
       <p class="article-description">這是一篇關於在地人視角的台南美食指南，從牛肉湯、小吃到甜點，應有盡有。我們將帶你走遍台南的大街小巷，發現那些隱藏在巷弄裡的美味秘境，讓你的味蕾體驗最道地的台南風味...</p>
