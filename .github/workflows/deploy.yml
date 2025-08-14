@@ -34,3 +34,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local_path: './_site/*'
           remote_path: ${{ secrets.REMOTE_PATH }}
+          # 新增這一行，強制包含所有檔案，包括點開頭的隱藏檔案
+          args: -a 
