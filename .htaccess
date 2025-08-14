@@ -1,0 +1,22 @@
+# 啟用 Apache/LiteSpeed 的重寫引擎
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 設定網站的根目錄 (如果您的網站不是放在根目錄，請修改 "/")
+  RewriteBase /
+
+  # --- 規則 1：如果請求的是一個存在的檔案，就直接提供該檔案 ---
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # --- 規則 2：處理結尾有斜線的漂亮連結 (例如 /categories/tainan-food/) ---
+  # 將請求重寫到對應的 index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^([^/]+/)$ $1index.html [L]
+
+  # --- 規則 3：處理結尾沒有斜線的漂亮連結 (例如 /about) ---
+  # 將請求重寫到對應的 .html 檔案
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^.*$ %{REQUEST_URI}.html [L]
+</IfModule>
