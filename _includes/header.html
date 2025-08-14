@@ -1,0 +1,51 @@
+<!-- 一個聰明的、會根據頁面變換內容的 header.html -->
+
+{% comment %} 檢查當前頁面的網址是否為首頁 ('/') {% endcomment %}
+{% if page.url == '/' %}
+
+  <!-- 如果是首頁，就顯示這個華麗的 Header -->
+  <header class="site-header">
+    <div class="header-content">
+      <h1>歡迎來到我的美食地圖！</h1>
+      <p class="subtitle">探索台南最道地的美味，品嚐在地人的私房推薦</p>
+      <div class="food-icons">
+        <div class="food-icon">🍜</div>
+        <div class="food-icon">🥟</div>
+        <div class="food-icon">🍰</div>
+      </div>
+    </div>
+    <!-- 首頁的導航列 -->
+    <nav class="main-nav">
+      <div class="container">
+          <ul>
+              <li><a href="{{ '/' | relative_url }}">首頁</a></li>
+              <!-- ▼▼▼ 以下是根據「最終猜想」修正過的連結 ▼▼▼ -->
+              <li><a href="{{ '/topics/tainan-food-guide.html' | relative_url }}">台南美食</a></li>
+              <li><a href="{{ '/topics/reviews.html' | relative_url }}">店家評論</a></li>
+              <li><a href="{{ '/topics/recipes.html' | relative_url }}">食譜分享</a></li>
+              <li><a href="{{ '/about.html' | relative_url }}">關於我</a></li>
+          </ul>
+      </div>
+    </nav>
+  </header>
+
+{% else %}
+
+  <!-- 如果是任何其他內頁，就顯示這個簡潔的 Header -->
+  <header class="post-header">
+    <div class="container">
+      <!-- 內頁的導航列 -->
+      <nav class="main-nav">
+        <ul>
+            <li><a href="{{ '/' | relative_url }}">首頁</a></li>
+            <!-- ▼▼▼ 以下是根據「最終猜想」修正過的連結 ▼▼▼ -->
+            <li><a href="{{ '/topics/tainan-food-guide.html' | relative_url }}">台南美食</a></li>
+            <li><a href="{{ '/topics/reviews.html' | relative_url }}">店家評論</a></li>
+            <li><a href="{{ '/topics/recipes.html' | relative_url }}">食譜分享</a></li>
+            <li><a href="{{ '/about.html' | relative_url }}">關於我</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+{% endif %}
