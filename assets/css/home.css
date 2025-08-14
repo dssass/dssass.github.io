@@ -37,7 +37,7 @@ header::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 193, 7, 0.1), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255, 193, 7, 0.25), transparent);
     transform: rotate(-45deg);
     animation: shimmer 3s infinite;
 }
