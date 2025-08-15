@@ -1,27 +1,56 @@
 ---
-layout: default
+layout: home
 title: 我的美食地圖 - 首頁
 description: 探索台南最道地的美味，品嚐在地人的私房推薦
 ---
 
+<div class="bg-decoration"></div>
+
 <div class="container">
-  <h2 class="section-title">最新文章</h2>
-
-  <div class="articles-grid">
-    <!-- 
-      文章卡片 - 我們將連結直接指向檔案的真實路徑 
-      這是最重要的修改！
-    -->
-    <a href="{{ '/topics/tainan-food-guide.html' | relative_url }}" class="article-card">
-      <div class="featured-badge">推薦</div>
-      <h3 class="article-title">台南美食導覽 - 在地人推薦</h3>
-      <p class="article-description">這是一篇關於在地人視角的台南美食指南，從牛肉湯、小吃到甜點，應有盡有。我們將帶你走遍台南的大街小巷，發現那些隱藏在巷弄裡的美味秘境，讓你的味蕾體驗最道地的台南風味...</p>
+    <!-- 歡迎區塊 -->
+    <section class="welcome-section fade-in">
+        <h1>歡迎來到我的美食地圖！</h1>
+        <p>探索台南最道地的美味，品嚐在地人的私房推薦</p>
+        <div class="food-icons">
+            <div class="food-icon">🍜</div>
+            <div class="food-icon">🥟</div>
+            <div class="food-icon">🍰</div>
+        </div>
+    </section>
+    
+    <!-- 快速導航 -->
+    <section class="quick-nav fade-in">
+        <h3>🗺️ 快速導航</h3>
+        <div class="nav-grid">
+            <a href="/topics/tainan-food-guide.html" class="nav-item">
+                <span class="nav-icon">🐂</span>
+                <span class="nav-text">牛肉湯</span>
+            </a>
+            <a href="/topics/tainan-food-guide.html#desserts" class="nav-item">
+                <span class="nav-icon">🍩</span>
+                <span class="nav-text">甜食</span>
+            </a>
+            <a href="/topics/tainan-food-guide.html#lunch" class="nav-item">
+                <span class="nav-icon">🍴</span>
+                <span class="nav-text">午餐</span>
+            </a>
+            <a href="/topics/tainan-food-guide.html#dinner" class="nav-item">
+                <span class="nav-icon">🍽️</span>
+                <span class="nav-text">晚餐</span>
+            </a>
+        </div>
+    </section>
+    
+    <!-- 文章卡片 -->
+    <a href="/topics/tainan-food-guide.html" class="article-card fade-in">
+        <div class="featured-badge">推薦</div>
+        <h3 class="article-title">台南美食導覽 - 在地人推薦</h3>
+        <p class="article-description">這是一篇關於在地人視角的台南美食指南，從牛肉湯、小吃到甜點，應有有。我們將帶你走遍台南的大街小巷，發現那些隱藏在巷弄裡的美味秘境，讓你的味蕾體驗最道地的台南風味...</p>
     </a>
-
-    <!-- 敬請期待卡片 -->
-    <div class="article-card coming-soon">
-      <h3>更多精彩文章</h3>
-      <p>正在準備中... 即將分享更多台南美食、小吃探店、甜點推薦等內容</p>
+    
+    <!-- 即將推出 -->
+    <div class="article-card coming-soon fade-in">
+        <h3>更多精彩文章</h3>
+        <p>正在準備中... 即將分享更多台南美食、小吃探店、甜點推薦等內容</p>
     </div>
-  </div>
 </div>
