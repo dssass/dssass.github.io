@@ -1,0 +1,414 @@
+/* Google Fonts - Noto Sans TC */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+:root {
+  --primary-color: #E87400;
+  --secondary-color: #4CAF50;
+  --accent-color: #FF6B35;
+  --background-color: #FAF8F2;
+  --text-color: #333;
+  --light-gray: #f4f4f4;
+  --white: #fff;
+  --hover-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  --border-radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, var(--background-color) 0%, #F5F2E8 100%);
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+   background: var(--primary-color);;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color);
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 3em;
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  margin: 1rem auto;
+  border-radius: 2px;
+}
+
+h2 {
+  font-size: 2.2em;
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+  padding-bottom: 0.5em;
+  margin: 3rem 0 1.5rem 0;
+  display: flex;
+  align-items: center;
+  scroll-margin-top: 20px;
+  position: relative;
+}
+
+h2::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 40px;
+  background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+  border-radius: 3px;
+}
+
+h3 {
+  font-size: 1.6em;
+  color: var(--text-color);
+  border-left: 5px solid var(--secondary-color);
+  padding-left: 1rem;
+  margin: 2.5rem 0 1.2rem 0;
+  scroll-margin-top: 20px;
+  background: linear-gradient(90deg, rgba(76,175,80,0.05) 0%, transparent 100%);
+  padding: 0.5rem 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+h4 {
+  font-size: 1.3em;
+  margin-top: 2rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+/* Alert boxes */
+.custom-block, .warning-box {
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: var(--border-radius);
+  font-size: 1em;
+  line-height: 1.7;
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-block { 
+  background: linear-gradient(135deg, #F0FFF0 0%, #E8F5E8 100%);
+  color: #2E8B57;
+  border-left: 5px solid var(--secondary-color);
+}
+
+.warning-box { 
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFF3C4 100%);
+  color: #F57C00;
+  border: 1px solid #FFECB3;
+  display: flex;
+  align-items: center;
+}
+
+.warning-box .icon { 
+  font-size: 1.5em;
+  margin-right: 0.7em;
+}
+
+/* Restaurant list styling */
+ul { 
+  list-style-type: none;
+  padding-left: 0;
+  margin: 1.5rem 0;
+}
+
+ul > li {
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    padding: 1em 1.5em;
+    margin-bottom: 1em;
+    box-shadow: none;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+ul > li:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary-color);
+}
+
+ul > li:hover::before {
+  transform: scaleY(1);
+}
+
+ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: var(--transition);
+  display: inline-block;
+}
+
+ul li a:hover {
+  color: var(--primary-color);
+  transform: translateX(8px);
+}
+
+blockquote {
+  margin: 0.8rem 0 0 0;
+  padding: 1rem;
+  border-left: 4px solid var(--light-gray);
+  background: linear-gradient(90deg, #f9f9f9 0%, transparent 100%);
+  color: #666;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95em;
+  font-style: normal;
+}
+
+/* Sidebar styles */
+#toc-sidebar {
+  position: fixed;
+  left: -320px; 
+  top: 50%;
+  transform: translateY(-50%);
+  width: 280px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1em;
+  border-radius: 12px;
+  z-index: 1000;
+  transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.2);
+  opacity: 0;
+  visibility: hidden;
+}
+
+#toc-sidebar.open {
+  left: 0;
+}
+
+#toc-sidebar h4 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  font-size: 1.4em;
+  text-align: center;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  position: relative;
+}
+
+#toc-sidebar h4::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: var(--accent-color);
+}
+
+#toc-sidebar h4 a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  transition: var(--transition);
+}
+
+#toc-sidebar h4 a:hover {
+  opacity: 0.8;
+  transform: scale(1.02);
+}
+
+#toc-sidebar ul { 
+  padding-left: 0;
+  margin: 0;
+}
+
+#toc-sidebar ul.main-menu > li > a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+  margin-bottom: 0.3rem;
+}
+
+#toc-sidebar a.has-submenu::after {
+  content: '▸';
+  position: absolute;
+  right: 15px;
+  transition: var(--transition);
+  font-size: 0.9em;
+}
+
+#toc-sidebar li.open > a.has-submenu::after {
+  transform: rotate(90deg);
+}
+
+#toc-sidebar ul li a:hover,
+#toc-sidebar ul li a.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: var(--white);
+  transform: translateX(8px);
+}
+
+#toc-sidebar ul li a.active {
+  font-weight: 700;
+}
+
+.submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, transparent 100%);
+  border-radius: 8px;
+  margin: 4px 0 8px 0;
+}
+
+li.open > .submenu {
+  max-height: 1000px;
+}
+
+.submenu li a {
+  padding: 0.6rem 1rem 0.6rem 2rem;
+  display: block;
+  font-size: 0.9em;
+  font-weight: 400;
+  color: #555;
+  border-radius: 6px;
+  transition: var(--transition);
+  margin-bottom: 0.2rem;
+}
+
+.submenu li a:hover, 
+.submenu li a.active {
+  background: linear-gradient(135deg, var(--secondary-color), #66BB6A);
+  color: var(--white);
+  transform: translateX(5px);
+}
+
+
+/* Mobile menu */
+#mobile-menu-toggle {
+    /* --- 修改 --- */
+    /* 讓漢堡按鈕在所有尺寸下都顯示 */
+    display: block; 
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 55px;
+    height: 55px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    z-index: 9999; 
+    cursor: pointer;
+}
+
+#mobile-menu-toggle span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 50%;
+  background: white;
+  border-radius: 3px;
+  left: 25%;
+  transition: var(--transition);
+}
+
+#mobile-menu-toggle span:nth-child(1) { top: 30%; }
+#mobile-menu-toggle span:nth-child(2) { top: 48%; }
+#mobile-menu-toggle span:nth-child(3) { top: 66%; }
+
+#toc-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.mobile-menu-open #toc-overlay {
+  display: block;
+  opacity: 1;
+}
+
+/* --- 將原本在 @media 中的邏輯移到外面，讓所有尺寸通用 --- */
+.mobile-menu-open #toc-sidebar {
+  left: 0;
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.mobile-menu-open #mobile-menu-toggle span:nth-child(1) {
+  top: 48%;
+  transform: rotate(135deg);
+}
+.mobile-menu-open #mobile-menu-toggle span:nth-child(2) {
+  opacity: 0;
+  left: -50%;
+}
+.mobile-menu-open #mobile-menu-toggle span:nth-child(3) {
+  top: 48%;
+  transform: rotate(-135deg);
+}
+
+
+/* Responsive design */
+@media (max-width: 1400px) {
+  /* 此處現在是空的，因為主要邏輯已經移到外面了。 */
+  /* 您可以保留這個空區塊，未來若有平板專屬樣式可以寫在這裡。 */
+}
