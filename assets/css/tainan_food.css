@@ -331,9 +331,12 @@ li.open > .submenu {
   transform: translateX(5px);
 }
 
+
 /* Mobile menu */
 #mobile-menu-toggle {
-    display: none;
+    /* --- 修改 --- */
+    /* 讓漢堡按鈕在所有尺寸下都顯示 */
+    display: block; 
     position: fixed;
     bottom: 20px;
     left: 20px;
@@ -342,7 +345,7 @@ li.open > .submenu {
     background-color: var(--primary-color);
     border: none;
     border-radius: 50%;
-    z-index: 9999; /* 保持最高層級 */
+    z-index: 9999; 
     cursor: pointer;
 }
 
@@ -380,157 +383,30 @@ li.open > .submenu {
   opacity: 1;
 }
 
-/* Color utilities */
-.orange-text { 
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.brown-text { 
-  color: #8D6E63;
-  font-weight: 500;
-}
-
-/* Search functionality */
-.search-container {
-  margin: 2rem 0;
-  position: relative;
-}
-
-.search-input {
-  width: 100%;
-  padding: 1rem 1.5rem;
-  font-size: 1.1em;
-  border: 2px solid #E8E8E8;
-  border-radius: var(--border-radius);
-  outline: none;
-  transition: var(--transition);
-  background: var(--white);
-}
-
-.search-input:focus {
-  border-color: var(--primary-color);
-}
-
-.search-results {
-  position: absolute;
-  top: 100%;
+/* --- 將原本在 @media 中的邏輯移到外面，讓所有尺寸通用 --- */
+.mobile-menu-open #toc-sidebar {
   left: 0;
-  right: 0;
-  background: var(--white);
-  border: 1px solid #E8E8E8;
-  border-radius: var(--border-radius);
-  z-index: 100;
-  max-height: 300px;
-  overflow-y: auto;
-  display: none;
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
 }
 
-.search-result-item {
-  padding: 1rem 1.5rem;
-  cursor: pointer;
-  transition: var(--transition);
-  border-bottom: 1px solid #f0f0f0;
+.mobile-menu-open #mobile-menu-toggle span:nth-child(1) {
+  top: 48%;
+  transform: rotate(135deg);
+}
+.mobile-menu-open #mobile-menu-toggle span:nth-child(2) {
+  opacity: 0;
+  left: -50%;
+}
+.mobile-menu-open #mobile-menu-toggle span:nth-child(3) {
+  top: 48%;
+  transform: rotate(-135deg);
 }
 
-.search-result-item:hover {
-  background: var(--background-color);
-}
-
-.search-result-item:last-child {
-  border-bottom: none;
-}
 
 /* Responsive design */
 @media (max-width: 1400px) {
-  #toc-sidebar {
-    left: -320px;
-    opacity: 0;
-    visibility: hidden;
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                opacity 0.3s ease,
-                visibility 0s linear 0.4s;
-  }
-
-  #mobile-menu-toggle {
-    display: block;
-  }
-
-  .mobile-menu-open #toc-sidebar {
-    left: 0;
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
-  }
-
-  .mobile-menu-open #mobile-menu-toggle span:nth-child(1) {
-    top: 48%;
-    transform: rotate(135deg);
-  }
-  .mobile-menu-open #mobile-menu-toggle span:nth-child(2) {
-    opacity: 0;
-    left: -50%;
-  }
-  .mobile-menu-open #mobile-menu-toggle span:nth-child(3) {
-    top: 48%;
-    transform: rotate(-135deg);
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-  
-  h1 { 
-    font-size: 2.5em;
-    letter-spacing: 2px;
-  }
-  
-  h2 { 
-    font-size: 2em;
-    margin: 2rem 0 1rem 0;
-  }
-  
-  h3 { 
-    font-size: 1.4em;
-  }
-
-  ul > li {
-    padding: 1rem 1.2rem;
-  }
-}
-
-/* Smooth scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--accent-color), var(--primary-color));
-}
-
-/* Loading animation */
-.loading {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* 此處現在是空的，因為主要邏輯已經移到外面了。 */
+  /* 您可以保留這個空區塊，未來若有平板專屬樣式可以寫在這裡。 */
 }
