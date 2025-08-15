@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
   
-  {% seo %}
+  <!-- 1. 載入所有共通的 head 元素 (meta, title, seo, adsense 等) -->
+  {% include head.html %}
   
-  <!-- 
-    正確地引入台南美食頁專屬的 CSS 檔案
-  -->
+  <!-- 2. 只載入這個版型 "專屬" 的 CSS 檔案 -->
   <link rel="stylesheet" href="/assets/css/tainan_food.css">
   
-  <!-- 如果有 Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
 </head>
 <body>
 
