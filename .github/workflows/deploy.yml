@@ -25,22 +25,20 @@ jobs:
       - name: Build site
         run: bundle exec jekyll build
 
-      - name: Deploy to SFTP using a more reliable action
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      # =============================================================
+      #  ★★★ 這就是我們新增的「偵錯步驟」 ★★★
+      #  這個步驟會列出 _site 資料夾裡的所有檔案，包括隱藏檔案
+      # =============================================================
+      - name: List files in the build directory
+        run: ls -la ./_site
+
+      - name: Deploy to SFTP using a different action
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          # =============================================================
-          #  ★★★ 我們把造成錯誤的 protocol 這一行完全刪除 ★★★
-          # =============================================================
-          
-          # 您主機的 IP 位址
-          server: ${{ secrets.FTP_HOST }}
-          # 您的 SFTP 使用者名稱
           username: ${{ secrets.FTP_USERNAME }}
-          # 您的 SFTP 密碼
-          password: ${{ secrets.FTP_PASSWORD }}
-          # 您的 SFTP 連接埠
+          server: ${{ secrets.FTP_HOST }}
           port: ${{ secrets.FTP_PORT }}
-          # 要上傳的本地資料夾
-          local-dir: ./_site/
-          # 要上傳到的遠端資料夾
-          server-dir: ${{ secrets.REMOTE_PATH }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_path: './_site/*'
+          remote_path: ${{ secrets.REMOTE_PATH }}
+          args: -a 
