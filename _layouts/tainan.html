@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  
+  {% seo %}
+  
+  <!-- 
+    正確地引入台南美食頁專屬的 CSS 檔案
+  -->
+  <link rel="stylesheet" href="/assets/css/tainan_food.css">
+  
+  <!-- 如果有 Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- 
+    ★★★ 新增的關鍵程式碼 ★★★
+    我們在這裡，把包含了「側邊欄」和「漢堡按鈕」的零件安裝回來！
+  -->
+  {% include sidebar.html %}
+
+  <!-- 主內容容器 -->
+  <div class="container">
+    {{ content }}
+  </div>
+
+  <!-- 引入可重用的 JavaScript -->
+  {% include scripts.html %}
+
+</body>
+</html>
