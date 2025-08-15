@@ -1,201 +1,73 @@
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // 添加載入動畫
-      setTimeout(() => {
-        document.querySelector('.container').classList.remove('loading');
-      }, 100);
+// 不需要 <script> 標籤，因為 include 會將其視為純文字
+document.addEventListener('DOMContentLoaded', () => {
+  // --- 1. 處理捲動時，目錄項目高亮顯示的邏輯 ---
+  const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
+  const tocLinks = document.querySelectorAll('#toc-sidebar a');
 
-      // --- 選取所有需要的元素 ---
-      const body = document.body;
-      const menuToggle = document.getElementById('mobile-menu-toggle');
-      const sidebar = document.getElementById('toc-sidebar');
-      const overlay = document.getElementById('toc-overlay');
-      const searchInput = document.querySelector('.search-input');
-      const searchResults = document.querySelector('.search-results');
-      
-      // 創建餐廳搜尋索引
-      const restaurants = [];
-      document.querySelectorAll('ul > li > a[href^="https://maps"]').forEach(link => {
-        const name = link.textContent.trim();
-        const section = link.closest('section')?.querySelector('h2')?.textContent || '';
-        const subsection = link.closest('ul').previousElementSibling?.textContent || '';
-        restaurants.push({
-          name,
-          section,
-          subsection,
-          element: link.closest('li')
-        });
-      });
-
-      // 搜尋功能
-      let searchTimeout;
-      searchInput?.addEventListener('input', (e) => {
-        clearTimeout(searchTimeout);
-        const query = e.target.value.trim().toLowerCase();
-        
-        searchTimeout = setTimeout(() => {
-          if (query.length === 0) {
-            searchResults.style.display = 'none';
-            searchResults.innerHTML = '';
-            return;
-          }
-
-          const filteredResults = restaurants.filter(restaurant => 
-            restaurant.name.toLowerCase().includes(query) ||
-            restaurant.section.toLowerCase().includes(query) ||
-            restaurant.subsection.toLowerCase().includes(query)
-          ).slice(0, 8);
-
-          if (filteredResults.length > 0) {
-            searchResults.innerHTML = filteredResults.map(result => 
-              `<div class="search-result-item" data-name="${result.name}">
-                <strong>${result.name}</strong>
-                <br><small style="color: #666;">${result.section} ${result.subsection ? '> ' + result.subsection : ''}</small>
-              </div>`
-            ).join('');
-            searchResults.style.display = 'block';
-          } else {
-            searchResults.innerHTML = '<div class="search-result-item">找不到相關餐廳</div>';
-            searchResults.style.display = 'block';
-          }
-        }, 300);
-      });
-
-      // 搜尋結果點擊
-      searchResults?.addEventListener('click', (e) => {
-        const item = e.target.closest('.search-result-item');
-        if (item && item.dataset.name) {
-          const restaurant = restaurants.find(r => r.name === item.dataset.name);
-          if (restaurant) {
-            restaurant.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            restaurant.element.style.transform = 'scale(1.02)';
-            restaurant.element.style.boxShadow = '0 8px 25px rgba(232,116,0,0.3)';
-            setTimeout(() => {
-              restaurant.element.style.transform = '';
-              restaurant.element.style.boxShadow = '';
-            }, 2000);
-          }
-          searchInput.value = '';
-          searchResults.style.display = 'none';
+  const observer = new IntersectionObserver((entries) => {
+    let latestIntersectingEntry = null;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!latestIntersectingEntry || entry.boundingClientRect.top < latestIntersectingEntry.boundingClientRect.top) {
+          latestIntersectingEntry = entry;
         }
-      });
-
-      // 點擊其他地方關閉搜尋結果
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.search-container')) {
-          searchResults.style.display = 'none';
-        }
-      });
-      
-      // --- 處理滾動時，目錄項目高亮顯示的邏輯 ---
-      const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
-      const tocLinks = document.querySelectorAll('#toc-sidebar a');
-      
-      const observer = new IntersectionObserver((entries) => {
-        let latestIntersectingEntry = null;
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            if (!latestIntersectingEntry || entry.boundingClientRect.top < latestIntersectingEntry.boundingClientRect.top) {
-              latestIntersectingEntry = entry;
-            }
-          }
-        });
-
-        if (latestIntersectingEntry) {
-          const activeId = latestIntersectingEntry.target.getAttribute('id');
-          tocLinks.forEach(link => {
-            link.classList.remove('active');
-            const linkHref = link.getAttribute('href').substring(1);
-            if (linkHref === activeId) {
-              link.classList.add('active');
-              // 自動展開父層選單
-              const parentSubmenu = link.closest('.submenu');
-              if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
-                parentSubmenu.parentElement.classList.add('open');
-              }
-            }
-          });
-        }
-      }, { 
-        rootMargin: '0px 0px -80% 0px'
-      });
-      
-      sections.forEach(section => {
-        observer.observe(section);
-      });
-
-      // --- 手機版選單開關功能 ---
-      const openMenu = () => body.classList.add('mobile-menu-open');
-      const closeMenu = () => body.classList.remove('mobile-menu-open');
-
-      // 點擊漢堡按鈕來開關選單
-      menuToggle?.addEventListener('click', (event) => {
-        event.stopPropagation();
-        if (body.classList.contains('mobile-menu-open')) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
-      
-      // 點擊半透明遮罩層來關閉選單
-      overlay?.addEventListener('click', closeMenu);
-
-      // --- 側邊欄點擊的核心邏輯 ---
-      sidebar?.addEventListener('click', function(event) {
-        const targetLink = event.target.closest('a');
-
-        if (!targetLink) return;
-
-        // 處理最頂端的 "目錄" 標題連結
-        if (targetLink.getAttribute('href') === '#') {
-          event.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          closeMenu();
-          return;
-        }
-        
-        // 如果點擊的是有子選單的父連結
-        if (targetLink.classList.contains('has-submenu')) {
-          event.preventDefault(); 
-          targetLink.parentElement.classList.toggle('open');
-        } 
-        // 如果點擊的是最終的目標連結
-        else {
-          event.preventDefault();
-          const targetId = targetLink.getAttribute('href');
-          const targetElement = document.querySelector(targetId);
-
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-          
-          closeMenu();
-        }
-      });
-
-      // 為外部連結添加 loading 效果
-      document.querySelectorAll('a[href^="https://maps"]').forEach(link => {
-        link.addEventListener('click', (e) => {
-          const spinner = document.createElement('span');
-          spinner.innerHTML = ' 🔄';
-          spinner.style.animation = 'spin 1s linear infinite';
-          link.appendChild(spinner);
-          
-          setTimeout(() => {
-            spinner.remove();
-          }, 2000);
-        });
-      });
-
-      // 添加旋轉動畫
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `;
-      document.head.appendChild(style);
+      }
     });
-  </script>
+
+    if (latestIntersectingEntry) {
+      const activeId = latestIntersectingEntry.target.getAttribute('id');
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkHref = link.getAttribute('href').substring(1);
+        if (linkHref === activeId) {
+          link.classList.add('active');
+          const parentSubmenu = link.closest('.submenu');
+          if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
+            parentSubmenu.parentElement.classList.add('open');
+          }
+        }
+      });
+    }
+  }, { 
+    rootMargin: '0px 0px -80% 0px'
+  });
+  
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  // --- 2. 處理點擊時，目錄展開/收合的邏輯 ---
+  const toc = document.querySelector('#toc-sidebar');
+  toc.addEventListener('click', function(event) {
+    const targetLink = event.target.closest('a');
+    if (!targetLink) return;
+    if (targetLink.classList.contains('has-submenu')) {
+      event.preventDefault(); 
+      targetLink.parentElement.classList.toggle('open');
+    }
+  });
+  
+  /* --- ★★★ 關鍵修正 #2 ★★★ (行動版漢堡選單功能) --- */
+  const body = document.body;
+  const menuToggle = document.getElementById('menu-toggle');
+  const sidebar = document.getElementById('toc-sidebar');
+
+  // 開關選單的邏輯改為直接在 body 上切換 class
+  menuToggle.addEventListener('click', (event) => {
+    event.stopPropagation();
+    body.classList.toggle('mobile-menu-open');
+  });
+
+  // 點擊遮罩層或側邊欄裡的「最終連結」時，關閉選單
+  document.addEventListener('click', (event) => {
+    // 如果 body 是開啟狀態，且點擊的不是側邊欄本身或漢堡按鈕
+    if (body.classList.contains('mobile-menu-open') && !sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+      body.classList.remove('mobile-menu-open');
+    }
+    
+    // 如果點擊的是側邊欄裡的最終連結 (不是 has-submenu 的那種)
+    if (event.target.closest('a') && !event.target.closest('a').classList.contains('has-submenu') && sidebar.contains(event.target)) {
+      body.classList.remove('mobile-menu-open');
+    }
+  });
+});
