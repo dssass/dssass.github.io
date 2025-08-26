@@ -1,399 +1,73 @@
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* assets/css/home.css */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent-gradient: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+    --warm-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    --cool-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text-primary: #2d3748;
+    --text-secondary: #718096;
+    --text-light: rgba(255, 255, 255, 0.9);
+    --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-xl: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+    --radius-lg: 20px;
+    --radius-xl: 28px;
 }
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-    font-family: 'Noto Sans TC', sans-serif;
-    /* 擴大漸層的範圍，並增加更多顏色讓動畫更豐富 */
-    background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b, #feca57);
-    /* 將背景尺寸擴大到 400%，這是讓漸層能夠移動的關鍵 */
+    font-family: 'Noto Sans TC', 'Inter', sans-serif;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     min-height: 100vh;
-    color: #2c3e50;
-    line-height: 1.6;
-    /* 應用我們下面定義的動畫 */
-    animation: backgroundFlow 15s ease-in-out infinite;
+    color: var(--text-primary);
+    overflow-x: hidden;
 }
-
-/* Header 優化 */
-.header {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 15px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.header-title {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-/* 主要容器 - 減少白色背景 */
-.container {
-    max-width: 100%;
-    margin: 0;
-    padding: 20px;
-    background: transparent; /* 移除白色背景 */
-}
-
-/* 歡迎區塊 */
-.welcome-section {
-    /* 我們將背景改為一個非常 Subtle 的彩色漸層 */
-    background: linear-gradient(
-        125deg, 
-        hsl(30, 80%, 98%), /* 淡橘色 */
-        hsl(180, 80%, 98%), /* 淡青色 */
-        hsl(240, 80%, 98%), /* 淡藍色 */
-        hsl(330, 80%, 98%)  /* 淡粉色 */
-    );
-    background-size: 400% 400%; /* 擴大背景尺寸以利移動 */
-    animation: subtleFlow 10s ease-in-out infinite; /* 應用流光動畫 */
-
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    text-align: center;
-    position: relative; /* 為了可能的擴充性 */
-    overflow: hidden;   /* 確保漸層不會溢出圓角 */
-}
-
-.welcome-section h1 {
-    font-size: 2rem;
-    background: linear-gradient(45deg, #e74c3c, #f39c12);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 15px;
-}
-
-.food-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
-}
-
-/* 修改後的程式碼 - 方案一：溫暖美食色系 */
-.food-icon {
-    font-size: 2rem;
-    padding: 10px;
-    /* 圖示一：溫暖的橘紅色漸層 */
-    background: linear-gradient(45deg, #ff9d6c, #ff6b6b);
-    border-radius: 50%;
-    animation: bounce 2s infinite;
-}
-
-.food-icon:nth-child(2) {
-    /* 圖示二：柔和的芒果黃漸層 */
-    background: linear-gradient(45deg, #feca57, #ff9f43);
-    animation-delay: 0.2s;
-}
-
-.food-icon:nth-child(3) {
-    /* 圖示三：清新的酪梨綠漸層 */
-    background: linear-gradient(45deg, #a8e063, #56ab2f);
-    animation-delay: 0.4s;
-}
-
-/* 我們為第四個圖示新增一個樣式 */
-.food-icon:nth-child(4) {
-    /* 圖示四：甜美的莓果粉漸層 */
-    background: linear-gradient(45deg, #ff9a9e, #fecfef);
-    animation-delay: 0.6s;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
-}
-
-/* 文章卡片 - 使用彩色背景 */
-.article-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%);
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    position: relative;
-    overflow: hidden;
-}
-
-.article-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s;
-}
-
-.article-card:hover::before {
-    left: 100%;
-}
-
-.article-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-.featured-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-    color: white;
-    padding: 5px 12px;
-    border-radius: 0 15px 0 15px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    z-index: 2;
-}
-
-.article-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-    background: linear-gradient(45deg, #e74c3c, #f39c12);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
-    z-index: 2;
-}
-
-.article-description {
-    color: #666;
-    line-height: 1.6;
-    position: relative;
-    z-index: 2;
-}
-
-/* 即將推出卡片 */
-.coming-soon {
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    border: 2px dashed rgba(255,255,255,0.4);
-    color: white;
-    text-align: center;
-}
-
-.coming-soon h3 {
-    color: white;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.coming-soon p {
-    color: rgba(255,255,255,0.8);
-}
-
-/* 快速導航區塊 */
-.quick-nav {
-    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 20px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(255,255,255,0.3);
-}
-
-.quick-nav h3 {
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-}
-
-.nav-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-}
-
-.nav-item {
-    background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 15px;
-    padding: 15px;
-    text-align: center;
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.nav-item:hover {
-    background: linear-gradient(45deg, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
-    transform: translateY(-2px);
-}
-
-.nav-icon {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-    display: block;
-}
-
-.nav-text {
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-/* Footer */
-.footer {
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(15px);
-    color: white;
-    text-align: center;
-    padding: 25px 20px;
-    margin-top: 30px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 15px;
-}
-
-.social-link {
-    display: inline-block;
-    padding: 8px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 50%;
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-.social-link:hover {
-    background: rgba(255,255,255,0.2);
-    transform: scale(1.1);
-}
-
-/* 響應式優化 */
-@media (max-width: 480px) {
-    .container {
-        padding: 15px;
-    }
-    
-    .article-card {
-        padding: 20px;
-        margin-bottom: 15px;
-    }
-    
-    .welcome-section {
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-    
-    .quick-nav {
-        padding: 15px;
-        margin-bottom: 20px;
-    }
-    
-    .nav-grid {
-        gap: 10px;
-    }
-    
-    .nav-item {
-        padding: 12px;
-    }
-    
-    .food-icons {
-        gap: 10px;
-    }
-    
-    .food-icon {
-        font-size: 1.8rem;
-        padding: 8px;
-    }
-}
-
-/* 載入動畫 */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.fade-in:nth-child(1) { animation-delay: 0.1s; }
-.fade-in:nth-child(2) { animation-delay: 0.2s; }
-.fade-in:nth-child(3) { animation-delay: 0.3s; }
-.fade-in:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 增加視覺層次的裝飾元素 */
-.bg-decoration {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.1;
-}
-
-.bg-decoration::before {
-    content: '🍜🥟🍰🥤';
-    position: absolute;
-    top: 20%;
-    left: 10%;
-    font-size: 3rem;
-    animation: float 6s ease-in-out infinite;
-}
-
-.bg-decoration::after {
-    content: '🍔🍣🧋🥘';
-    position: absolute;
-    bottom: 20%;
-    right: 10%;
-    font-size: 3rem;
-    animation: float 8s ease-in-out infinite reverse;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-}
-/* --- 定義極光流彩動畫 --- */
-@keyframes subtleFlow {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.floating-shapes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.shape { position: absolute; border-radius: 50%; opacity: 0.1; animation: float 20s infinite linear; }
+.shape:nth-child(1) { width: 80px; height: 80px; background: var(--accent-gradient); top: 20%; left: 10%; animation-delay: 0s; }
+.shape:nth-child(2) { width: 120px; height: 120px; background: var(--warm-gradient); top: 60%; right: 15%; animation-delay: -5s; }
+.shape:nth-child(3) { width: 60px; height: 60px; background: var(--cool-gradient); bottom: 30%; left: 20%; animation-delay: -10s; }
+@keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } 100% { transform: translateY(0px) rotate(360deg); } }
+.main-container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 15px 0; background: var(--glass-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--text-light); text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+.nav-links { display: flex; gap: 30px; list-style: none; }
+.nav-links a { color: var(--text-light); text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent-gradient); transition: width 0.3s ease; }
+.nav-links a:hover::after { width: 100%; }
+.hero-section { padding: 140px 0 80px; text-align: center; }
+.hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; background: linear-gradient(45deg, #ffffff, #f8f9fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); line-height: 1.1; }
+.hero-subtitle { font-size: 1.3rem; color: var(--text-light); margin-bottom: 40px; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+.hero-cta { display: inline-flex; align-items: center; gap: 10px; background: var(--accent-gradient); color: white; padding: 15px 30px; border-radius: var(--radius-lg); text-decoration: none; font-weight: 600; box-shadow: var(--shadow-lg); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid var(--glass-border); }
+.hero-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-xl); }
+.features-section { padding: 80px 0; }
+.section-title { text-align: center; font-size: 2.5rem; font-weight: 700; color: var(--text-light); margin-bottom: 60px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 60px; }
+.feature-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--radius-xl); padding: 40px 30px; text-align: center; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+.feature-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transition: left 0.6s; }
+.feature-card:hover::before { left: 100%; }
+.feature-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-xl); border-color: rgba(255, 255, 255, 0.3); }
+.feature-icon { font-size: 3rem; margin-bottom: 20px; display: block; filter: drop-shadow(2px 2px 8px rgba(0,0,0,0.2)); }
+.feature-title { font-size: 1.4rem; font-weight: 600; color: var(--text-light); margin-bottom: 15px; }
+.feature-description { color: rgba(255, 255, 255, 0.8); line-height: 1.6; font-size: 1rem; }
+.articles-section { padding: 80px 0; }
+.articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+.article-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--radius-xl); padding: 30px; text-decoration: none; color: inherit; display: block; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+.article-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); border-color: rgba(255, 255, 255, 0.3); }
+.article-badge { position: absolute; top: -10px; right: -10px; background: var(--accent-gradient); color: white; padding: 8px 16px; border-radius: var(--radius-lg); font-size: 0.85rem; font-weight: 600; box-shadow: var(--shadow-lg); }
+.article-title { font-size: 1.5rem; font-weight: 600; color: var(--text-light); margin-bottom: 15px; line-height: 1.3; }
+.article-excerpt { color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-bottom: 20px; }
+.article-meta { display: flex; align-items: center; gap: 15px; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; }
+.footer-section { padding: 60px 0 40px; text-align: center; border-top: 1px solid var(--glass-border); background: var(--glass-bg); backdrop-filter: blur(20px); }
+.social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; }
+.social-link { display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50%; color: var(--text-light); text-decoration: none; font-size: 1.2rem; transition: all 0.3s ease; }
+.social-link:hover { background: var(--accent-gradient); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.copyright { color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; }
+@media (max-width: 768px) { .nav-links { display: none; } .hero-section { padding: 120px 0 60px; } .features-grid, .articles-grid { grid-template-columns: 1fr; gap: 20px; } .feature-card, .article-card { padding: 25px 20px; } .main-container { padding: 0 15px; } }
+.fade-in { opacity: 0; transform: translateY(30px); animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.fade-in:nth-child(1) { animation-delay: 0.1s; } .fade-in:nth-child(2) { animation-delay: 0.2s; } .fade-in:nth-child(3) { animation-delay: 0.3s; } .fade-in:nth-child(4) { animation-delay: 0.4s; }
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
