@@ -1,3 +1,12 @@
 # _config.yml
+
 title: 台南味旅
 description: 在地人的美食地圖，跟著我們的腳步，品嚐最道地的台南美食，發現隱藏在巷弄裡的美味秘境。
+
+# ... 其他設定 ...
+
+# 啟用外掛列表
+plugins:
+  - jekyll-seo-tag
+  # - jekyll-feed # 如果您有使用 RSS feed，也可以加上這個
+  # - jekyll-sitemap # 建議也加上這個，對 SEO 很好
