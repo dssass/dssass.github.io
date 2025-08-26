@@ -1,37 +1,25 @@
----
-layout: null
----
+<!-- _layouts/home.html -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-    {% seo %}
-    
-    <!-- 載入專屬於首頁的 CSS -->
-    <link rel="stylesheet" href="/assets/css/home.css">
+    {% include head.html %}
 </head>
 <body>
-    
-    <header class="header">
-        <h1 class="header-title">我的美食地圖</h1>
-    </header>
-    
-    <main>
+    <!-- 漂浮裝飾 -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    {% include header.html %}
+
+    <div class="main-container">
         {{ content }}
-    </main>
-    
-    <footer class="footer">
-        <div class="social-links">
-            <a href="#" class="social-link">📘</a>
-            <a href="#" class="social-link">📷</a>
-            <a href="#" class="social-link">💬</a>
-        </div>
-        <p>&copy; 2025 my blog | 屁眼</p>
-    </footer>
-    
-    <!-- 載入專屬於首頁的 JavaScript -->
+    </div>
+
+    {% include footer.html %}
+
     <script src="/assets/js/home.js"></script>
 </body>
 </html>
