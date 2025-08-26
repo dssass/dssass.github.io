@@ -1,73 +1,97 @@
-
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   // --- 1. 處理捲動時，目錄項目高亮顯示的邏輯 ---
   const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
   const tocLinks = document.querySelectorAll('#toc-sidebar a');
 
   const observer = new IntersectionObserver((entries) => {
-    let latestIntersectingEntry = null;
+    let latestIntersectingId = null;
+
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        if (!latestIntersectingEntry || entry.boundingClientRect.top < latestIntersectingEntry.boundingClientRect.top) {
-          latestIntersectingEntry = entry;
+        if (entry.isIntersecting) {
+            if (!latestIntersectingId) {
+                latestIntersectingId = entry.target.getAttribute('id');
+            }
         }
-      }
     });
 
-    if (latestIntersectingEntry) {
-      const activeId = latestIntersectingEntry.target.getAttribute('id');
+    if (latestIntersectingId) {
       tocLinks.forEach(link => {
         link.classList.remove('active');
-        const linkHref = link.getAttribute('href').substring(1);
-        if (linkHref === activeId) {
-          link.classList.add('active');
-          const parentSubmenu = link.closest('.submenu');
-          if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
-            parentSubmenu.parentElement.classList.add('open');
+        // 確保 href 屬性存在才進行處理
+        if (link.getAttribute('href')) {
+          const linkHref = link.getAttribute('href').substring(1);
+
+          if (linkHref === latestIntersectingId) {
+            link.classList.add('active');
+
+            // 自動展開高亮項目的父層選單
+            const parentSubmenu = link.closest('.submenu');
+            if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
+              parentSubmenu.parentElement.classList.add('open');
+            }
           }
         }
       });
     }
-  }, { 
-    rootMargin: '0px 0px -80% 0px'
+  }, {
+    rootMargin: '0px 0px -70% 0px'
   });
-  
+
   sections.forEach(section => {
     observer.observe(section);
   });
 
   // --- 2. 處理點擊時，目錄展開/收合的邏輯 ---
   const toc = document.querySelector('#toc-sidebar');
-  toc.addEventListener('click', function(event) {
-    const targetLink = event.target.closest('a');
-    if (!targetLink) return;
-    if (targetLink.classList.contains('has-submenu')) {
-      event.preventDefault(); 
-      targetLink.parentElement.classList.toggle('open');
-    }
-  });
-  
-  /* --- ★★★ 關鍵修正 #2 ★★★ (行動版漢堡選單功能) --- */
-  const body = document.body;
+  if (toc) {
+    toc.addEventListener('click', function(event) {
+      const targetLink = event.target.closest('a');
+
+      if (!targetLink) return;
+
+      // 如果點擊的是有子選單的連結，就展開/收合它
+      if (targetLink.classList.contains('has-submenu')) {
+        event.preventDefault();
+        targetLink.parentElement.classList.toggle('open');
+      }
+    });
+  }
+
+  // --- 3. ★★★ 修正後的行動版漢堡選單功能 ★★★ ---
   const menuToggle = document.getElementById('menu-toggle');
   const sidebar = document.getElementById('toc-sidebar');
+  const overlay = document.getElementById('overlay');
+  const body = document.body; // 直接選取 body
 
-  // 開關選單的邏輯改為直接在 body 上切換 class
-  menuToggle.addEventListener('click', (event) => {
-    event.stopPropagation();
-    body.classList.toggle('mobile-menu-open');
-  });
+  // 確保所有元素都存在再綁定事件，避免錯誤
+  if (menuToggle && sidebar && overlay) {
 
-  // 點擊遮罩層或側邊欄裡的「最終連結」時，關閉選單
-  document.addEventListener('click', (event) => {
-    // 如果 body 是開啟狀態，且點擊的不是側邊欄本身或漢堡按鈕
-    if (body.classList.contains('mobile-menu-open') && !sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+    // 統一的開關函式
+    const toggleMenu = () => {
+      body.classList.toggle('mobile-menu-open');
+    };
+
+    // 點擊漢堡按鈕時，切換 body 的 class
+    menuToggle.addEventListener('click', (event) => {
+      event.stopPropagation(); // 防止事件冒泡
+      toggleMenu();
+    });
+
+    // 點擊遮罩層時，永遠移除 class (關閉選單)
+    overlay.addEventListener('click', () => {
       body.classList.remove('mobile-menu-open');
-    }
-    
-    // 如果點擊的是側邊欄裡的最終連結 (不是 has-submenu 的那種)
-    if (event.target.closest('a') && !event.target.closest('a').classList.contains('has-submenu') && sidebar.contains(event.target)) {
-      body.classList.remove('mobile-menu-open');
-    }
-  });
+    });
+
+    // 點擊側邊欄中的「頁內連結」時，關閉選單
+    sidebar.addEventListener('click', (event) => {
+      const target = event.target;
+      // 確保點擊的是一個有效的頁內錨點連結 (href="#...")
+      if (target.tagName === 'A' && target.getAttribute('href') && target.getAttribute('href').startsWith('#')) {
+          body.classList.remove('mobile-menu-open');
+      }
+    });
+  }
+
 });
+</script>
