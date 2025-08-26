@@ -1,13 +1,9 @@
 <!-- _includes/head.html -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- 動態標題，適用於全站所有頁面 -->
-<title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-
-<!-- 這裡的 meta 資訊也可以改成動態的，但暫時保留也可 -->
-<meta name="description" content="台南在地人推薦美食清單，包含牛肉湯、小吃、甜點、咖啡廳等完整分類，附營業時間與Google地圖連結">
-<meta name="keywords" content="台南美食,台南小吃,台南牛肉湯,台南咖啡廳,台南甜點">
-  
-<!-- Google AdSense 程式碼 -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1804918027527093" crossorigin="anonymous"></script>
+<title>{{ page.title | default: site.title }}</title>
+<meta name="description" content="{{ page.description | default: site.description }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/home.css">
