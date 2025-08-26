@@ -9,10 +9,15 @@
 
 body {
     font-family: 'Noto Sans TC', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+    /* 擴大漸層的範圍，並增加更多顏色讓動畫更豐富 */
+    background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b, #feca57);
+    /* 將背景尺寸擴大到 400%，這是讓漸層能夠移動的關鍵 */
+    background-size: 400% 400%;
     min-height: 100vh;
     color: #2c3e50;
     line-height: 1.6;
+    /* 應用我們下面定義的動畫 */
+    animation: backgroundFlow 15s ease-in-out infinite;
 }
 
 /* Header 優化 */
@@ -367,4 +372,15 @@ body {
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
+}
+@keyframes backgroundFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
