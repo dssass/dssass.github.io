@@ -1,59 +1,64 @@
 ---
 layout: home
-title: 我的美食地圖 - 首頁
-description: 探索台南美食
+title: 首頁 - 台南味旅
+description: 探索台南的味覺記憶，跟著在地人的腳步，品嚐最道地的台南美食。
 ---
 
-<div class="bg-decoration"></div>
+<!-- index.html -->
 
-<div class="container">
-    <!-- 歡迎區塊 -->
-    <section class="welcome-section fade-in">
-        <h1>歡迎來到我的美食地圖！</h1>
-        <p>探索台南最道地的美味，品嚐在地人的私房推薦</p>
-        <div class="food-icons">
-            <div class="food-icon">🐝</div>
-            <div class="food-icon">🦦</div>
-            <div class="food-icon">😈</div>
-            <div class="food-icon">🍰</div>
-        </div>
-    </section>
-    
-    <!-- 快速導航 -->
-    <section class="quick-nav fade-in">
-        <h3>🗺️ 快速導航</h3>
-        <div class="nav-grid">
-            <a href="/topics/tainan-food-guide.html" class="nav-item">
-                <span class="nav-icon">🐂</span>
-                <span class="nav-text">牛肉湯</span>
-            </a>
-            <a href="/topics/tainan-food-guide.html#desserts" class="nav-item">
-                <span class="nav-icon">🍩</span>
-                <span class="nav-text">甜食</span>
-            </a>
-            <a href="/topics/tainan-food-guide.html#lunch" class="nav-item">
-                <span class="nav-icon">🍴</span>
-                <span class="nav-text">午餐</span>
-            </a>
-            <a href="/topics/tainan-food-guide.html#dinner" class="nav-item">
-                <span class="nav-icon">🍽️</span>
-                <span class="nav-text">晚餐</span>
-            </a>
-        </div>
-    </section>
-    
-    <!-- 文章卡片 -->
-    <a href="/topics/tainan-food-guide.html" class="article-card fade-in">
-        <div class="featured-badge">推薦</div>
-        <h3 class="article-title">台南美食導覽 - 在地人推薦</h3>
-        <p class="article-description">這是一篇關於在地人視角的台南美食指南，從牛肉湯、小吃到甜點，應有有。我們將帶你走遍台南的大街小巷，發現那些隱藏在巷弄裡的美味秘境，讓你的味蕾體驗最道地的台南風味...</p>
+<!-- 英雄區塊 -->
+<section class="hero-section fade-in">
+    <h1 class="hero-title">探索台南的味覺記憶</h1>
+    <p class="hero-subtitle">跟著在地人的腳步，品嚐最道地的台南美食，發現隱藏在巷弄裡的美味秘境</p>
+    <a href="#features" class="hero-cta">
+        <span>開始探索</span>
+        <span>🗺️</span>
     </a>
-    
-    <!-- 即將推出 -->
-    <div class="article-card coming-soon fade-in">
-        <h3>更多精彩文章</h3>
-        <p>正在準備中... 即將分享更多台南美食、小吃探店、甜點推薦等內容</p>
+</section>
+
+<!-- 特色功能區塊 -->
+<section id="features" class="features-section">
+    <h2 class="section-title fade-in">為什麼選擇我們的美食地圖？</h2>
+    <div class="features-grid">
+        <div class="feature-card fade-in">
+            <span class="feature-icon">🏆</span>
+            <h3 class="feature-title">在地人推薦</h3>
+            <p class="feature-description">由台南在地人精心挑選，帶你品嚐最道地的古都風味，避開觀光陷阱，直達美食精髓。</p>
+        </div>
+        <div class="feature-card fade-in">
+            <span class="feature-icon">📍</span>
+            <h3 class="feature-title">精準定位</h3>
+            <p class="feature-description">詳細的地址資訊和營業時間，讓你輕鬆找到每一間推薦店家，不會空手而歸。</p>
+        </div>
+        <div class="feature-card fade-in">
+            <span class="feature-icon">⭐</span>
+            <h3 class="feature-title">真實評價</h3>
+            <p class="feature-description">真實的用餐體驗分享，包含菜品推薦、價位參考，幫你做出最好的選擇。</p>
+        </div>
     </div>
-</div>
+</section>
 
-
+<!-- 精選文章區塊 -->
+<section class="articles-section">
+    <h2 class="section-title fade-in">精選美食文章</h2>
+    <div class="articles-grid">
+        <a href="/topics/tainan-food-guide.html" class="article-card fade-in">
+            <div class="article-badge">熱門推薦</div>
+            <h3 class="article-title">台南美食完整導覽</h3>
+            <p class="article-excerpt">從早餐到宵夜，從小吃到正餐，這是一份最完整的台南美食地圖。我們走訪了台南的大街小巷，為你精選出最值得品嚐的美味...</p>
+            <div class="article-meta">
+                <span>📅 2025-01-15</span>
+                <span>👁️ 1,234 次瀏覽</span>
+            </div>
+        </a>
+        <div class="article-card fade-in" style="opacity: 0.7;">
+            <h3 class="article-title">台南甜點巡禮</h3>
+            <p class="article-excerpt">探索台南的甜點文化，從傳統的椪餅、蜜餞到現代的創意甜品，帶你品嚐台南獨有的甜蜜滋味...</p>
+            <div class="article-meta">
+                <span>📅 即將發布</span>
+                <span>🚀 敬請期待</span>
+            </div>
+        </div>
+    </div>
+</section>
+```*   `---` 之間的區塊是 "Front Matter"，`layout: home` 指示 Jekyll 在建置此頁面時，要將其內容放入 `_layouts/home.html` 的 `{{ content }}` 位置。
