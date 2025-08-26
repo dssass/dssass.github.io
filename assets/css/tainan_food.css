@@ -134,13 +134,13 @@ h4 {
   overflow: hidden;
 }
 
-.custom-block { 
+.custom-block {
   background: linear-gradient(135deg, #F0FFF0 0%, #E8F5E8 100%);
   color: #2E8B57;
   border-left: 5px solid var(--secondary-color);
 }
 
-.warning-box { 
+.warning-box {
   background: linear-gradient(135deg, #FFF8E1 0%, #FFF3C4 100%);
   color: #F57C00;
   border: 1px solid #FFECB3;
@@ -148,13 +148,13 @@ h4 {
   align-items: center;
 }
 
-.warning-box .icon { 
+.warning-box .icon {
   font-size: 1.5em;
   margin-right: 0.7em;
 }
 
 /* Restaurant list styling */
-ul { 
+ul {
   list-style-type: none;
   padding-left: 0;
   margin: 1.5rem 0;
@@ -207,7 +207,7 @@ blockquote {
 /* Sidebar styles */
 #toc-sidebar {
   position: fixed;
-  left: -320px; 
+  left: -320px;
   top: 50%;
   transform: translateY(-50%);
   width: 280px;
@@ -262,7 +262,7 @@ blockquote {
   transform: scale(1.02);
 }
 
-#toc-sidebar ul { 
+#toc-sidebar ul {
   padding-left: 0;
   margin: 0;
 }
@@ -326,7 +326,7 @@ li.open > .submenu {
   margin-bottom: 0.2rem;
 }
 
-.submenu li a:hover, 
+.submenu li a:hover,
 .submenu li a.active {
   background: linear-gradient(135deg, var(--secondary-color), #66BB6A);
   color: var(--white);
@@ -335,10 +335,9 @@ li.open > .submenu {
 
 
 /* Mobile menu */
-#mobile-menu-toggle {
-    /* --- 修改 --- */
-    /* 讓漢堡按鈕在所有尺寸下都顯示 */
-    display: block; 
+/* ★★★ 這裡已修正 ★★★ */
+#menu-toggle {
+    display: block;
     position: fixed;
     bottom: 20px;
     left: 20px;
@@ -347,11 +346,11 @@ li.open > .submenu {
     background-color: var(--primary-color);
     border: none;
     border-radius: 50%;
-    z-index: 9999; 
+    z-index: 9999;
     cursor: pointer;
 }
 
-#mobile-menu-toggle span {
+#menu-toggle span {
   display: block;
   position: absolute;
   height: 3px;
@@ -362,11 +361,12 @@ li.open > .submenu {
   transition: var(--transition);
 }
 
-#mobile-menu-toggle span:nth-child(1) { top: 30%; }
-#mobile-menu-toggle span:nth-child(2) { top: 48%; }
-#mobile-menu-toggle span:nth-child(3) { top: 66%; }
+#menu-toggle span:nth-child(1) { top: 30%; }
+#menu-toggle span:nth-child(2) { top: 48%; }
+#menu-toggle span:nth-child(3) { top: 66%; }
 
-#toc-overlay {
+/* ★★★ 這裡已修正 ★★★ */
+#overlay {
   display: none;
   position: fixed;
   top: 0;
@@ -380,35 +380,33 @@ li.open > .submenu {
   backdrop-filter: blur(4px);
 }
 
-.mobile-menu-open #toc-overlay {
+.mobile-menu-open #overlay {
   display: block;
   opacity: 1;
 }
 
-/* --- 將原本在 @media 中的邏輯移到外面，讓所有尺寸通用 --- */
+/* 當 body 標籤有 .mobile-menu-open class 時觸發的樣式 */
 .mobile-menu-open #toc-sidebar {
   left: 0;
   opacity: 1;
   visibility: visible;
-  transition-delay: 0s;
 }
 
-.mobile-menu-open #mobile-menu-toggle span:nth-child(1) {
+.mobile-menu-open #menu-toggle span:nth-child(1) {
   top: 48%;
   transform: rotate(135deg);
 }
-.mobile-menu-open #mobile-menu-toggle span:nth-child(2) {
+.mobile-menu-open #menu-toggle span:nth-child(2) {
   opacity: 0;
   left: -50%;
 }
-.mobile-menu-open #mobile-menu-toggle span:nth-child(3) {
+.mobile-menu-open #menu-toggle span:nth-child(3) {
   top: 48%;
   transform: rotate(-135deg);
 }
 
 
-/* Responsive design */
+/* Responsive design - 這裡現在不需要特別的媒體查詢了 */
 @media (max-width: 1400px) {
-  /* 此處現在是空的，因為主要邏輯已經移到外面了。 */
-  /* 您可以保留這個空區塊，未來若有平板專屬樣式可以寫在這裡。 */
+  /* 這個區塊可以保留，未來若有平板專屬樣式可以寫在這裡。 */
 }
