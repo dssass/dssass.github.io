@@ -47,3 +47,4 @@ document.querySelectorAll('.feature-card, .article-card').forEach(card => {
     });
 });
 });
+
