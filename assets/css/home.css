@@ -68,22 +68,33 @@ body {
     margin: 20px 0;
 }
 
+/* 修改後的程式碼 - 方案一：溫暖美食色系 */
 .food-icon {
     font-size: 2rem;
     padding: 10px;
-    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    /* 圖示一：溫暖的橘紅色漸層 */
+    background: linear-gradient(45deg, #ff9d6c, #ff6b6b);
     border-radius: 50%;
     animation: bounce 2s infinite;
 }
 
 .food-icon:nth-child(2) {
-    background: linear-gradient(45deg, #48cae4, #0077b6);
+    /* 圖示二：柔和的芒果黃漸層 */
+    background: linear-gradient(45deg, #feca57, #ff9f43);
     animation-delay: 0.2s;
 }
 
 .food-icon:nth-child(3) {
-    background: linear-gradient(45deg, #06ffa5, #3d5a80);
+    /* 圖示三：清新的酪梨綠漸層 */
+    background: linear-gradient(45deg, #a8e063, #56ab2f);
     animation-delay: 0.4s;
+}
+
+/* 我們為第四個圖示新增一個樣式 */
+.food-icon:nth-child(4) {
+    /* 圖示四：甜美的莓果粉漸層 */
+    background: linear-gradient(45deg, #ff9a9e, #fecfef);
+    animation-delay: 0.6s;
 }
 
 @keyframes bounce {
