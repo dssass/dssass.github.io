@@ -1,6 +1,6 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // --- 1. 處理捲動時，目錄項目高亮顯示的邏輯 ---
+  // --- 1. 處理捲動時，目錄項目高亮顯示的邏輯 (這部分不變) ---
   const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
   const tocLinks = document.querySelectorAll('#toc-sidebar a');
 
@@ -18,14 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (latestIntersectingId) {
       tocLinks.forEach(link => {
         link.classList.remove('active');
-        // 確保 href 屬性存在才進行處理
         if (link.getAttribute('href')) {
           const linkHref = link.getAttribute('href').substring(1);
-
           if (linkHref === latestIntersectingId) {
             link.classList.add('active');
-
-            // 自動展開高亮項目的父層選單
             const parentSubmenu = link.closest('.submenu');
             if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
               parentSubmenu.parentElement.classList.add('open');
@@ -42,54 +38,51 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(section);
   });
 
-  // --- 2. 處理點擊時，目錄展開/收合的邏輯 ---
-  const toc = document.querySelector('#toc-sidebar');
-  if (toc) {
-    toc.addEventListener('click', function(event) {
+  // --- 2. ★★★ 優化後的側邊欄點擊邏輯 ★★★ ---
+  // 我們將「展開/收合」和「關閉選單」的邏輯合併在一起，避免衝突
+  const sidebar = document.getElementById('toc-sidebar');
+  const body = document.body;
+
+  if (sidebar) {
+    sidebar.addEventListener('click', (event) => {
+      // 找到使用者實際點擊的 <a> 連結元素
       const targetLink = event.target.closest('a');
 
-      if (!targetLink) return;
+      // 如果點擊的不是連結，就什麼都不做
+      if (!targetLink) {
+        return;
+      }
 
-      // 如果點擊的是有子選單的連結，就展開/收合它
+      // 情況一：如果點擊的連結是「父層選單」(它帶有 'has-submenu' class)
       if (targetLink.classList.contains('has-submenu')) {
+        // 我們要阻止它預設的跳轉行為
         event.preventDefault();
+        // 並且只切換它底下子選單的展開/收合狀態
         targetLink.parentElement.classList.toggle('open');
+      }
+      // 情況二：如果點擊的是一個「普通的頁內連結」(不是父層選單)
+      else if (targetLink.getAttribute('href') && targetLink.getAttribute('href').startsWith('#')) {
+        // 我們就關閉整個側邊欄
+        body.classList.remove('mobile-menu-open');
+        // 瀏覽器會自動處理跳轉到對應區塊
       }
     });
   }
 
-  // --- 3. ★★★ 修正後的行動版漢堡選單功能 ★★★ ---
+  // --- 3. 漢堡按鈕與遮罩層的開關邏輯 (這部分不變) ---
   const menuToggle = document.getElementById('menu-toggle');
-  const sidebar = document.getElementById('toc-sidebar');
   const overlay = document.getElementById('overlay');
-  const body = document.body; // 直接選取 body
 
-  // 確保所有元素都存在再綁定事件，避免錯誤
-  if (menuToggle && sidebar && overlay) {
-
-    // 統一的開關函式
-    const toggleMenu = () => {
-      body.classList.toggle('mobile-menu-open');
-    };
-
+  if (menuToggle && overlay) {
     // 點擊漢堡按鈕時，切換 body 的 class
     menuToggle.addEventListener('click', (event) => {
-      event.stopPropagation(); // 防止事件冒泡
-      toggleMenu();
+      event.stopPropagation();
+      body.classList.toggle('mobile-menu-open');
     });
 
-    // 點擊遮罩層時，永遠移除 class (關閉選單)
+    // 點擊遮罩層時，永遠關閉選單
     overlay.addEventListener('click', () => {
       body.classList.remove('mobile-menu-open');
-    });
-
-    // 點擊側邊欄中的「頁內連結」時，關閉選單
-    sidebar.addEventListener('click', (event) => {
-      const target = event.target;
-      // 確保點擊的是一個有效的頁內錨點連結 (href="#...")
-      if (target.tagName === 'A' && target.getAttribute('href') && target.getAttribute('href').startsWith('#')) {
-          body.classList.remove('mobile-menu-open');
-      }
     });
   }
 
