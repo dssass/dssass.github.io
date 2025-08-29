@@ -37,4 +37,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local_path: './_site/'
           remote_path: ${{ secrets.REMOTE_PATH }}
-          args: -a
+        
