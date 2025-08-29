@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台南美食指南 | Tainan Food Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #FF6B35;
+      --primary-dark: #E85A2B;
+      --secondary: #4ECDC4;
+      --accent: #FFE66D;
+      --success: #95E1D3;
+      --warning: #F38BA8;
+      --dark: #2D3436;
+      --gray-900: #1A1A1A;
+      --gray-800: #2D2D2D;
+      --gray-700: #3D3D3D;
+      --gray-600: #6C6C6C;
+      --gray-500: #8E8E8E;
+      --gray-400: #ADADAD;
+      --gray-300: #D1D1D1;
+      --gray-200: #E8E8E8;
+      --gray-100: #F5F5F5;
+      --white: #FFFFFF;
+      
+      --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFE66D 100%);
+      --gradient-secondary: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+      --gradient-accent: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 25px rgba(0,0,0,0.15);
+      --shadow-xl: 0 20px 40px rgba(0,0,0,0.2);
+      
+      --border-radius: 16px;
+      --border-radius-lg: 24px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: var(--gray-800);
+      background: var(--gradient-bg);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 230, 109, 0.1) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    /* Header */
+    .hero-section {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray-600);
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.3s forwards;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Section Headers */
+    .section {
+      margin-bottom: 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+      scroll-margin-top: 100px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+
+    .section-emoji {
+      font-size: 3rem;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+
+    .subsection-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin: 2.5rem 0 1.5rem;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: var(--border-radius);
+      border-left: 4px solid var(--secondary);
+      scroll-margin-top: 100px;
+    }
+
+    .category-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 2rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      scroll-margin-top: 100px;
+    }
+
+    .category-title::before {
+      content: '';
+      width: 4px;
+      height: 1.5rem;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+
+    /* Food Items Grid */
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .food-item {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(0);
+    }
+
+    .food-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition);
+    }
+
+    .food-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: rgba(255, 107, 53, 0.3);
+    }
+
+    .food-item:hover::before {
+      transform: scaleX(1);
+    }
+
+    .food-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--gray-800);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.75rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .food-name::after {
+      content: '→';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) translateX(-10px);
+      opacity: 0;
+      transition: var(--transition);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .food-item:hover .food-name::after {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .food-name:hover {
+      color: var(--primary);
+    }
+
+    .food-details {
+      background: rgba(78, 205, 196, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 0.95rem;
+      color: var(--gray-700);
+      line-height: 1.6;
+      border-left: 3px solid var(--secondary);
+      margin-top: 0.75rem;
+    }
+
+    .food-details strong {
+      color: var(--primary);
+    }
+
+    .food-details a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .food-details a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      left: -380px;
+      top: 0;
+      width: 360px;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      transition: var(--transition);
+      overflow-y: auto;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow-xl);
+    }
+
+    #sidebar.open {
+      left: 0;
+    }
+
+    .sidebar-header {
+      padding: 2rem 1.5rem 1rem;
+      background: var(--gradient-primary);
+      color: white;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .sidebar-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .sidebar-nav {
+      padding: 1rem;
+    }
+
+    .nav-section {
+      margin-bottom: 1rem;
+    }
+
+    .nav-item {
+      display: block;
+      padding: 0.875rem 1.25rem;
+      color: var(--gray-700);
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: var(--gradient-secondary);
+      color: white;
+      transform: translateX(8px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-submenu {
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+      border-left: 2px solid rgba(78, 205, 196, 0.3);
+      padding-left: 1rem;
+    }
+
+    .nav-submenu .nav-item {
+      font-size: 0.9rem;
+      font-weight: 400;
+      padding: 0.625rem 1rem;
+    }
+
+    .nav-submenu .nav-item:hover,
+    .nav-submenu .nav-item.active {
+      background: var(--gradient-accent);
+    }
+
+    /* Menu Toggle Button */
+    .menu-toggle {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      width: 64px;
+      height: 64px;
+      background: var(--gradient-primary);
+      border: none;
+      border-radius: 50%;
+      box-shadow: var(--shadow-lg);
+      cursor: pointer;
+      z-index: 1001;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .menu-icon {
+      width: 24px;
+      height: 18px;
+      position: relative;
+    }
+
+    .menu-icon span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: white;
+      border-radius: 1px;
+      position: absolute;
+      transition: var(--transition);
+    }
+
+    .menu-icon span:nth-child(1) { top: 0; }
+    .menu-icon span:nth-child(2) { top: 8px; }
+    .menu-icon span:nth-child(3) { bottom: 0; }
+
+    .menu-toggle.active .menu-icon span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 8px;
+    }
+
+    .menu-toggle.active .menu-icon span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active .menu-icon span:nth-child(3) {
+      transform: rotate(-45deg);
+      bottom: 8px;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Interactive Tools Section */
+    .tools-section {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      border-radius: var(--border-radius-lg);
+      padding: 2.5rem;
+      margin: 3rem 0;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .tools-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 1rem;
+    }
+
+    .tools-description {
+      font-size: 1.1rem;
+      color: var(--gray-600);
+      margin-bottom: 2rem;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tool-button {
+      display: block;
+      padding: 1.25rem 2rem;
+      background: var(--gradient-secondary);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: var(--transition);
+    }
+
+    .tool-button:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .tool-button:hover::before {
+      left: 100%;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 1280px) {
+      #sidebar {
+        left: 0;
+        position: fixed;
+      }
+
+      .container {
+        margin-left: 380px;
+        max-width: none;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .overlay {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 2rem 1rem;
+      }
+
+      .container {
+        padding: 0 1rem 2rem;
+      }
+
+      .food-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .food-item {
+        padding: 1.25rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .section-emoji {
+        font-size: 2.5rem;
+      }
+
+      .tools-section {
+        padding: 1.5rem;
+      }
+
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Scrollbar Styling */
+    #sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #sidebar::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.05);
+    }
+
+    #sidebar::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 3px;
+    }
+
+    #sidebar::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-section {
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .section {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+    .section:nth-child(4) { animation-delay: 0.4s; }
+    .section:nth-child(5) { animation-delay: 0.5s; }
+
+    /* Loading Animation */
+    .loading {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  
+  <!-- Sidebar Navigation -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">台南美食指南</div>
+      <div class="sidebar-subtitle">Tainan Food Guide</div>
+    </div>
+    
+    <div class="sidebar-nav">
+      <div class="nav-section">
+        <a href="#beef" class="nav-item">🐂 牛肉</a>
+        <div class="nav-submenu">
+          <a href="#beef-city" class="nav-item">市區</a>
+          <a href="#beef-jiali" class="nav-item">佳里</a>
+          <a href="#beef-hotpot" class="nav-item">牛肉火鍋</a>
+        </div>
+      </div>
+      
+      <a href="#brunch" class="nav-item">🥐 早午餐</a>
+      
+      <div class="nav-section">
+        <a href="#lunch" class="nav-item">🍱 午餐 Time</a>
+        <div class="nav-submenu">
+          <a href="#lunch-taiwanese-rice" class="nav-item">台式飯類</a>
+          <a href="#lunch-fish" class="nav-item">魚類</a>
+          <a href="#lunch-taiwanese-noodle" class="nav-item">台式麵類</a>
+          <a href="#lunch-american" class="nav-item">美式</a>
+          <a href="#lunch-japanese" class="nav-item">日式料理</a>
+          <a href="#lunch-ramen" class="nav-item">拉麵</a>
+          <a href="#lunch-hotpot" class="nav-item">火鍋</a>
+          <a href="#lunch-hongkong" class="nav-item">港式</a>
+          <a href="#lunch-others" class="nav-item">其他</a>
+        </div>
+      </div>
+      
+      <div class="nav-section">
+        <a href="#dinner" class="nav-item">🍽️ 晚餐 Time</a>
+        <div class="nav-submenu">
+          <a href="#dinner-taiwanese-rice" class="nav-item">台式飯類</a>
+          <a href="#dinner-winter-food" class="nav-item">冬天進補</a>
+          <a href="#dinner-fish" class="nav-item">魚類</a>
+          <a href="#dinner-taiwanese-noodle" class="nav-item">台式麵類</a>
+          <a href="#dinner-american" class="nav-item">美式</a>
+          <a href="#dinner-curry" class="nav-item">咖哩</a>
+          <a href="#dinner-ramen" class="nav-item">拉麵</a>
+          <a href="#dinner-japanese" class="nav-item">日式料理</a>
+          <a href="#dinner-hotpot" class="nav-item">火鍋</a>
+          <a href="#dinner-drypot" class="nav-item">乾鍋</a>
+          <a href="#dinner-hongkong" class="nav-item">港式</a>
+          <a href="#dinner-thai" class="nav-item">泰式</a>
+          <a href="#dinner-izakaya" class="nav-item">居酒屋、熱炒、燒烤</a>
+          <a href="#dinner-others" class="nav-item">其他</a>
+          <a href="#dinner-group-meal" class="nav-item">合菜、buffet</a>
+          <a href="#dinner-snacks" class="nav-item">小吃</a>
+        </div>
+      </div>
+      
+      <div class="nav-section">
+        <a href="#desserts" class="nav-item">🍰 甜食</a>
+        <div class="nav-submenu">
+          <a href="#dessert" class="nav-item">甜點</a>
+          <a href="#cafe" class="nav-item">咖啡廳</a>
+          <a href="#ice-dessert" class="nav-item">冰&甜品</a>
+        </div>
+      </div>
+      
+      <a href="#drinks" class="nav-item">🥤 飲料</a>
+      <a href="#mid-price-restaurants" class="nav-item">✨ 氣氛晚餐</a>
+      <a href="#high-end-restaurants" class="nav-item">🌟 高級料理</a>
+      <a href="#late-night-snack" class="nav-item">🌙 宵夜</a>
+      <a href="#bars" class="nav-item">🍺 酒吧</a>
+      <a href="#hungover" class="nav-item">☕ 宿醉良藥</a>
+      <a href="#night-markets" class="nav-item">🎪 夜市</a>
+      <a href="#tourist-areas" class="nav-item">🗺️ 觀光地區</a>
+      
+      <div class="nav-section">
+        <a href="#ncku-area" class="nav-item">🎓 成大周遭</a>
+        <div class="nav-submenu">
+          <a href="#ncku-brunch" class="nav-item">早午餐</a>
+          <a href="#ncku-dinner-only" class="nav-item">晚餐 only</a>
+          <a href="#ncku-lunch-dinner" class="nav-item">午/晚餐</a>
+          <a href="#ncku-latenight" class="nav-item">宵夜</a>
+          <a href="#ncku-budget" class="nav-item">省錢</a>
+          <a href="#ncku-mid-price" class="nav-item">中價位餐廳</a>
+        </div>
+      </div>
+      
+      <a href="#tools" class="nav-item">🎯 決策工具</a>
+    </div>
+  </nav>
+
+  <!-- Menu Toggle Button -->
+  <button class="menu-toggle" id="menuToggle">
+    <div class="menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <h1 class="hero-title">台南美食指南</h1>
+    <p class="hero-subtitle">探索古都台南的美味饗宴，從傳統小吃到現代料理的完整指南</p>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- 牛肉 Section -->
+    <section class="section" id="beef">
+      <div class="section-header">
+        <span class="section-emoji">🐂</span>
+        <h2 class="section-title">牛肉</h2>
+      </div>
+      
+      <h3 class="category-title" id="beef-city">市區</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/eNX1bSt5T1bKFXiN6" class="food-name">六千牛肉湯</a>
+          <div class="food-details">每日 05:30–13:30</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/vhCUEYrfn1QBSmnE6" class="food-name">石精臼牛肉湯</a>
+          <div class="food-details">每日 05:30–13:30</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/qr23JJgDYRNGN2iQ6" class="food-name">阿村牛肉湯 第二代</a>
+          <div class="food-details">每日 05:00–13:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/2Q41hdjbpihGgNqP8" class="food-name">文章牛肉湯</a>
+          <div class="food-details">每日 06:30–13:00、17:00–00:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/xLhFYfHtdkxfGR179" class="food-name">鄭家牛肉湯</a>
+          <div class="food-details">每日 17:00–00:30</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/eiHt1EgfEX9gR18VA" class="food-name">阿明牛肉湯</a>
+          <div class="food-details">每日 17:30–02:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="beef-jiali">佳里</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/z6VPL8PUXnfqnX9Y9" class="food-name">金龍牛肉湯</a>
+          <div class="food-details">每日 06:00–18:00 (週二公休)</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/vKmhMUhfg9xq3mh29" class="food-name">永成戲院牛肉湯</a>
+          <div class="food-details">週三至週一 06:00–18:30 (週二公休)</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="beef-hotpot">牛肉火鍋</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/PdTjL1yKfQ2LtKe89" class="food-name">阿裕牛肉湯</a>
+          <div class="food-details">一～六 17:00–00:00</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 早午餐 Section -->
+    <section class="section" id="brunch">
+      <div class="section-header">
+        <span class="section-emoji">🥐</span>
+        <h2 class="section-title">早午餐</h2>
+      </div>
+      
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/H8Wj7t6J8oAXCp5r6" class="food-name">早堂 Early Bird</a>
+          <div class="food-details">週二～日 08:00–15:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/poCjhbQS4QTFEQ869" class="food-name">小邁時光</a>
+          <div class="food-details">每日 08:00–16:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/H7UNtBBVQB8fFrLc7" class="food-name">黑浮咖啡</a>
+          <div class="food-details">每日 07:30–17:30</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/4pMHgqJfEqJQV5Lf6" class="food-name">沛里芽美式早午餐</a>
+          <div class="food-details">每日 08:00–16:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/EBZvfWx3FUzgDuGr8" class="food-name">TW Brunch</a>
+          <div class="food-details">每日 08:00–16:00 (週三公休)</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/TUeuJdu38iGpDLTW7" class="food-name">晨香廚房</a>
+          <div class="food-details">每日 06:00–13:00</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 午餐 Section -->
+    <section class="section" id="lunch">
+      <div class="section-header">
+        <span class="section-emoji">🍱</span>
+        <h2 class="section-title">午餐 Time</h2>
+      </div>
+      
+      <h3 class="category-title" id="lunch-taiwanese-rice">台式飯類</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/j6nVwXAE3sjKo91v8" class="food-name">石精臼蚵仔煎</a>
+          <div class="food-details">
+            香菇湯飯<br>
+            每日 07:30–20:00
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/6CHUC63G5FJdJinUA" class="food-name">一味品碗粿魚羹</a>
+          <div class="food-details">每日 05:00–17:00 (週二公休)</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/xYtaRj6NP7sRjxCw8" class="food-name">七誠米粿</a>
+          <div class="food-details">每日 07:30–20:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="lunch-fish">魚類</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/FY1A28PoKQLsoEr78" class="food-name">王氏魚皮店</a>
+          <div class="food-details">
+            一～五 04:00–14:00<br>
+            六、日 04:00–15:00
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/4hnLRSVUAdcKZojF9" class="food-name">新興路無名虱目魚粥</a>
+          <div class="food-details">週一～週六 06:00–10:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/sjEhKPNzB6FLfQsx8" class="food-name">七海魚皮</a>
+          <div class="food-details">一～六 11:00–14:00、17:00–20:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="lunch-taiwanese-noodle">台式麵類</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/i77Dp1HYqNTb6pyj7" class="food-name">醇涎坊古早味鍋燒意麵</a>
+          <div class="food-details">每日 06:00–20:00 (週日只營業至14:00)</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/fE2hX8YC55KEtioF7" class="food-name">開元紅燒土魠魚羹</a>
+          <div class="food-details">每日 09:00–18:30</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/eUC8sfembdro6Sgd9" class="food-name">頂好意麵</a>
+          <div class="food-details">每日 19:00–04:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="lunch-american">美式</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/Ty8jUi6zAtN7VoJH9" class="food-name">BitchFryFry 台南店</a>
+          <div class="food-details">每日 11:00–14:00、17:00–22:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/6WaNgKMv6oAY9JTf9" class="food-name">大口咬定</a>
+          <div class="food-details">每日 11:00–21:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="lunch-japanese">生魚片、壽司、丼飯</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/xj73NvoE7heaxsfh7" class="food-name">二樂丼飯 (之前是叫餓了)</a>
+          <div class="food-details">每日 11:00–14:00、17:00–21:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/oZchWGSm6MhMvayC7" class="food-name">櫻之庭食堂</a>
+          <div class="food-details">日式料理專門店</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="lunch-ramen">拉麵</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/uDhyvfVtGto6Daxn8" class="food-name">昆布食堂</a>
+          <div class="food-details">二～六：11:00–14:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="lunch-hotpot">火鍋</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/hqacHoarmDsgaXkw5" class="food-name">飽芝林關東煮🍢</a>
+          <div class="food-details">每日 11:00–23:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/wnDgDFanAELpqjPn7" class="food-name">一煥關東煮</a>
+          <div class="food-details">一～日 18:00–00:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="lunch-hongkong">港式</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/6e74LYAmAF2toGMt7" class="food-name">港記燒臘便當</a>
+          <div class="food-details">09:30–20:00 六公休</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/5w8rYsJv1yCVDJVd8" class="food-name">上海好味道小籠湯包(貴)</a>
+          <div class="food-details">精緻港式點心</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="lunch-others">其他</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/6e74LYAmAF2toGMt7" class="food-name">廣越美食</a>
+          <div class="food-details">
+            咖哩麵包容易賣完要早一點去<br>
+            星期一至星期五：11:00–15:00， 16:30–19:30<br>
+            星期六：only11:00–15:00<br>
+            星期日：公休
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/kTJtenaDMZNk5Eud7" class="food-name">有泰拜三</a>
+          <div class="food-details">每日11:30–20:30</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 晚餐 Section -->
+    <section class="section" id="dinner">
+      <div class="section-header">
+        <span class="section-emoji">🍽️</span>
+        <h2 class="section-title">晚餐 Time</h2>
+      </div>
+      
+      <h3 class="category-title" id="dinner-taiwanese-rice">台式飯類</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/gDsbud2yUad6wF8R8" class="food-name">十三小館</a>
+          <div class="food-details">每日 11:30–14:00, 17:00–20:30 (週二公休)</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/MoMqLNCm2VmUJMpc9" class="food-name">暖食堂 歐姆蛋包飯</a>
+          <div class="food-details">二～日、16:00–20:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/kNPRHbAAg1jMGZjv7" class="food-name">元味屋和風洋食</a>
+          <div class="food-details">一～六 11:00–14:00、17:00–20:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-winter-food">冬天進補</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/TgMQ4JpAQxi84QRFA" class="food-name">鴨霸當歸鴨</a>
+          <div class="food-details">星期一～六 10:00–21:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/ytVu1RpH1QcJCzgu7" class="food-name">Walking Su 藥膳麻油雞</a>
+          <div class="food-details">溫補養生好選擇</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-fish">魚類</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/FY1A28PoKQLsoEr78" class="food-name">王氏魚皮店</a>
+          <div class="food-details">
+            一～五 04:00–14:00<br>
+            六、日 04:00–15:00
+          </div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-taiwanese-noodle">台式麵類</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/6e74LYAmAF2toGMt7" class="food-name">添福麵館</a>
+          <div class="food-details">
+            星期二至星期五：11:30–15:00、17:30–20:30<br>
+            星期一：公休
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/ZE4fWVz8Tc29k4tb6" class="food-name">阿明豬心冬粉</a>
+          <div class="food-details">每日 17:00–00:00 (週一公休)</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-american">美式</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/ubUoYagq4sXuadwT8" class="food-name">禾品平價鐵板燒</a>
+          <div class="food-details">
+            平日: 11:00–14:30、16:30–23:30<br>
+            六日: 11:00–23:30
+          </div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-curry">咖哩</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/3xoREEZYZZuFFTVi7" class="food-name">辣訣</a>
+          <div class="food-details">每日 11:00–14:00、17:00–22:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-ramen">拉麵</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/wnDgDFanAELpqjPn7" class="food-name">竹間手作 麻辣燙</a>
+          <div class="food-details">一～六 18:00–23:30</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-japanese">生魚片、壽司、丼飯</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/xj73NvoE7heaxsfh7" class="food-name">康舍FOOD HOUSE</a>
+          <div class="food-details">一～六 11:00–14:00、17:00–20:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-hotpot">火鍋</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/6J2iiEVDZ9vSahPi6" class="food-name">嚥舐麻辣鴨血</a>
+          <div class="food-details">每日 16:30–21:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-drypot">乾鍋</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/yXU4tQKus3dZSMUW8" class="food-name">萬客樓</a>
+          <div class="food-details">川菜乾鍋專門店</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-hongkong">港式</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/kNPRHbAAg1jMGZjv7" class="food-name">樂品屋</a>
+          <div class="food-details">一～六 11:00–14:00、16:30–20:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-thai">泰式</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/kTJtenaDMZNk5Eud7" class="food-name">有泰拜三</a>
+          <div class="food-details">每日11:30–20:30</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-izakaya">居酒屋、熱炒、燒烤</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/TUeuJdu38iGpDLTW7" class="food-name">菘芝香滷味</a>
+          <div class="food-details">二～六 17:30–22:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/kNPRHbAAg1jMGZjv7" class="food-name">餃場</a>
+          <div class="food-details">一～六 11:00–13:00、17:00–22:00</div>
+        </div>
+      </div>
+      
+      <h3 class="category-title" id="dinner-others">其他</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/Tz7NPDg81gvhqf5U9" class="food-name">丹瓦樓</a>
+          <div class="food-details">
+            週一至週五 17:00–01:30<br>
+            週六、週日 11:00–01:30
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 甜食 Section -->
+    <section class="section" id="desserts">
+      <div class="section-header">
+        <span class="section-emoji">🍰</span>
+        <h2 class="section-title">甜食</h2>
+      </div>
+      
+      <h3 class="subsection-title" id="dessert">甜點</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/gK1RX4SZ5dUomDiN8" class="food-name">雀色喫茶</a>
+          <div class="food-details">
+            永樂市場裡面，一定要預約，店內只有四組位置<br>
+            公休日請看<a href="https://www.instagram.com/sunsetdessert.lab">IG</a>
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/viqWTm8bgynu3zRR9" class="food-name">富川麻糬</a>
+          <div class="food-details">每日 09:45–19:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/ZdNaUsQKPzjLSqWDA" class="food-name">八寶彬圓仔惠</a>
+          <div class="food-details">傳統甜點專門店</div>
+        </div>
+      </div>
+      
+      <h3 class="subsection-title" id="cafe">咖啡廳</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/H7UNtBBVQB8fFrLc7" class="food-name">黑浮咖啡</a>
+          <div class="food-details">每日 07:30–17:30</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/oA1WUJZCXu1eAXHR6" class="food-name">咖啡小酒館</a>
+          <div class="food-details">氛圍絕佳的咖啡廳</div>
+        </div>
+      </div>
+      
+      <h3 class="subsection-title" id="ice-dessert">冰&甜品</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/UbNiWkVed9K7f8" class="food-name">冰鄉</a>
+          <div class="food-details">
+            草莓冰需先去排隊拿號碼牌<br>
+            每日 12:00–20:00
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="https://www.google.com/maps?cid=16005384033278745991&entry=gps" class="food-name">冰ㄉ• かき氷(東區)</a>
+          <div class="food-details">
+            每日 11:00–20:00<br>
+            <a href="https://www.google.com/maps?cid=16005384033278745991&entry=gps">冰ㄉ• かき氷 二號店(中西區)</a>
+          </div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/FKHPwktSe2gJ4xoT7" class="food-name">太陽牌冰品</a>
+          <div class="food-details">古早味冰品老店</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/xE1kozfozeiaJF7f8" class="food-name">美雪冰菓室</a>
+          <div class="food-details">復古冰菓室</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 飲料 Section -->
+    <section class="section" id="drinks">
+      <div class="section-header">
+        <span class="section-emoji">🥤</span>
+        <h2 class="section-title">飲料</h2>
+      </div>
+      
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/rxTxcMg6CLLBxHdD7" class="food-name">第一站手作飲品</a>
+          <div class="food-details">每日 星期五、09:00–21:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/uvutJt6LjPDKnX3k6" class="food-name">双生綠豆沙牛奶</a>
+          <div class="food-details">每日 11:00–19:00 (週二公休)</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/PGfRg1pVymtJZksC8" class="food-name">老丘茶舖</a>
+          <div class="food-details">每日 10:00–21:00 (週日公休)</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/QW6vjr4TCQitKqHW6" class="food-name">甜又鮮飲料</a>
+          <div class="food-details">每日 08:30–22:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/idng8vTKt5MyhfXG7" class="food-name">小良田</a>
+          <div class="food-details">每日 11:00–21:30</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 氣氛晚餐 Section -->
+    <section class="section" id="mid-price-restaurants">
+      <div class="section-header">
+        <span class="section-emoji">✨</span>
+        <h2 class="section-title">氣氛晚餐、中價位餐廳</h2>
+      </div>
+      
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/H7UNtBBVQB8fFrLc7" class="food-name">LOLA蘿拉冷飲</a>
+          <div class="food-details">二～日 18:00–<strong>01:00</strong>(五、六至<strong>02:00</strong>)</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/AmozeaBnPuPBBYwt5" class="food-name">麥謎食驗室 Bue mi .Lab</a>
+          <div class="food-details">週一、週四～週日 12:00–14:00、17:50–20:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/u5BnnUFvY69pV5Bj7" class="food-name">南瓜餐桌</a>
+          <div class="food-details">溫馨家庭式餐廳</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/Sf9p1goHHTeyStWM8" class="food-name">今鶴</a>
+          <div class="food-details">每日 10:00–22:00</div>
+        </div>
+        <div class="food-item">
+          <a href="https://maps.app.goo.gl/rEVcFS3o5wKeWrdFA" class="food-name">十平</a>
+          <div class="food-details">
+            不定休請參考<a href="https://www.instagram.com/zyuutsubo/">ig</a>貼文公告<br>
+            每日 12:00–14:00 、18:00–20:00 (週三公休)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 高級料理 Section -->
+    <section class="section" id="high-end-restaurants">
+      <div class="section-header">
+        <span class="section-emoji">🌟</span>
+        <h2 class="section-title">高級料理</h2>
+      </div>
+      
+      <div class="food-grid">
+        <div class="food-item">
+          <a href="https://maps.google.com/?cid=9524955650233570520" class="
