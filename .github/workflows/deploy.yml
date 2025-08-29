@@ -25,10 +25,6 @@ jobs:
       - name: Build site
         run: bundle exec jekyll build
 
-      # =============================================================
-      #  ★★★ 這就是我們新增的「偵錯步驟」 ★★★
-      #  這個步驟會列出 _site 資料夾裡的所有檔案，包括隱藏檔案
-      # =============================================================
       - name: List files in the build directory
         run: ls -la ./_site
 
@@ -39,6 +35,6 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           port: ${{ secrets.FTP_PORT }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local_path: './_site/*'
+          local_path: './_site/'
           remote_path: ${{ secrets.REMOTE_PATH }}
-          args: -a 
+          args: -a
