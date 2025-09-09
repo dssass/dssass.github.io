@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台南美食清單</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1804918027527093"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --primary-color: #FFAA7A;      /* 主色調：陽光杏桃色 (Apricot) - 明亮、溫暖、有食慾 */
+      --secondary-color: #F0E5D8;    /* 次要色調：淺燕麥色 (Oat) - 用於邊框，非常柔和 */
+      --accent-color: #FF8C69;       /* 強調色：柔和珊瑚紅 (Soft Coral) - 用於需要突出的地方 */
+      --background-color: #FDF6E3;   /* 背景色：明亮的羊皮紙色 (Parchment) */
+      --text-color: #000000;         
+      --light-gray: #F0E5D8;         /* [重要] 將灰色變數替換為淺燕麥色 */
+      --white: #FFFFFF;             /* 白色：卡片維持純白，確保乾淨明亮 */
+      --hover-shadow: 0 6px 16px rgba(255, 170, 122, 0.18); /* 配合主色的暖色陰影 */
+      --border-radius: 6px;
+      --transition: all 0.2s ease-in-out;
+    }
+        * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, var(--background-color) 0%, #F5F2E8 100%);
+      color: var(--text-color);
+      font-weight: 400;
+      min-height: 100vh;
+    }
+    
+    .main-header {
+        background-color: var(--white);
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        text-align: left;
+    }
+
+    .header-logo {
+        font-weight: 700;
+        font-size: 1.5em;
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: var(--transition);
+    }
+    
+    .header-logo:hover {
+        color: var(--accent-color);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      margin-left: 2rem;
+      padding: 2rem;
+      background: var(--white);
+      border-radius: var(--border-radius);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    }
+    
+    .comment.reply {
+      margin-left: 30px; /* 讓回覆向右縮排 30px */
+      border-left: 3px solid var(--secondary-color); /* 左邊加上一條線，更明顯 */
+      padding-left: 15px; /* 增加一點左邊的內距 */
+    }
+    
+    /* --- 线程式回复系统样式 --- */
+    .comment {
+      margin-top: 1rem;
+    }
+    .replies {
+      margin-left: 15px;
+      padding-left: 10px;
+      border-left: 2px solid var(--secondary-color);
+    }
+    .reply-btn {
+      background: none;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      font-size: 0.8em;
+      padding: 4px 8px;
+      margin-top: 4px;
+      border-radius: 4px;
+    }
+    .reply-btn:hover {
+      background: var(--secondary-color);
+      color: var(--primary-color);
+    }
+    .reply-form {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Noto Sans TC', sans-serif; /* 統一字體以保持現代感 */
+      font-weight: 700; /* 加粗以突顯標題 */
+      color: var(--text-color); /* 統一使用黑色字體 */
+    }
+
+    h1 {
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px; /* 稍微縮小字距 */
+      text-shadow: none; /* 移除陰影，更乾淨 */
+      position: relative;
+    }
+
+    /* h1下方的裝飾線，改為更細緻的單色 */
+    h1::after {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 3px;
+      background: var(--primary-color); /* 使用單一主色，移除漸層 */
+      margin: 0.8rem auto;
+      border-radius: 2px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      padding-bottom: 0.5em;
+      margin: 2.5rem 0 1.2rem 0;
+      border-bottom: 2px solid var(--secondary-color); /* 改用更柔和、更細的底線 */
+      scroll-margin-top: 20px;
+    }
+
+    /* 移除 h2 左邊的裝飾條，讓版面更乾淨 */
+    h2::before {
+      display: none;
+    }
+
+    h3 {
+      font-size: 1.4em;
+      margin: 2rem 0 1rem 0;
+      scroll-margin-top: 20px;
+      /* 移除所有背景、邊框和多餘的 padding，回歸最簡潔的樣式 */
+      padding: 0;
+      background: none;
+      border: none;
+    }
+
+    h4 {
+      font-size: 1.15em;
+      margin-top: 1.8rem;
+      font-weight: 600;
+      color: var(--primary-color); /* 使用主色調來點綴，比 accent-color 更柔和 */
+      scroll-margin-top: 20px;
+    }
+
+    h5 {
+      font-size: 1em;
+      margin-top: 1.5rem;
+      font-weight: 600; /* 加粗以和內文區分 */
+      scroll-margin-top: 20px;
+    }
+
+    .orange-text {
+      color: var(--primary-color) !important;
+    }
+
+    .brown-text {
+      color: #8B4513 !important;
+    }
+
+    .custom-block {
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: var(--border-radius);
+      font-size: 1em;
+      line-height: 1.7;
+      position: relative;
+      overflow: hidden;
+      background: #FFFBF5; 
+      color: #2E8B57;
+      text-align: center; /* 讓文字置中 */
+      font-weight: 500;   /* 讓文字稍微加粗 */
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 1.5rem 0;
+    }
+
+    ul > li {
+      background-color: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      padding: 1.2em 1.5em;
+      margin-bottom: 1em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    ul > li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+      border-radius: 0 4px 4px 0;
+      transform: scaleY(0);
+      transition: var(--transition);
+    }
+
+    ul > li:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--hover-shadow);
+      border-color: var(--primary-color);
+    }
+
+    ul > li:hover::before {
+      transform: scaleY(1);
+    }
+
+    ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    ul li a:hover {
+      color: var(--primary-color);
+      transform: translateX(4px);
+    }
+
+    blockquote {
+      margin: 0.8rem 0 0 0;
+      padding: 1rem;
+      background: linear-gradient(90deg, #f9f9f9 0%, transparent 100%);
+      color: #666;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.95em;
+      font-style: normal;
+      transition: var(--transition);
+    }
+
+    blockquote:hover {
+      background: linear-gradient(90deg, #f0f8ff 0%, transparent 100%);
+    }
+    .underline-text {
+      text-decoration: underline;
+      text-decoration-style: solid; 
+      text-decoration-color: var(--primary-color); 
+      text-underline-offset: 3px;
+    }
+
+    #toc-sidebar {
+      position: fixed;
+      left: -320px;
+      top: 0;
+      bottom: 0; /* ★★★ 新增 bottom: 0; ★★★ */
+      width: 300px;
+      overflow-y: auto; /* <<< 2. 將 overflow-y 設回 auto */
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px);
+      padding: 2rem 1.5rem;
+      z-index: 1000;
+      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-right: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+    }
+
+    #toc-sidebar h4 {
+      margin-top: 0;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      font-size: 1.6em;
+      text-align: center;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+      position: relative;
+    }
+
+    #toc-sidebar h4::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background: var(--accent-color);
+    }
+
+    #toc-sidebar ul {
+      padding-left: 0;
+      margin: 0;
+    }
+
+    #toc-sidebar ul.main-menu > li {
+      margin-bottom: 0.5rem;
+    }
+
+    #toc-sidebar ul.main-menu > li > a {
+      display: block;
+      padding: 0.6rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      font-size: 1em;
+    }
+
+    #toc-sidebar a.has-submenu::after {
+      content: '▸';
+      position: absolute;
+      right: 15px;
+      transition: var(--transition);
+      font-size: 0.9em;
+    }
+
+    #toc-sidebar li.open > a.has-submenu::after {
+      transform: rotate(90deg);
+    }
+
+    #toc-sidebar ul li a:hover,
+    #toc-sidebar ul li a.active {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: var(--white);
+      transform: translateX(8px);
+      box-shadow: 0 4px 12px rgba(232, 116, 0, 0.3);
+    }
+
+    #toc-sidebar ul li a.active {
+      font-weight: 700;
+    }
+
+    .submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(0,0,0,0.02);
+      border-radius: 8px;
+      margin: 4px 0 8px 0;
+    }
+
+    li.open > .submenu {
+      max-height: 1000px;
+    }
+
+    .submenu li a {
+      padding: 0.25rem 1rem 0.25rem 2.5rem; /* ★ 將上下的內距從 0.8rem 減少到 0.4rem */
+      display: block;
+      font-size: 0.85em; /* ★ 將字體大小稍微縮小 */
+      font-weight: 400;
+      color: #555;
+      border-radius: 6px;
+      transition: var(--transition);
+      margin-bottom: 0.1rem; /* ★ 稍微減少項目間的底部外距 */
+      position: relative;
+    }
+
+    .submenu li a::before {
+      content: '→';
+      position: absolute;
+      left: 1rem;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .submenu li a:hover::before {
+      opacity: 1;
+    }
+
+    .submenu li a:hover,
+    .submenu li a.active {
+      background: linear-gradient(135deg, var(--secondary-color), #66BB6A);
+      color: var(--white);
+      transform: translateX(5px);
+      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+    }
+
+    #menu-toggle {
+      display: block;
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      border: none;
+      border-radius: 50%;
+      z-index: 9999;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transition: var(--transition);
+    }
+
+    #menu-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    #menu-toggle span {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 50%;
+      background: white;
+      border-radius: 3px;
+      left: 25%;
+      transition: var(--transition);
+    }
+
+    #menu-toggle span:nth-child(1) { top: 30%; }
+    #menu-toggle span:nth-child(2) { top: 48%; }
+    #menu-toggle span:nth-child(3) { top: 66%; }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .mobile-menu-open #overlay {
+      display: block;
+      opacity: 1;
+    }
+
+    .mobile-menu-open #toc-sidebar {
+      left: 0;
+    }
+
+    .mobile-menu-open #menu-toggle span:nth-child(1) {
+      top: 48%;
+      transform: rotate(135deg);
+    }
+    .mobile-menu-open #menu-toggle span:nth-child(2) {
+      opacity: 0;
+      left: -50%;
+    }
+    .mobile-menu-open #menu-toggle span:nth-child(3) {
+      top: 48%;
+      transform: rotate(-135deg);
+    }
+
+    @media (min-width: 1200px) {
+
+      .container {
+        margin-left: auto;  /* 改為 auto，讓它能置中 */
+        margin-right: auto; /* 改為 auto，讓它能置中 */
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.8em;
+      }
+
+      #toc-sidebar {
+        width: 280px;
+      }
+
+      ul > li {
+        padding: 1rem;
+      }
+    }
+        .custom-block {
+      font-size: 0.9em;     /* 稍微縮小字體 */
+      padding-left: 1rem;   /* 同時減少左右的留白 */
+      padding-right: 1rem;  /* 給文字更多空間 */
+    }
+
+    #toc-sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #toc-sidebar::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.05);
+      border-radius: 3px;
+    }
+
+    #toc-sidebar::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 3px;
+    }
+
+    #toc-sidebar::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    ul > li {
+      background: linear-gradient(135deg, var(--white) 0%, #fafafa 100%);
+    }
+
+    ul > li:hover {
+      background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
+    }
+
+    .custom-block a {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--secondary-color), #66BB6A);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      margin: 0.5rem 0.5rem 0.5rem 0;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+    }
+
+    .custom-block a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+      background: linear-gradient(135deg, #66BB6A, var(--secondary-color));
+    }
+    /* --- 新增的懸浮留言按鈕樣式 --- */
+    #feedback-button {
+      display: flex; 
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      bottom: 30px;
+      right: 30px; /* 將按鈕固定在右下角 */
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      border: none;
+      border-radius: 50%;
+      z-index: 9998;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    #feedback-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    /* 手機版位置 */
+    @media (max-width: 768px) {
+      /* ... 您可能還有其他手機版樣式在這裡 ... */
+
+      #feedback-button {
+        bottom: 30px; /* ★★★ 將 100px 改為 30px，讓它和左邊按鈕對齊 ★★★ */
+        right: 30px;  /* 順便將右邊間距也設為 30px，更對稱 */
+      }
+    }
+    #comments-panel {
+      position: fixed;
+      top: 0;
+      right: -420px; /* 預設藏在螢幕右邊 */
+      width: 400px;
+      max-width: 90vw; /* 在小螢幕上不要超過 90% 寬 */
+      height: 100vh;
+      background: var(--white);
+      z-index: 1001; /* 比側邊欄高，比遮罩低 */
+      box-shadow: -4px 0 25px rgba(0,0,0,0.15);
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 留言面板標頭 */
+    .comments-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--light-gray);
+      flex-shrink: 0;
+    }
+
+    .comments-header h4 {
+      margin: 0;
+      font-size: 1.4em;
+      color: var(--text-color);
+    }
+
+    /* 關閉按鈕 */
+    #close-comments-btn {
+      background: none;
+      border: none;
+      font-size: 2.5em;
+      line-height: 1;
+      color: #888;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+
+    #close-comments-btn:hover {
+      color: var(--accent-color);
+    }
+
+    /* 留言內容區 */
+    .comments-body {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+    }
+
+    /* 用來控制面板滑出的 body class */
+    body.comments-open #comments-panel {
+      right: 0; /* 將面板拉回螢幕內 */
+    }
+
+    /* 當留言面板或手機選單開啟時，顯示遮罩 */
+    body.comments-open #overlay,
+    body.mobile-menu-open #overlay {
+      display: block;
+      opacity: 1;
+    }
+    footer {
+      padding: 2rem 1rem;
+      background-color: var(--secondary-color); /* 使用柔和的次要色調 */
+      text-align: center;
+      margin-top: 3rem;
+      color: #888;
+      font-size: 0.9em;
+    }
+
+    .footer-content p {
+      margin: 0.5rem 0;
+    }
+
+    .social-links {
+      margin: 1rem 0;
+    }
+
+    .social-links a {
+      color: #555;
+      font-size: 1.8em; /* 圖示大小 */
+      margin: 0 0.75rem;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color); /* 滑鼠懸停時變色 */
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      font-size: 0.8em;
+      color: #aaa;
+      margin-top: 1.5rem;
+    }
+    /* --- 自訂留言系統樣式 --- */
+    #comments-list .comment {
+      padding: 1rem;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    #comments-list .comment-author {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    #comments-list .comment-body {
+      margin: 0.5rem 0;
+      line-height: 1.7;
+    }
+    #comments-list .comment-date {
+      font-size: 0.8em;
+      color: #aaa;
+    }
+    #comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    #comment-form input,
+    #comment-form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--light-gray);
+      border-radius: var(--border-radius);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1em;
+    }
+    #comment-form button {
+      padding: 0.8rem 1.5rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: 1em;
+      transition: var(--transition);
+      align-self: flex-start;
+    }
+    #comment-form button:hover {
+      background: var(--accent-color);
+    }
+  </style>
+</head>
+<body id="page-top">
+
+<header class="main-header">
+  <a href="https://www.dssass.com/" class="header-logo">
+    🏠 Home
+  </a>
+</header>    
+
+<button id="menu-toggle" aria-label="開啟或關閉目錄">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+<button id="feedback-button" aria-label="提供意見回饋">
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12zM7 9h10v2H7zm4 3h6v2h-6zm-4-5h10v2H7z"/></svg>
+</button>
+
+<div id="overlay"></div>
+
+<nav id="toc-sidebar">
+    <h4><a href="#page-top" style="text-decoration: none; color: inherit;">目錄</a></h4>
+    <ul class="main-menu">
+        <li><a href="#beef" class="has-submenu">牛肉</a>
+            <ul class="submenu">
+                <li><a href="#beef-city">市區</a></li>
+                <li><a href="#beef-jiali">佳里</a></li>
+                <li><a href="#beef-hotpot">牛肉火鍋</a></li>
+            </ul>
+        </li>
+        <li><a href="#brunch">🥪早午餐</a></li>
+        <li><a href="#lunch" class="has-submenu">🌞午餐time</a>
+            <ul class="submenu">
+                <li><a href="#lunch-taiwanese-rice">台式飯類</a></li>
+                <li><a href="#lunch-fish">魚類</a></li>
+                <li><a href="#lunch-taiwanese-noodle">台式麵類</a></li>
+                <li><a href="#lunch-american">美式</a></li>
+                <li><a href="#lunch-japanese">生魚片、壽司、丼飯</a></li>
+                <li><a href="#lunch-ramen">拉麵</a></li>
+                <li><a href="#lunch-hotpot">火鍋</a></li>
+                <li><a href="#lunch-hongkong">港式</a></li>
+                <li><a href="#lunch-others">其他</a></li>
+            </ul>
+        </li>
+        <li><a href="#dinner" class="has-submenu">🌙晚餐time</a>
+            <ul class="submenu">
+                <li><a href="#dinner-taiwanese-rice">台式飯類</a></li>
+                <li><a href="#dinner-winter-food">冬天進補</a></li>
+                <li><a href="#dinner-fish">魚類</a></li>
+                <li><a href="#dinner-taiwanese-noodle">台式麵類</a></li>
+                <li><a href="#dinner-american">美式</a></li>
+                <li><a href="#dinner-curry">咖哩</a></li>
+                <li><a href="#dinner-ramen">拉麵</a></li>
+                <li><a href="#dinner-japanese">生魚片、壽司、丼飯</a></li>
+                <li><a href="#dinner-hotpot">火鍋</a></li>
+                <li><a href="#dinner-drypot">乾鍋</a></li>
+                <li><a href="#dinner-hongkong">港式</a></li>
+                <li><a href="#dinner-thai">泰式</a></li>
+                <li><a href="#dinner-izakaya">居酒屋、熱炒、燒烤</a></li>
+                <li><a href="#dinner-others">其他</a></li>
+            </ul>
+        </li>
+        <li><a href="#dinner-group-meal">合菜、buffet</a></li>        
+        <li><a href="#dinner-snacks">小吃</a></li>
+        <li><a href="#desserts" class="has-submenu">🍩甜食</a>
+            <ul class="submenu">
+              <li><a href="#dessert">甜點</a></li>
+              <li><a href="#cafe">咖啡廳</a></li>
+              <li><a href="#ice-dessert">冰&甜品</a></li>
+            </ul>
+        </li>
+        <li><a href="#drinks">飲料</a></li>
+        <li><a href="#mid-price-restaurants">氣氛晚餐、中價位餐廳</a></li>
+        <li><a href="#high-end-restaurants">高級料理</a></li>
+        <li><a href="#late-night-snack">宵夜 (超過12.的)</a></li>
+        <li><a href="#bars">🍷酒吧</a></li>
+        <li><a href="#hungover">宿醉hung over</a></li>
+        <li><a href="#night-markets">夜市</a></li>
+        <li><a href="#tourist-areas">觀光地區</a></li>
+        <li><a href="#ncku-area" class="has-submenu">成大周遭</a>
+            <ul class="submenu">
+                <li><a href="#ncku-brunch">早午餐</a></li>
+                <li><a href="#ncku-lunch-dinner">午/晚餐</a></li>
+                <li><a href="#ncku-latenight">宵夜</a></li>
+                <li><a href="#ncku-budget">省錢</a></li>
+                <li><a href="#ncku-mid-price">中價位餐廳</a></li>
+            </ul>
+        </li>
+        <li><a href="#tools">互動小工具</a></li>
+        <li><a href="https://www.dssass.com/" style="font-weight: bold;">🏠 返回主頁</a></li>
+    </ul>
+</nav>
+
+
+<div class="container">
+  <h1>台南美食清單</h1>
+  <div class="custom-block">
+    !!!點選店家文字即可開啟對應的 Google 地圖位置!!!
+  </div>  
+  <h2 id="beef">🐂牛肉🐂</h2>
+  <h4 id="beef-city"><strong class="orange-text">市區</strong></h4>
+  <ul>
+      <li><a href="https://maps.app.goo.gl/ce3szQeqTsxVqZEDA">永樂牛肉湯(中西區)</a>    
+      <blockquote>每日 00:00–09:00 (週二公休)</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/ZdKip2QwR9PDa7hc7">西羅殿牛肉湯(北區)</a>
+      <blockquote>每日 04:30–13:00 (週二公休)</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/4EhxSkij8m4uXGCh7">苏 - 牛肉湯(東區)</a>
+      <blockquote>二~日 12:00–22:00</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/szc3PJ5JWzzFYi5d8">無名牛肉湯</a>
+        <blockquote>三~日 11:00–22:00</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/5HTv4BpxKTSjY5cr9">六千泓佐土產牛肉</a></blockquote>
+        <blockquote>05:00–11:00<Br>要凌晨2、3點去拿號碼牌不然很常喝不到</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/LTCB1aKVQpHexFYS9">阿財牛肉湯(安平)</a>
+        <blockquote>24hr，週三公休</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/MxXoqnbp4ErU4cjg8">二牛牛肉湯(安平)</a>
+        <blockquote>每日 07:30–00:30</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/LiLQkunm6vexyv4H9">阿棠牛肉湯(中西區)</a>
+        <blockquote>二~日 11:30–22:00</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/d3K73r6M9Ld5Q5rL8">阿村牛肉湯(中西區)</a>
+          <blockquote>每日 04:00–14:00(週二公休)</li>
+      <li><a href="https://maps.app.goo.gl/yqXMTUTBspFJFWeN7">美鮮牛肉湯(南區)</a>
+        <blockquote>24hr，週一週二公休</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/q3rxP6j38FRtfWiW8">杜牛肉湯(南區)</a>
+        <blockquote>每日 03:30–12:15 (週二公休)</li>
+  </ul>
+  <h4 id="beef-jiali"><strong class="orange-text">佳里</strong></h4>
+  <ul>
+      <li><a href="https://maps.app.goo.gl/EcmtSwQMuwRgQsg66">順福土產牛肉湯</a></li>
+      <li><a href="https://maps.app.goo.gl/EcmtSwQMuwRgQsg66">萬林牛肉湯</a></li>
+  </ul>
+  <h4 id="beef-hotpot"><strong class="orange-text">牛肉火鍋</strong></h4>
+  <ul>
+      <li><a href="https://maps.app.goo.gl/bHbmGkTFjmLfudw1A">三大牛肉火鍋</a>
+      <blockquote>二~日 11:00–14:30、17:00–21:00</blockquote></li>
+      <li><a href="https://maps.app.goo.gl/6DrdMCV9q42nKoyZ8">皇家四季溫體牛肉火鍋</a>
+      <blockquote>三~日 11:30–15:00、17:00–23:00</blockquote></li>
+  </ul>
+  <h2 id="brunch">🥪早午餐</h2>
+<ul>
+    <li><a href="https://maps.app.goo.gl/ntnhh3uXHqxKb9fD7">PEKO PEKO</a>
+    <blockquote>每日09:30–16:00 (週三公休)<br>北非蛋</blockquote></li>
+    <li><a href="https://maps.app.goo.gl/H9SPpZDgXgL62mhQ8">粼粼</a>
+    <blockquote>營業日期:看<a href="https://www.instagram.com/ring_ring.00?igsh=MWUxbW5ta3ByNmt5bQ==" style="font-weight:normal; font-size: 1em;">ig</a>，營業時間:11:30-17:00(最後點餐時間:16:00)<br>布丁</blockquote></li>
+    <li><a href="https://maps.app.goo.gl/ciUVRPUnD9MnBTZr9">小北家灶咖ZAOKA</a><blockquote>每日 09:00–16:30<br></blockquote></li>
+    <li><a href="https://maps.app.goo.gl/MBwfvwgk6skriehZ6">伊莉的店</a><blockquote>法國小店，可麗餅 (平日去才不用排隊)<br>三~日 07:30–14:30<br></blockquote></li>
+    <li><a href="https://maps.app.goo.gl/a9jm6oCmdkcLVK7HA">南島夢遊</a>
+      <blockquote>週一 、 週四~週日 09:00–15:00 (二、三公休)</blockquote></li>
+    <li><a href="https://maps.app.goo.gl/a9jm6oCmdkcLVK7HA">PIANO，PIANO</a>
+      <blockquote>明太子雞腿<br>三~五:10:00–14:00<br>六日:09:00–14:00</blockquote></li>   
+    <li><a href="https://maps.app.goo.gl/yXdVMu3gqwuUEwgw5">龍百貨</a><blockquote>二~六 09:30–14:30<br></blockquote></li>
+    <li><a href="https://maps.app.goo.gl/XTqbxAdE9pzytJVcA">後座熟食店</a>
+      <blockquote>每日 11:00–<strong>17:00</strong></blockquote></li>
+    <li><a href="https://maps.app.goo.gl/qz4zv7Meu6o68ZmE8">裏葉(北區)</a>
+      <blockquote>營業資訊請看<a href="https://www.instagram.com/uraha_iro_10" style="font-weight:normal; font-size: 1em;">ig</a>，11:00-16:30或提早完售</blockquote></li>
+    <li><a href="https://www.instagram.com/trip_of_island/">島旅(東區)</a>
+      <blockquote>營業資訊請看<a href="https://www.instagram.com/uraha_iro_10" style="font-weight:normal; font-size: 1em;">ig</a>，09:00–17:00</blockquote></li> 
+    <li><a href="https://maps.app.goo.gl/aKqu5ki27gXBemb26">橋上看書(成大附近)</a>
+      <blockquote>三~日 09:00–<strong>17:00</strong><br></blockquote></li> 
+    <li><a href="https://maps.app.goo.gl/yvZjjUXfNjnWk2EA8">阿公阿婆蛋餅</a><blockquote>週二到週日 05:30–12:30</blockquote></li>
+    <li><a href="https://maps.app.goo.gl/yZoinYwN4SaLpJM4A">南園街鍋貼</a>
+      <blockquote>週一到週六 09:30–15:00</blockquote></li>
+    <li><a href="https://maps.app.goo.gl/SoqpsqaJ6WwTkYVD7">小璋炭烤輕食(成大附近)</a>
+      <blockquote>每日 06:00–17:00 (六日營業至15:00)<br>內用只有兩小桌，可先打電話</blockquote></li>
+    <li><a href="#">龍鳳早點</a></li>
+</ul>
+</div>
+
+
+
+
+
+
+  <div id="comments-panel">
+  <div class="comments-header">
+    <h4>留言</h4>
+    <button id="close-comments-btn" aria-label="關閉留言面板">&times;</button>
+  </div>
+  <div class="comments-body">
+    <div id="comments-list">
+      <p>Loading comments...</p>
+    </div>
+
+    <hr style="margin: 2rem 0;">
+
+    <form id="comment-form">
+      <h4>留下您的推薦或建議</h4>
+      <input type="text" id="author-input" placeholder="您的稱呼" required maxlength="50">
+      <textarea id="body-input" placeholder="寫點什麼吧..." required maxlength="500"></textarea>
+      <button type="submit">送出留言</button>
+    </form>
+  </div>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // --- 變數定義 ---
+  const body = document.body;
+  const menuToggle = document.getElementById('menu-toggle');
+  const overlay = document.getElementById('overlay');
+  const sidebar = document.getElementById('toc-sidebar');
+  const feedbackButton = document.getElementById('feedback-button');
+  const commentsPanel = document.getElementById('comments-panel');
+  const closeCommentsBtn = document.getElementById('close-comments-btn');
+
+  // --- 自订留言系统功能 (线程式回复版) ---
+  const workerUrl = 'https://comments-worker.dssass.workers.dev'; // ★★★ 确认这是您自己的 Worker 网址 ★★★
+  
+  const commentsList = document.getElementById('comments-list');
+  const mainCommentForm = document.getElementById('comment-form');
+
+  // 功能 1: 读-取并以巢状结构显示所有留言
+  async function fetchComments() {
+    try {
+      const response = await fetch(workerUrl);
+      if (!response.ok) throw new Error('Failed to fetch comments.');
+      const comments = await response.json();
+
+      commentsList.innerHTML = ''; // 清空列表
+
+      if (comments.length === 0) {
+        commentsList.innerHTML = '<p>还沒有人留言，快来抢头香！</p>';
+      } else {
+        // 将扁平的留言列表，转换成树状结构
+        const commentsTree = buildTree(comments);
+        // 渲染留言树
+        renderComments(commentsTree, commentsList);
+      }
+    } catch (error) {
+      commentsList.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+    }
+  }
+
+  // 辅助功能：将扁平阵列转换为树状结构
+  function buildTree(comments) {
+    const commentsById = {};
+    comments.forEach(c => commentsById[c.id] = { ...c, children: [] });
+    
+    const tree = [];
+    comments.forEach(c => {
+      if (c.parent_id && commentsById[c.parent_id]) {
+        commentsById[c.parent_id].children.push(commentsById[c.id]);
+      } else {
+        tree.push(commentsById[c.id]);
+      }
+    });
+    return tree;
+  }
+
+  // 辅助功能：递归地渲染留言和它们的回复
+  function renderComments(comments, container) {
+    comments.forEach(comment => {
+      const commentElement = document.createElement('div');
+      commentElement.className = 'comment';
+      commentElement.id = `comment-${comment.id}`;
+      commentElement.innerHTML = `
+        <p class="comment-author">${escapeHtml(comment.author)}</p>
+        <p class="comment-body">${escapeHtml(comment.body)}</p>
+        <p class="comment-date">${new Date(comment.timestamp).toLocaleString()}</p>
+        <button class="reply-btn" data-comment-id="${comment.id}">回覆</button>
+        <div class="replies"></div>
+      `;
+      container.appendChild(commentElement);
+
+      if (comment.children && comment.children.length > 0) {
+        const repliesContainer = commentElement.querySelector('.replies');
+        renderComments(comment.children, repliesContainer);
+      }
+    });
+  }
+
+  // 功能 2: 送出新留言 (主留言框)
+  mainCommentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const authorInput = mainCommentForm.querySelector('#author-input');
+    const bodyInput = mainCommentForm.querySelector('#body-input');
+    await submitComment(authorInput.value, bodyInput.value, null, mainCommentForm);
+    authorInput.value = '';
+    bodyInput.value = '';
+  });
+
+  // 功能 3: 处理点击“回复”按钮的事件
+  commentsList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('reply-btn')) {
+      const commentId = e.target.dataset.commentId;
+      const commentElement = document.getElementById(`comment-${commentId}`);
+      
+      // 如果已经有回复框了，就移除它
+      const existingForm = commentElement.querySelector('.reply-form');
+      if (existingForm) {
+        existingForm.remove();
+        return;
+      }
+      
+      // 创建回复用的表单
+      const replyForm = document.createElement('form');
+      replyForm.className = 'reply-form';
+      replyForm.innerHTML = `
+        <input type="text" placeholder="您的稱呼" required maxlength="50">
+        <textarea placeholder="寫下您的回覆..." required maxlength="500"></textarea>
+        <button type="submit">送出回覆</button>
+      `;
+      commentElement.appendChild(replyForm);
+
+      replyForm.addEventListener('submit', async (submitEvent) => {
+        submitEvent.preventDefault();
+        const author = replyForm.querySelector('input').value;
+        const body = replyForm.querySelector('textarea').value;
+        await submitComment(author, body, commentId, replyForm);
+      });
+    }
+  });
+
+  // 功能 4: 统一的送出留言逻辑 (主留言和回复都用这个)
+  async function submitComment(author, body, parentId, formElement) {
+    author = author.trim();
+    body = body.trim();
+    if (!author || !body) return;
+
+    const submitButton = formElement.querySelector('button');
+    submitButton.disabled = true;
+    submitButton.textContent = '送出中...';
+
+    try {
+      const response = await fetch(workerUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ author, body, parent_id: parentId }),
+      });
+      if (!response.ok) {
+         const errorData = await response.json();
+         throw new Error(errorData.error || 'Failed to submit comment.');
+      }
+      
+      // 成功后，重新载-入所有留言来显示最新状态
+      fetchComments();
+
+    } catch (error) {
+      alert(error.message);
+      submitButton.disabled = false;
+      submitButton.textContent = '送出留言';
+    }
+  }
+  
+  // 辅助功能：防止 XSS 攻击
+  function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+  }
+
+  // 當留言面板被打開時，才去讀取留言
+  if (feedbackButton) {
+    feedbackButton.addEventListener('click', () => {
+        // 等待面板滑出動畫
+        setTimeout(fetchComments, 300);
+    });
+  }
+
+
+  // --- 手機版側邊欄功能 ---
+  if (menuToggle && overlay) {
+    menuToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      body.classList.toggle('mobile-menu-open');
+      body.classList.remove('comments-open'); // 開選單時關留言
+    });
+  }
+
+  // --- 留言面板功能 ---
+  if (feedbackButton && commentsPanel && closeCommentsBtn) {
+    // 開啟留言面板
+    feedbackButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      body.classList.add('comments-open');
+      body.classList.remove('mobile-menu-open'); // 開留言時關選單
+    });
+
+    // 關閉留言面板
+    const closeComments = () => {
+      body.classList.remove('comments-open');
+    };
+    closeCommentsBtn.addEventListener('click', closeComments);
+  }
+
+  // --- 點擊遮罩同時關閉選單與留言 ---
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      body.classList.remove('mobile-menu-open');
+      body.classList.remove('comments-open');
+    });
+  }
+  
+  // --- 目錄點擊與滾動監聽 ---
+  if (sidebar) {
+    sidebar.addEventListener('click', (event) => {
+      const targetLink = event.target.closest('a');
+      if (!targetLink) return;
+
+      if (targetLink.classList.contains('has-submenu')) {
+        event.preventDefault();
+        targetLink.parentElement.classList.toggle('open');
+      } else if (targetLink.getAttribute('href') && targetLink.getAttribute('href').startsWith('#')) {
+        if (window.innerWidth <= 1199) {
+          body.classList.remove('mobile-menu-open');
+        }
+      }
+    });
+  }
+  
+  const sections = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
+  const tocLinks = document.querySelectorAll('#toc-sidebar a');
+  const observer = new IntersectionObserver((entries) => {
+    let latestIntersectingId = null;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!latestIntersectingId) {
+          latestIntersectingId = entry.target.getAttribute('id');
+        }
+      }
+    });
+
+    if (latestIntersectingId) {
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href')) {
+          const linkHref = link.getAttribute('href').substring(1);
+          if (linkHref === latestIntersectingId) {
+            link.classList.add('active');
+            const parentSubmenu = link.closest('.submenu');
+            if (parentSubmenu && !parentSubmenu.parentElement.classList.contains('open')) {
+              parentSubmenu.parentElement.classList.add('open');
+            }
+          }
+        }
+      });
+    }
+  }, { rootMargin: '0px 0px -70% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+
+  // --- 平滑滾動 ---
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // --- 頁面載入動畫 ---
+  const container = document.querySelector('.container');
+  if (container) {
+    container.style.opacity = '0';
+    container.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      container.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      container.style.opacity = '1';
+      container.style.transform = 'translateY(0)';
+    }, 100);
+  }
+  
+  // --- 響應式調整 ---
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1200) {
+      body.classList.remove('mobile-menu-open');
+    }
+  });
+
+});
+</script>
+
+<footer>
+  <div class="footer-content">
+    <p>清單整理者：朱振均</p>
+    <div class="social-links">
+      <a href="/cdn-cgi/l/email-protection#335740400702010a0b0b0a1d565e525a5f73545e525a5f1d505c5e" target="_blank" aria-label="寄信到我的 Gmail">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+      <a href="https://www.facebook.com/zhu.zhen.jun.917365/" target="_blank" aria-label="前往我的 instagram">
+        <i class="fa-brands fa-facebook"></i>
+      </a>
+      <a href="https://www.instagram.com/wayne7ft/" target="_blank" aria-label="前往我的 instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <!-- 如果您還有其他連結，可以像上面一樣繼續新增 -->
+    </div>
+    <p class="copyright">© 2025 Tainan Food List. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
