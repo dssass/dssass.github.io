@@ -8,31 +8,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
-
     :root {
-      --primary-color: #A0A0A0;      /* 主色：軟銀/淺金屬灰 */
-      --secondary-color: #E8E8E8;    /* 輔助色：非常淡的灰色 */
-      --accent-color: #36AEE8;       /* 點綴色：冰藍/高光科技感藍色 */
-      --background-color: #F8F8F8;   /* 頁面基底：接近純白的淺灰 */
-      --text-color: #34495E;         /* 文字色：深沉的藍灰色 (增加高科技感) */
+      --primary-color: #A0A0A0;
+      --secondary-color: #E8E8E8;
+      --accent-color: #36AEE8;
+      --background-color: #F8F8F8;
+      --text-color: #34495E;
       --light-gray: #F0F0F0;
       --white: #FFFFFF;
-      --hover-shadow: 0 4px 20px rgba(160, 160, 160, 0.3); /* 淺色金屬光澤陰影 */
+      --hover-shadow: 0 4px 20px rgba(160, 160, 160, 0.3);
       --border-radius: 12px;
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     * {
       box-sizing: border-box;
     }
-
     html {
       scroll-behavior: smooth;
     }
-
     body {
       font-family: 'Noto Sans TC', sans-serif;
       font-size: 14px;
@@ -44,14 +39,12 @@
       font-weight: 400;
       min-height: 100vh;
     }
-    
     .main-header {
       background-color: var(--white);
       padding: 1rem 2rem;
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       text-align: left;
     }
-
     .header-logo {
       font-weight: 700;
       font-size: 1.5em;
@@ -59,38 +52,29 @@
       text-decoration: none;
       transition: var(--transition);
     }
-    
     .header-logo:hover {
       color: var(--accent-color);
     }
-
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 2rem;
       position: relative;
     }
-    
-    /* === START: Hero Filter Section Styles === */
-/* 尋找 .hero-filter-section */
     .hero-filter-section {
       text-align: center;
       padding: 3rem 2rem;
-      /* 變更為冰藍/銀色的流動感漸層 */
       background: linear-gradient(145deg, #B0B0B0 0%, #E8E8E8 50%, #A0A0A0 100%);
-      color: var(--white); /* 將文字強制變為白色以創造銀汞的反光感 */
+      color: var(--white);
       position: relative;
       overflow: hidden;
       border-radius: var(--border-radius);
       margin-bottom: 2rem;
-      /* 增加視覺深度和懸浮感 */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
-    /* 由於文字變為白色，可能需要調整子元素讓其清晰 */
     .hero-filter-subtitle {
-        text-shadow: 0 1px 3px rgba(0,0,0,0.3); /* 增加文字陰影增加立體感 */
+        text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
-
     .hero-filter-section::before {
       content: '';
       position: absolute;
@@ -101,19 +85,16 @@
       background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,50 Q25,30 50,50 Q75,70 100,50 L100,100 L0,100 Z" fill="rgba(255,255,255,0.08)"/></svg>') no-repeat bottom;
       background-size: cover;
     }
-
     .hero-filter-content {
       position: relative;
       z-index: 1;
     }
-
     .hero-filter-subtitle {
       font-size: 1.5em;
       font-weight: 700;
       margin: 0 0 2rem 0;
       opacity: 0.95;
     }
-
     .filter-tabs {
       display: flex;
       justify-content: center;
@@ -121,7 +102,6 @@
       margin: 2rem 0;
       flex-wrap: wrap;
     }
-
     .filter-btn {
       background: rgba(255,255,255,0.2);
       color: white;
@@ -134,24 +114,20 @@
       backdrop-filter: blur(10px);
       cursor: pointer;
     }
-
     .filter-btn:hover {
       background: rgba(255,255,255,0.3);
       transform: translateY(-3px);
     }
-    
     .filter-btn.active {
-      background: var(--accent-color); 
+      background: var(--accent-color);
       color: var(--accent-color);
       border-color: rgba(255, 255, 255, 0);
       font-weight: 700;
-      box-shadow: 0 4px 15px rgba(54, 174, 232, 0.4); /
+      box-shadow: 0 4px 15px rgba(54, 174, 232, 0.4);
     }
-    
     .search-box-wrapper {
         margin-top: 2rem;
     }
-
     .search-box {
       width: 100%;
       max-width: 600px;
@@ -167,22 +143,17 @@
     .search-box::placeholder {
         color: rgba(255,255,255,0.7);
     }
-
     .search-box:focus {
       outline: none;
       border-color: var(--white);
       background: rgba(255,255,255,0.3);
       box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
     }
-    /* === END: Hero Filter Section Styles === */
-    
-    /* Food Cards */
     .food-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1.5rem;
     }
-
     .food-card {
       background: var(--white);
       border-radius: var(--border-radius);
@@ -195,7 +166,6 @@
       display: flex;
       flex-direction: column;
     }
-
     .food-card::before {
       content: '';
       position: absolute;
@@ -207,24 +177,20 @@
       transform: scaleX(0);
       transition: var(--transition);
     }
-
     .food-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--hover-shadow);
       border-color: var(--primary-color);
     }
-
     .food-card:hover::before {
       transform: scaleX(1);
     }
-    
     .food-category-tags {
         display: flex;
         gap: 0.5rem;
         flex-wrap: wrap;
         margin-bottom: 1rem;
     }
-
     .food-category {
       display: inline-block;
       background: linear-gradient(135deg, #999999, #B0B0B0);
@@ -236,24 +202,20 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-
     .food-name {
       font-size: 1.3em;
       font-weight: 700;
       margin: 0 0 0.5rem 0;
       color: var(--text-color);
     }
-
     .food-name a {
       color: inherit;
       text-decoration: none;
       transition: var(--transition);
     }
-
     .food-name a:hover {
       color: var(--primary-color);
     }
-
     .food-info {
       background: #f8f9fa;
       padding: 1rem;
@@ -262,9 +224,8 @@
       border-left: 4px solid var(--primary-color);
       font-size: 0.9em;
       line-height: 1.5;
-      flex-grow: 1; /* Makes info section expand */
+      flex-grow: 1;
     }
-    
     .tool-card {
         grid-column: 1 / -1;
         text-align: center;
@@ -293,8 +254,6 @@
       box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
       background: linear-gradient(135deg, #66BB6A, var(--secondary-color));
     }
-
-    /* Random Recommendation Button */
     .random-rec {
       position: fixed;
       bottom: 30px;
@@ -312,18 +271,14 @@
       justify-content: center;
       align-items: center;
     }
-
     .random-rec:hover {
       transform: scale(1.1) rotate(15deg);
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     }
-
     .random-rec i {
       color: white;
       font-size: 1.5em;
     }
-
-    /* Recommendation Modal */
     .modal {
       display: none;
       position: fixed;
@@ -335,7 +290,6 @@
       z-index: 10000;
       backdrop-filter: blur(5px);
     }
-
     .modal-content {
       position: absolute;
       top: 50%;
@@ -349,14 +303,12 @@
       text-align: center;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     }
-
     .modal-title {
       font-size: 1.5em;
       font-weight: 700;
       color: var(--primary-color);
       margin-bottom: 1rem;
     }
-
     .modal-restaurant {
       font-size: 1.3em;
       font-weight: 600;
@@ -366,14 +318,12 @@
       color: white;
       border-radius: 8px;
     }
-
     .modal-buttons {
       display: flex;
       gap: 1rem;
       justify-content: center;
       margin-top: 1.5rem;
     }
-
     .modal-btn {
       padding: 0.8rem 1.5rem;
       border: none;
@@ -382,23 +332,18 @@
       font-weight: 600;
       transition: var(--transition);
     }
-
     .modal-btn.primary {
       background: var(--primary-color);
       color: white;
     }
-
     .modal-btn.secondary {
       background: var(--light-gray);
       color: var(--text-color);
     }
-
     .modal-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-
-    /* Loading Animation */
     .loading {
       display: inline-block;
       width: 20px;
@@ -408,14 +353,11 @@
       border-top-color: #fff;
       animation: spin 1s ease-in-out infinite;
     }
-
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-
-    /* === START: Comment System Styles === */
     #feedback-button {
-      display: flex; 
+      display: flex;
       justify-content: center;
       align-items: center;
       position: fixed;
@@ -432,12 +374,10 @@
       transition: var(--transition);
       text-decoration: none;
     }
-
     #feedback-button:hover {
       transform: scale(1.1);
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     }
-    
     #overlay {
       display: none;
       position: fixed;
@@ -451,12 +391,10 @@
       transition: opacity 0.3s ease;
       backdrop-filter: blur(4px);
     }
-
     body.comments-open #overlay {
       display: block;
       opacity: 1;
     }
-
     #comments-panel {
       position: fixed;
       top: 0;
@@ -471,11 +409,9 @@
       display: flex;
       flex-direction: column;
     }
-
     body.comments-open #comments-panel {
       right: 0;
     }
-
     .comments-header {
       display: flex;
       justify-content: space-between;
@@ -484,13 +420,11 @@
       border-bottom: 1px solid var(--light-gray);
       flex-shrink: 0;
     }
-
     .comments-header h4 {
       margin: 0;
       font-size: 1.4em;
       color: var(--text-color);
     }
-
     #close-comments-btn {
       background: none;
       border: none;
@@ -499,19 +433,16 @@
       color: #888;
       cursor: pointer;
       padding: 0;
-      transition: color 0.2s ease;
+      transition: color 0.2 ease;
     }
-
     #close-comments-btn:hover {
       color: var(--accent-color);
     }
-
     .comments-body {
       flex-grow: 1;
       overflow-y: auto;
       padding: 1.5rem;
     }
-
     #comments-list .comment {
       padding: 1rem;
       border-bottom: 1px solid var(--light-gray);
@@ -553,7 +484,6 @@
       flex-direction: column;
       gap: 10px;
     }
-
     #comment-form {
       display: flex;
       flex-direction: column;
@@ -586,9 +516,6 @@
     .reply-form button:hover {
       background: var(--accent-color);
     }
-    /* === END: Comment System Styles === */
-
-    /* Mobile Responsiveness */
     @media (max-width: 768px) {
       .food-grid {
         grid-template-columns: 1fr;
@@ -605,15 +532,12 @@
   </style>
 </head>
 <body id="page-top">
-
 <header class="main-header">
   <a href="https://www.dssass.com/" class="header-logo">
     🏠 Home
   </a>
 </header>
-
 <div class="container">
-
   <section class="hero-filter-section">
     <div class="hero-filter-content">
       <h2 class="hero-filter-subtitle">發現府城最道地的味道 🥢</h2>
@@ -641,21 +565,15 @@
       </div>
     </div>
   </section>
-
   <div class="food-grid" id="foodGrid">
-    <!-- Restaurant cards will be dynamically generated by JavaScript -->
   </div>
 </div>
-
-<!-- Floating Buttons -->
 <button class="random-rec" id="randomBtn" title="隨機推薦 (R)">
   <i class="fas fa-dice"></i>
 </button>
 <button id="feedback-button" aria-label="提供意見回饋">
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12zM7 9h10v2H7zm4 3h6v2h-6zm-4-5h10v2H7z"/></svg>
 </button>
-
-<!-- Recommendation Modal -->
 <div class="modal" id="recommendModal">
   <div class="modal-content">
     <h3 class="modal-title">🎲 今天就吃這家！</h3>
@@ -669,11 +587,7 @@
     </div>
   </div>
 </div>
-
-<!-- Overlay for Comments Panel -->
 <div id="overlay"></div>
-
-<!-- Comments Panel -->
 <div id="comments-panel">
   <div class="comments-header">
     <h4>留言</h4>
@@ -692,7 +606,6 @@
     </form>
   </div>
 </div>
-
 <footer style="margin-top: 4rem; padding: 3rem 2rem; background: linear-gradient(135deg, var(--secondary-color) 0%, #E8DDD4 100%); text-align: center;">
   <div style="max-width: 800px; margin: 0 auto;">
     <h3 style="color: var(--text-color); margin-bottom: 1rem;">台南美食清單</h3>
@@ -708,3 +621,285 @@
     <p style="color: #888; font-size: 0.9em;">© 2025 台南美食清單 by 朱振均. All Rights Reserved.</p>
   </div>
 </footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const restaurants = [
+    { name: '永樂牛肉湯(中西區)', link: 'https://maps.app.goo.gl/ce3szQeqTsxVqZEDA', info: '每日 00:00–09:00 (週二公休)', 标签: ['beef', 'tourist-area', 'hungover'] },
+    { name: '西羅殿牛肉湯(北區)', link: 'https://maps.app.goo.gl/ZdKip2QwR9PDa7hc7', info: '每日 04:30–13:00 (週二公休)', 标签: ['beef', 'hungover'] },
+    { name: '苏 - 牛肉湯(東區)', link: 'https://maps.app.goo.gl/4EhxSkij8m4uXGCh7', info: '二~日 12:00–22:00', 标签: ['beef', 'hungover'] },
+    { name: '無名牛肉湯', link: 'https://maps.app.goo.gl/szc3PJ5JWzzFYi5d8', info: '三~日 11:00–22:00', 标签: ['beef', 'hungover'] },
+    { name: '六千泓佐土產牛肉', link: 'https://maps.app.goo.gl/5HTv4BpxKTSjY5cr9', info: '05:00–11:00<br>要凌晨2、3點去拿號碼牌', 标签: ['beef', 'hungover'] },
+    { name: '阿財牛肉湯(安平)', link: 'https://maps.app.goo.gl/LTCB1aKVQpHexFYS9', info: '24hr，週三公休', 标签: ['beef', 'hungover'] },
+    { name: '二牛牛肉湯(安平)', link: 'https://maps.app.goo.gl/MxXoqnbp4ErU4cjg8', info: '每日 07:30–00:30', 标签: ['beef', 'hungover'] },
+    { name: '阿棠牛肉湯(中西區)', link: 'https://maps.app.goo.gl/LiLQkunm6vexyv4H9', info: '二~日 11:30–22:00', 标签: ['beef', 'hungover'] },
+    { name: '阿村牛肉湯(中西區)', link: 'https://maps.app.goo.gl/d3K73r6M9Ld5Q5rL8', info: '每日 04:00–14:00(週二公休)', 标签: ['beef', 'hungover'] },
+    { name: '美鮮牛肉湯(南區)', link: 'https://maps.app.goo.gl/yqXMTUTBspFJFWeN7', info: '24hr，週一週二公休', 标签: ['beef', 'hungover'] },
+    { name: '杜牛肉湯(南區)', link: 'https://maps.app.goo.gl/q3rxP6j38FRtfWiW8', info: '每日 03:30–12:15 (週二公休)', 标签: ['beef', 'hungover'] },
+    { name: '順福土產牛肉湯(佳里)', link: 'https://maps.app.goo.gl/EcmtSwQMuwRgQsg66', info: '佳里區', 标签: ['beef'] },
+    { name: '萬林牛肉湯(佳里)', link: 'https://maps.app.goo.gl/EcmtSwQMuwRgQsg66', info: '佳里區', 标签: ['beef'] },
+    { name: '三大牛肉火鍋', link: 'https://maps.app.goo.gl/bHbmGkTFjmLfudw1A', info: '二~日 11:00–14:30、17:00–21:00', 标签: ['beef', 'lunch', 'dinner', 'group-meal'] },
+    { name: '皇家四季溫體牛肉火鍋', link: 'https://maps.app.goo.gl/6DrdMCV9q42nKoyZ8', info: '三~日 11:30–15:00、17:00–23:00', 标签: ['beef', 'lunch', 'dinner', 'group-meal'] },
+    { name: 'PEKO PEKO', link: 'https://maps.app.goo.gl/ntnhh3uXHqxKb9fD7', info: '每日09:30–16:00 (週三公休)<br>特色：北非蛋', 标签: ['brunch'] },
+    {
+      name: '粼粼',
+      link: 'https://maps.app.goo.gl/H9SPpZDgXgL62mhQ8',
+      info: '營業日期:看<a href="https://www.instagram.com/ring_ring.00?igsh=MWUxbW5ta3ByNmt5bQ==" target="_blank" style="color: inherit; font-weight: bold;">ig</a>, 營業時間:11:30-17:00(最後點餐時間:16:00)<br>布丁',
+      标签: ['brunch', 'dessert']
+    },
+    { name: '小北家灶咖ZAOKA', link: 'https://maps.app.goo.gl/ciUVRPUnD9MnBTZr9', info: '每日 09:00–16:30', 标签: ['brunch'] },
+    
+    { name: '鳳姐鴨肉飯', link: 'https://maps.app.goo.gl/1H6C9fSrUZ7jug2y6', info: '每日 11:00–18:30 (三四公休)', 标签: ['lunch', 'dinner'] },
+
+    { name: '懷舊小棧杏仁豆腐冰', link: 'https://maps.app.goo.gl/ccGmwqHiDPgcsDtTA', info: '每日 10:30–22:00', 标签: ['dessert', 'tourist-area'] },
+    { name: '同記安平豆花', link: 'https://maps.app.goo.gl/gmEfn6Ni4L1PekT6A', info: '每日 09:00–23:00', 标签: ['dessert'] },
+    { name: '冰鄉 (草莓冰)', link: 'https://maps.app.goo.gl/qWZUbNiWkVed9K7f8', info: '需排隊 / 每日 12:00–20:00', 标签: ['dessert'] },
+    { name: '八寶彬圓仔惠', link: 'https://maps.app.goo.gl/ZdNaUsQKPzjLSqWDA', info: '冰品', 标签: ['dessert', 'tourist-area'] },
+    { name: '第一站手作飲品', link: 'https://maps.app.goo.gl/rxTxcMg6CLLBxHdD7', info: '每日 09:00–21:00', 标签: ['drink'] },
+    { name: '双生綠豆沙牛奶', link: 'https://maps.app.goo.gl/uvutJt6LjPDKnX3k6', info: '每日 11:00–19:00 (二公休)', 标签: ['drink'] },
+    { name: '老丘茶舖', link: 'https://maps.app.goo.gl/PGfRg1pVymtJZksC8', info: '每日 10:00–21:00 (日公休)', 标签: ['drink'] },
+    { name: '甜又鮮飲料', link: 'https://maps.app.goo.gl/QW6vjr4TCQitKqHW6', info: '每日 08:30–22:00', 标签: ['drink'] },
+    { name: '小良田', link: 'https://maps.app.goo.gl/idng8vTKt5MyhfXG7', info: '每日 11:00–21:30', 标签: ['drink'] },
+    { name: '島鼓計畫', link: 'https://maps.app.goo.gl/69xcoDg4tTT5ppCg8', info: '一~六 10:30–20:45', 标签: ['drink', 'ncku'] },
+    { name: '荳神綠豆沙', link: 'https://maps.app.goo.gl/Abg6mzikR3wFFoVa7', info: '每日 10:30–21:30', 标签: ['drink', 'ncku'] },
+    { name: 'LOLA蘿拉冷飲', link: 'https://maps.app.goo.gl/H7UNtBBVQB8fFrLc7', info: '二~日 18:00–01:00', 标签: ['mid-price', 'bar'] },
+    { name: '麥謎食驗室', link: 'https://maps.app.goo.gl/AmozeaBnPuPBBYwt5', info: '一四~日 12:00–14:00, 17:50–20:00', 标签: ['mid-price'] },
+    { isTool: true, 标签: ['tool'] }
+  ];
+
+  const body = document.body;
+  const foodGrid = document.getElementById('foodGrid');
+
+  function renderCards(data) {
+    if (!foodGrid) return;
+    const stripHtml = (html) => {
+       const doc = new DOMParser().parseFromString(html, 'text/html');
+       return doc.body.textContent || "";
+    };
+    foodGrid.innerHTML = data.map(item => {
+      const tagDetails = {
+          'beef': '🐂 牛肉', 'brunch': '🥪 早午餐', 'lunch': '🌞 午餐',
+          'dinner': '🌙 晚餐', 'group-meal': '合菜', 'snack': '🍢 小吃',
+          'dessert': '🍩 甜食', 'drink': '🥤 飲料', 'mid-price': '氣氛餐廳',
+          'high-end': ' 高級料理', 'late-night': ' 宵夜', 'bar': '🍷 酒吧',
+          'hungover': '解宿醉', 'night-market': '夜市', 'tourist-area': '📸 觀光區', 'ncku': '🎓 成大'
+      };
+      if (item.isTool) {
+        return `
+          <div class="food-card tool-card" data-tags="tool">
+            <div class="food-category-tags"><span class="food-category">🕹️ 互動小工具</span></div>
+            <h3 class="food-name">用輪盤決定吃什麼！</h3>
+            <div class="food-info">
+              <a href="https://pickerwheel.com/pw?id=DLzPr" target="_blank">午餐吃什麼？ 🎯</a>
+              <a href="https://pickerwheel.com/pw?id=DncVx" target="_blank">晚餐吃什麼？ 🎲</a>
+              <a href="https://pickerwheel.com/pw?id=p93C3" target="_blank">吃什麼鹹食？ 🍜</a>
+              <a href="https://pickerwheel.com/pw?id=bEjnG" target="_blank">吃什麼甜食？ 🍰</a>
+              <a href="https://wheelofnames.com/zh-HK/95z-yk9" target="_blank">喝什麼？ 🥤</a>
+            </div>
+          </div>`;
+      }
+      const tagsHtml = item.标签.map(tag => `<span class="food-category">${tagDetails[tag] || tag}</span>`).join('');
+      const infoAsText = stripHtml(item.info || '');
+      return `
+        <div class="food-card" data-tags="${item.标签.join(',')}" data-text-content="${item.name.toLowerCase()} ${infoAsText.toLowerCase()}">
+          <div class="food-category-tags">${tagsHtml}</div>
+          <h3 class="food-name">
+            <a href="${item.link}" target="_blank">${item.name}</a>
+          </h3>
+          <div class="food-info">${item.info || '詳細資訊請見店家公告'}</div>
+        </div>`;
+    }).join('');
+  }
+  renderCards(restaurants);
+  const filterTabs = document.querySelectorAll('.filter-btn');
+  const searchInput = document.getElementById('searchInput');
+  const foodCards = document.querySelectorAll('.food-card');
+  const randomBtn = document.getElementById('randomBtn');
+  const modal = document.getElementById('recommendModal');
+  const randomRestaurant = document.getElementById('randomRestaurant');
+  const goToRestaurant = document.getElementById('goToRestaurant');
+  const tryAgain = document.getElementById('tryAgain');
+  const closeModal = document.getElementById('closeModal');
+  let currentRestaurantLink = '';
+  const overlay = document.getElementById('overlay');
+  const feedbackButton = document.getElementById('feedback-button');
+  const commentsPanel = document.getElementById('comments-panel');
+  const closeCommentsBtn = document.getElementById('close-comments-btn');
+  const workerUrl = 'https://comments-worker.dssass.workers.dev';
+  const commentsList = document.getElementById('comments-list');
+  const mainCommentForm = document.getElementById('comment-form');
+
+  function filterCards(category, searchTerm = '') {
+    foodCards.forEach(card => {
+      const 标签 = card.dataset.标签.split(',');
+      const textContent = card.dataset.textContent;
+      const categoryMatch = category === 'all' || 标签.includes(category);
+      const searchMatch = searchTerm === '' || textContent.includes(searchTerm);
+      card.style.display = (categoryMatch && searchMatch) ? 'flex' : 'none';
+    });
+  }
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filterTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      filterCards(tab.dataset.category, searchInput.value);
+    });
+  });
+  searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase().trim();
+    const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
+    filterCards(activeCategory, searchTerm);
+  });
+  function showRandomRecommendation() {
+    randomRestaurant.innerHTML = '<div class="loading"></div>';
+    setTimeout(() => {
+      const visibleCards = Array.from(foodCards).filter(card =>
+        card.style.display !== 'none' && !card.classList.contains('tool-card')
+      );
+      if (visibleCards.length === 0) {
+        randomRestaurant.innerHTML = '沒有可推薦的餐廳 😅';
+        goToRestaurant.style.display = 'none';
+        return;
+      }
+      const randomCard = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+      const name = randomCard.querySelector('.food-name a').textContent;
+      const link = randomCard.querySelector('.food-name a').href;
+      currentRestaurantLink = link;
+      goToRestaurant.style.display = 'inline-block';
+      randomRestaurant.textContent = name;
+    }, 800);
+  }
+  randomBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+    showRandomRecommendation();
+  });
+  tryAgain.addEventListener('click', showRandomRecommendation);
+  goToRestaurant.addEventListener('click', () => {
+    if (currentRestaurantLink && currentRestaurantLink !== '#') window.open(currentRestaurantLink, '_blank');
+    modal.style.display = 'none';
+  });
+  closeModal.addEventListener('click', () => modal.style.display = 'none');
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+  if (feedbackButton) {
+    feedbackButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      body.classList.add('comments-open');
+      setTimeout(fetchComments, 300);
+    });
+  }
+  if (closeCommentsBtn) closeCommentsBtn.addEventListener('click', () => body.classList.remove('comments-open'));
+  if (overlay) overlay.addEventListener('click', () => body.classList.remove('comments-open'));
+  async function fetchComments() {
+    try {
+      const response = await fetch(workerUrl);
+      if (!response.ok) throw new Error('Failed to fetch comments.');
+      const comments = await response.json();
+      commentsList.innerHTML = '';
+      if (comments.length === 0) {
+        commentsList.innerHTML = '<p>還沒有人留言，快來搶頭香！</p>';
+      } else {
+        renderComments(buildTree(comments), commentsList);
+      }
+    } catch (error) {
+      commentsList.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+    }
+  }
+  function buildTree(comments) {
+    const commentsById = {};
+    comments.forEach(c => commentsById[c.id] = { ...c, children: [] });
+    const tree = [];
+    comments.forEach(c => {
+      if (c.parent_id && commentsById[c.parent_id]) {
+        commentsById[c.parent_id].children.push(commentsById[c.id]);
+      } else {
+        tree.push(commentsById[c.id]);
+      }
+    });
+    return tree;
+  }
+  function renderComments(comments, container) {
+    comments.forEach(comment => {
+      const commentElement = document.createElement('div');
+      commentElement.className = 'comment';
+      commentElement.id = `comment-${comment.id}`;
+      commentElement.innerHTML = `<p class="comment-author">${escapeHtml(comment.author)}</p><p class="comment-body">${escapeHtml(comment.body)}</p><p class="comment-date">${new Date(comment.timestamp).toLocaleString()}</p><button class="reply-btn" data-comment-id="${comment.id}">回覆</button><div class="replies"></div>`;
+      container.appendChild(commentElement);
+      if (comment.children && comment.children.length > 0) {
+        renderComments(comment.children, commentElement.querySelector('.replies'));
+      }
+    });
+  }
+  mainCommentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const authorInput = mainCommentForm.querySelector('#author-input'), bodyInput = mainCommentForm.querySelector('#body-input');
+    await submitComment(authorInput.value, bodyInput.value, null, mainCommentForm);
+    authorInput.value = ''; bodyInput.value = '';
+  });
+  commentsList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('reply-btn')) {
+      const commentId = e.target.dataset.commentId;
+      const commentElement = document.getElementById(`comment-${commentId}`);
+      const existingForm = commentElement.querySelector('.reply-form');
+      if (existingForm) { existingForm.remove(); return; }
+      const replyForm = document.createElement('form');
+      replyForm.className = 'reply-form';
+      replyForm.innerHTML = `<input type="text" placeholder="您的稱呼" required maxlength="50"><textarea placeholder="寫下您的回覆..." required maxlength="500"></textarea><button type="submit">送出回覆</button>`;
+      commentElement.appendChild(replyForm);
+      replyForm.addEventListener('submit', async (submitEvent) => {
+        submitEvent.preventDefault();
+        const author = replyForm.querySelector('input').value, body = replyForm.querySelector('textarea').value;
+        await submitComment(author, body, commentId, replyForm);
+      });
+    }
+  });
+  async function submitComment(author, body, parentId, formElement) {
+    author = author.trim(); body = body.trim();
+    if (!author || !body) return;
+    const submitButton = formElement.querySelector('button');
+    submitButton.disabled = true; submitButton.textContent = '送出中...';
+    try {
+      const response = await fetch(workerUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ author, body, parent_id: parentId }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit comment.');
+      }
+      fetchComments();
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      submitButton.disabled = false; submitButton.textContent = '送出留言';
+    }
+  }
+  function escapeHtml(unsafe) {
+    return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  }
+  foodCards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    setTimeout(() => {
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, index * 10);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+    if (e.key === 'Escape') {
+      searchInput.value = '';
+      searchInput.dispatchEvent(new Event('input'));
+      searchInput.blur();
+    }
+    if (e.key.toLowerCase() === 'r' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      randomBtn.click();
+    }
+  });
+});
+</script>
+</body>
+</html>
